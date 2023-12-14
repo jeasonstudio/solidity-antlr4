@@ -1,0 +1,65 @@
+{
+  "name": "solidity-antlr4",
+  "description": "Solidity Lang Lexer and Parser by official ANTLR4 grammar",
+  "version": "1.0.0",
+  "types": "./dist/lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/lib/index.js",
+      "types": "./dist/esm/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "grammar",
+    "CHANGELOG.md",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "author": "jeason.eth <me@cowpoke.cc>",
+  "repository": "git@github.com:jeasonstudio/solidity-antlr4.git",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "grammar": "antlr4ng -Dlanguage=TypeScript -o src/antlr4/ -message-format vs2005 -visitor -listener -long-messages -Xexact-output-dir grammar/SolidityLexer.g4 grammar/SolidityParser.g4",
+    "dev": "father dev",
+    "build": "father build",
+    "postinstall": "npm run husky:prepare",
+    "changeset": "changeset",
+    "release": "changeset version && changeset publish",
+    "release:alpha": "changeset version --snapshot alpha && changeset publish --tag alpha",
+    "release:beta": "changeset version --snapshot beta && changeset publish --tag beta",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch --coverage",
+    "test:ci": "jest --coverage --maxWorkers=4 --forceExit",
+    "lint": "pnpm run \"/^lint:.+/\"",
+    "lint:eslint": "eslint --quiet --fix --ext .ts,.js .",
+    "lint:prettier": "prettier --loglevel warn --write '**/*.{ts,tsx,js,jsx,json,md}'",
+    "husky:prepare": "husky install",
+    "husky:pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --quiet --fix",
+    "*.{ts,js,json,md}": "prettier --loglevel warn --write"
+  },
+  "dependencies": {
+    "antlr4ng": "^2.0.3",
+    "solidity-ast": "^0.4.55"
+  },
+  "devDependencies": {
+    "@changesets/changelog-git": "^0.2.0",
+    "@changesets/cli": "^2.27.1",
+    "@umijs/test": "^4.0.89",
+    "@types/jest": "^29.5.11",
+    "antlr4ng-cli": "^1.0.6",
+    "changeset": "^0.2.6",
+    "father": "^4.3.7",
+    "typescript": "^5.3.3",
+    "@umijs/fabric": "^4.0.1",
+    "eslint": "^8.55.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1"
+  }
+}
