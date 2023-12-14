@@ -100,5 +100,6 @@
     /* Completeness */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
+  "include": ["**/*"],
   "exclude": ["node_modules", "src/antlr4/**/*"]
 }

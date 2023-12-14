@@ -34,14 +34,14 @@
     "test:watch": "jest --watch --coverage",
     "test:ci": "jest --coverage --maxWorkers=4 --forceExit",
     "lint": "pnpm run \"/^lint:.+/\"",
-    "lint:eslint": "eslint --quiet --fix --ext .ts,.js .",
-    "lint:prettier": "prettier --loglevel warn --write '**/*.{ts,tsx,js,jsx,json,md}'",
+    "lint:eslint": "eslint --quiet --fix --ext .ts .",
+    "lint:prettier": "prettier --log-level warn --write '**/*.{ts,tsx,json}'",
     "husky:prepare": "husky install",
     "husky:pre-commit": "lint-staged"
   },
   "lint-staged": {
     "*.ts": "eslint --quiet --fix",
-    "*.{ts,js,json,md}": "prettier --loglevel warn --write"
+    "*.{ts,json}": "prettier --loglevel warn --write"
   },
   "dependencies": {
     "antlr4ng": "^2.0.3",
@@ -55,7 +55,7 @@
     "antlr4ng-cli": "^1.0.6",
     "changeset": "^0.2.6",
     "father": "^4.3.7",
-    "typescript": "^5.3.3",
+    "typescript": "~5.1.0",
     "@umijs/fabric": "^4.0.1",
     "eslint": "^8.55.0",
     "husky": "^8.0.3",
