@@ -1,6 +1,5 @@
 import { BaseNode } from './base';
 import { InterfaceDefinitionContext, SolidityParserVisitor } from '../grammar';
-import { InheritanceSpecifier } from './inheritance-specifier';
 import { EnumDefinition } from './enum-definition';
 import { ErrorDefinition } from './error-definition';
 import { EventDefinition } from './event-definition';
