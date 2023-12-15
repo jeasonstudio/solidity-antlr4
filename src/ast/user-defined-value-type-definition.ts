@@ -1,9 +1,17 @@
 import { BaseNode } from './base';
 import { UserDefinedValueTypeDefinitionContext, SolidityParserVisitor } from '../grammar';
+import { ElementaryTypeName } from './elementary-type-name';
 
 export class UserDefinedValueTypeDefinition extends BaseNode {
-  public type = 'UserDefinedValueTypeDefinition';
-  public constructor(ctx: UserDefinedValueTypeDefinitionContext, visitor: SolidityParserVisitor<any>) {
+  type = 'UserDefinedValueTypeDefinition';
+  name: string;
+  typeName: ElementaryTypeName;
+  public constructor(
+    ctx: UserDefinedValueTypeDefinitionContext,
+    visitor: SolidityParserVisitor<any>,
+  ) {
     super(ctx, visitor);
+    this.name = ctx.identifier().getText();
+    this.typeName = ctx.elementaryTypeName().accept(visitor);
   }
 }

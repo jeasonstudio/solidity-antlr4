@@ -10,25 +10,25 @@ const parse = (input: string) => {
 describe('usingDirective', () => {
   test('usingDirective', () => {
     expect(parse(`using A for uint;`)).toMatchObject({
-      libraryName: 'A',
+      libraryName: { name: 'A' },
       typeName: { name: 'uint' },
     });
     expect(parse(`using A for B.C;`)).toMatchObject({
-      libraryName: 'A',
+      libraryName: { name: 'A' },
       typeName: { name: 'B.C' },
     });
     expect(parse(`using A for unit[] global;`)).toMatchObject({
-      libraryName: 'A',
+      libraryName: { name: 'A' },
       typeName: { name: 'unit[]' },
       global: true,
     });
     expect(parse(`using { A, C.D } for B;`)).toMatchObject({
       functionList: [
         {
-          definition: 'A',
+          definition: { name: 'A' },
         },
         {
-          definition: 'C.D',
+          definition: { name: 'C.D' },
         },
       ],
       typeName: { name: 'B' },
@@ -37,10 +37,10 @@ describe('usingDirective', () => {
     expect(parse(`using { B, add as + } for B;`)).toMatchObject({
       functionList: [
         {
-          definition: 'B',
+          definition: { name: 'B' },
         },
         {
-          definition: 'add',
+          definition: { name: 'add' },
           // operator: '+', // TODO
         },
       ],
