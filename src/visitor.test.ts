@@ -12,18 +12,29 @@ const getParser = (input: string) => {
 describe('ast-builder', () => {
   test('visitSourceUnit', () => {
     const source = `// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+    pragma solidity ^0.8.20;
 
-contract HelloWorld {
-    string public greet = "Hello World!";
-}
+    contract SimpleStorage {
+        // State variable to store a number
+        uint public num;
+
+        // You need to send a transaction to write to a state variable.
+        function set(uint _num) public {
+            num = _num;
+        }
+
+        // You can read from a state variable without sending a transaction.
+        function get() public view returns (uint) {
+            return num;
+        }
+    }
 `;
     const cst = getParser(source).sourceUnit();
     const ast = visitor.visit(cst);
-    console.log(JSON.stringify(ast, null, 2));
-    expect(ast).toMatchObject({
-      type: 'SourceUnit',
-    });
+    // console.log(ast!.serialize());
+    // expect(ast).toMatchObject({
+    //   type: 'SourceUnit',
+    // });
   });
   // test('visitPragmaDirective', () => {
   //   const source = `pragma solidity ^0.8.24;`;

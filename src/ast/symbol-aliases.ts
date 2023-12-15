@@ -1,9 +1,10 @@
-import { BaseNode } from './base';
+import { BaseNodeList } from './base';
 import { SymbolAliasesContext, SolidityParserVisitor } from '../grammar';
+import { ImportAliases } from './import-aliases';
 
-export class SymbolAliases extends BaseNode {
-  public type = 'SymbolAliases';
-  public constructor(ctx: SymbolAliasesContext, visitor: SolidityParserVisitor<BaseNode>) {
-    super(ctx, visitor);
+export class SymbolAliases extends BaseNodeList<ImportAliases> {
+  type = 'SymbolAliases';
+  public constructor(ctx: SymbolAliasesContext, visitor: SolidityParserVisitor<any>) {
+    super(ctx.importAliases(), visitor);
   }
 }

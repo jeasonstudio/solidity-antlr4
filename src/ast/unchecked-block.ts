@@ -3,7 +3,7 @@ import { UncheckedBlockContext, SolidityParserVisitor } from '../grammar';
 
 export class UncheckedBlock extends BaseNode {
   public type = 'UncheckedBlock';
-  public constructor(ctx: UncheckedBlockContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: UncheckedBlockContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

@@ -3,7 +3,7 @@ import { ModifierDefinitionContext, SolidityParserVisitor } from '../grammar';
 
 export class ModifierDefinition extends BaseNode {
   public type = 'ModifierDefinition';
-  public constructor(ctx: ModifierDefinitionContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: ModifierDefinitionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

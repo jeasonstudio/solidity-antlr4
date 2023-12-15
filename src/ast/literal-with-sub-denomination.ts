@@ -3,7 +3,7 @@ import { LiteralWithSubDenominationContext, SolidityParserVisitor } from '../gra
 
 export class LiteralWithSubDenomination extends BaseNode {
   public type = 'LiteralWithSubDenomination';
-  public constructor(ctx: LiteralWithSubDenominationContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: LiteralWithSubDenominationContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

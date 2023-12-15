@@ -132,3 +132,5 @@ export class SolidityASTVisitor extends parser.SolidityParserVisitor<ast.ASTNode
   visitYulLiteral = (ctx: parser.YulLiteralContext) => new ast.YulLiteral(ctx, this);
   visitYulExpression = (ctx: parser.YulExpressionContext) => new ast.YulExpression(ctx, this);
 }
+
+export const solidityASTVisitor = new SolidityASTVisitor();

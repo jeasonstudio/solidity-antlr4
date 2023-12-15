@@ -3,7 +3,7 @@ import { ConstantVariableDeclarationContext, SolidityParserVisitor } from '../gr
 
 export class ConstantVariableDeclaration extends BaseNode {
   public type = 'ConstantVariableDeclaration';
-  public constructor(ctx: ConstantVariableDeclarationContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: ConstantVariableDeclarationContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

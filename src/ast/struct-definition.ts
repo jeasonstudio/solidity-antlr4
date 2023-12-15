@@ -3,7 +3,7 @@ import { StructDefinitionContext, SolidityParserVisitor } from '../grammar';
 
 export class StructDefinition extends BaseNode {
   public type = 'StructDefinition';
-  public constructor(ctx: StructDefinitionContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: StructDefinitionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

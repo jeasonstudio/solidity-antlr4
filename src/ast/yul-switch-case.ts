@@ -3,7 +3,7 @@ import { YulSwitchCaseContext, SolidityParserVisitor } from '../grammar';
 
 export class YulSwitchCase extends BaseNode {
   public type = 'YulSwitchCase';
-  public constructor(ctx: YulSwitchCaseContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: YulSwitchCaseContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

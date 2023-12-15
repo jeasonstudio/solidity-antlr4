@@ -3,7 +3,7 @@ import { VariableDeclarationTupleContext, SolidityParserVisitor } from '../gramm
 
 export class VariableDeclarationTuple extends BaseNode {
   public type = 'VariableDeclarationTuple';
-  public constructor(ctx: VariableDeclarationTupleContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: VariableDeclarationTupleContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

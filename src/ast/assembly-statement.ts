@@ -3,7 +3,7 @@ import { AssemblyStatementContext, SolidityParserVisitor } from '../grammar';
 
 export class AssemblyStatement extends BaseNode {
   public type = 'AssemblyStatement';
-  public constructor(ctx: AssemblyStatementContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: AssemblyStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

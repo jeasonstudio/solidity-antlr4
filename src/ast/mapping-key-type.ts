@@ -3,7 +3,7 @@ import { MappingKeyTypeContext, SolidityParserVisitor } from '../grammar';
 
 export class MappingKeyType extends BaseNode {
   public type = 'MappingKeyType';
-  public constructor(ctx: MappingKeyTypeContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: MappingKeyTypeContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

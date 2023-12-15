@@ -3,7 +3,7 @@ import { VariableDeclarationStatementContext, SolidityParserVisitor } from '../g
 
 export class VariableDeclarationStatement extends BaseNode {
   public type = 'VariableDeclarationStatement';
-  public constructor(ctx: VariableDeclarationStatementContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: VariableDeclarationStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

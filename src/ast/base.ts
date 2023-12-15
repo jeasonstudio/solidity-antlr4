@@ -1,4 +1,4 @@
-import { ParserRuleContext, SolidityParserVisitor } from '../grammar';
+import { ParseTree, ParserRuleContext, SolidityParser, SolidityParserVisitor } from '../grammar';
 // import { NodeType } from 'solidity-ast/node';
 
 export type Range = [number, number];
@@ -32,7 +32,7 @@ export abstract class BaseNode {
   public readonly range: Range;
   public readonly location: Location;
 
-  public constructor(ctx: ParserRuleContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: ParserRuleContext, visitor: SolidityParserVisitor<any>) {
     const start = ctx.start?.start ?? 0;
     const end = ctx.stop?.stop ?? start;
     this.range = [start, end];
@@ -44,5 +44,43 @@ export abstract class BaseNode {
       ctx.stop?.column ?? startPosition.column,
     );
     this.location = Location.create(startPosition, endPosition);
+
+    this.visitContextList = (list?: any[] | null) => {
+      if (!list?.length) return [];
+      return list.map((ctx) => visitor.visit(ctx)! as any).filter(Boolean);
+    };
+  }
+
+  protected visitContextList: <N extends BaseNode = BaseNode, T extends ParseTree = ParseTree>(
+    list?: T[] | null,
+  ) => N[];
+
+  public serialize = () => JSON.parse(JSON.stringify(this));
+}
+
+export abstract class BaseNodeList<T extends BaseNode> extends Array<T> {
+  public serialize = () => JSON.parse(JSON.stringify(this));
+  public constructor(ctxList: ParserRuleContext[], visitor: SolidityParserVisitor<any>) {
+    super(...ctxList.map((ctx) => ctx.accept(visitor)));
+  }
+}
+
+export abstract class BaseNodeString extends String {
+  public serialize = () => JSON.parse(JSON.stringify(this));
+  public constructor(str: string, visitor: SolidityParserVisitor<any>) {
+    super(str);
+  }
+}
+
+export abstract class BaseNodeUnion<T extends BaseNode> {
+  public serialize = () => JSON.parse(JSON.stringify(this));
+  // ruleIndex => Node
+  public constructor(ctx: ParserRuleContext, nodeMap: Record<number, T>) {
+    console.log(111, nodeMap);
+    if (!nodeMap[ctx.ruleIndex])
+      throw new Error(
+        `cannot transform node to "${SolidityParser.ruleNames[ctx.ruleIndex]}(${ctx.ruleIndex})"`,
+      );
+    Object.assign(this, nodeMap[ctx.ruleIndex]);
   }
 }

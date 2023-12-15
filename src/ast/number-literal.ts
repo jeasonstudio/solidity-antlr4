@@ -3,7 +3,7 @@ import { NumberLiteralContext, SolidityParserVisitor } from '../grammar';
 
 export class NumberLiteral extends BaseNode {
   public type = 'NumberLiteral';
-  public constructor(ctx: NumberLiteralContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: NumberLiteralContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

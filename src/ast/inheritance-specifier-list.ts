@@ -3,7 +3,7 @@ import { InheritanceSpecifierListContext, SolidityParserVisitor } from '../gramm
 
 export class InheritanceSpecifierList extends BaseNode {
   public type = 'InheritanceSpecifierList';
-  public constructor(ctx: InheritanceSpecifierListContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: InheritanceSpecifierListContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

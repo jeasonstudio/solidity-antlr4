@@ -3,7 +3,7 @@ import { StateVariableDeclarationContext, SolidityParserVisitor } from '../gramm
 
 export class StateVariableDeclaration extends BaseNode {
   public type = 'StateVariableDeclaration';
-  public constructor(ctx: StateVariableDeclarationContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: StateVariableDeclarationContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

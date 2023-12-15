@@ -3,7 +3,7 @@ import { ReceiveFunctionDefinitionContext, SolidityParserVisitor } from '../gram
 
 export class ReceiveFunctionDefinition extends BaseNode {
   public type = 'ReceiveFunctionDefinition';
-  public constructor(ctx: ReceiveFunctionDefinitionContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: ReceiveFunctionDefinitionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

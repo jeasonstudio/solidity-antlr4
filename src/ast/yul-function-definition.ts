@@ -3,7 +3,7 @@ import { YulFunctionDefinitionContext, SolidityParserVisitor } from '../grammar'
 
 export class YulFunctionDefinition extends BaseNode {
   public type = 'YulFunctionDefinition';
-  public constructor(ctx: YulFunctionDefinitionContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: YulFunctionDefinitionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

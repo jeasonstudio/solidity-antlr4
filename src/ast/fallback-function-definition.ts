@@ -3,7 +3,7 @@ import { FallbackFunctionDefinitionContext, SolidityParserVisitor } from '../gra
 
 export class FallbackFunctionDefinition extends BaseNode {
   public type = 'FallbackFunctionDefinition';
-  public constructor(ctx: FallbackFunctionDefinitionContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: FallbackFunctionDefinitionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

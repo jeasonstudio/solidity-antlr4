@@ -2,8 +2,11 @@ import { BaseNode } from './base';
 import { ElementaryTypeNameContext, SolidityParserVisitor } from '../grammar';
 
 export class ElementaryTypeName extends BaseNode {
-  public type = 'ElementaryTypeName';
-  public constructor(ctx: ElementaryTypeNameContext, visitor: SolidityParserVisitor<BaseNode>) {
+  type = 'ElementaryTypeName';
+  name: string;
+  public constructor(ctx: ElementaryTypeNameContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
+    this.name = ctx.getText();
+    // TODO
   }
 }

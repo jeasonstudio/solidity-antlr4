@@ -3,7 +3,7 @@ import { ErrorParameterContext, SolidityParserVisitor } from '../grammar';
 
 export class ErrorParameter extends BaseNode {
   public type = 'ErrorParameter';
-  public constructor(ctx: ErrorParameterContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: ErrorParameterContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

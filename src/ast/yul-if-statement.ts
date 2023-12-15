@@ -3,7 +3,7 @@ import { YulIfStatementContext, SolidityParserVisitor } from '../grammar';
 
 export class YulIfStatement extends BaseNode {
   public type = 'YulIfStatement';
-  public constructor(ctx: YulIfStatementContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: YulIfStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

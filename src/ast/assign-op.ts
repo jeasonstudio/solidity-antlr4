@@ -3,7 +3,7 @@ import { AssignOpContext, SolidityParserVisitor } from '../grammar';
 
 export class AssignOp extends BaseNode {
   public type = 'AssignOp';
-  public constructor(ctx: AssignOpContext, visitor: SolidityParserVisitor<BaseNode>) {
+  public constructor(ctx: AssignOpContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }
