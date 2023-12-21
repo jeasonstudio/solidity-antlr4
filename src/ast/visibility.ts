@@ -1,22 +1,31 @@
-import { BaseNode, FunctionVisibility } from './base';
-import { VisibilityContext, SolidityParserVisitor } from '../grammar';
+import { BaseNode, VisibilityKind } from './base';
+import { VisibilityContext, SolidityParserVisitor, TerminalNode } from '../grammar';
 
 export class Visibility extends BaseNode {
   type = 'Visibility';
-  visibility: FunctionVisibility | null = null;
+  visibility: VisibilityKind | null = null;
   public constructor(ctx: VisibilityContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.visibility = this.getVisibility(ctx);
   }
 
-  public getVisibility(ctx: VisibilityContext): FunctionVisibility | null {
-    if (ctx.External?.()) {
+  public getVisibility(ctx: VisibilityContext): VisibilityKind | null {
+    const format = (n: TerminalNode | TerminalNode[] | null | undefined) => {
+      if (Array.isArray(n)) {
+        return !!n.length;
+      } else if (!!n?.symbol) {
+        return true;
+      }
+      return false;
+    };
+
+    if (format(ctx.External?.())) {
       return 'external';
-    } else if (ctx.Private?.()) {
-      return 'private';
-    } else if (ctx.Internal?.()) {
+    } else if (format(ctx.Internal?.())) {
       return 'internal';
-    } else if (ctx.Public?.()) {
+    } else if (format(ctx.Private?.())) {
+      return 'private';
+    } else if (format(ctx.Public?.())) {
       return 'public';
     } else {
       return null;

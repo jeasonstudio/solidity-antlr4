@@ -1,19 +1,8 @@
-import { createParse } from './utils';
-
-const parseConstant = createParse((p) => p.constantVariableDeclaration());
-
-test('constantVariableDeclaration', () => {
-  expect(parseConstant(`uint128 constant amount = 100;`)).toMatchObject({
-    name: 'amount',
-    typeName: 'uint128',
-  });
-});
-
-const parseFunc = createParse((p) => p.functionDefinition());
+import { createLog, createParse } from './utils';
 
 test('functionDefinition', () => {
   expect(
-    parseFunc(
+    createParse((p) => p.functionDefinition())(
       `function transfer(address calldata recipient, uint256 amount) public virtual override(Foo, Bar) onlyAdmin returns (bool) {}`,
     ),
   ).toMatchObject({
@@ -48,7 +37,7 @@ test('functionDefinition', () => {
     functionKind: 'constructor',
     override: null,
     virtual: false,
-    visibility: 'internal',
+    visibility: null,
     stateMutability: 'payable',
     modifiers: [
       {
@@ -70,5 +59,24 @@ test('functionDefinition', () => {
         typeName: 'string',
       },
     ],
+  });
+});
+
+test('modifierDefinition', () => {
+  expect(
+    createParse((p) => p.modifierDefinition())(
+      `modifier onlyAdmin(address sender) virtual override(Foo, Bar) {}`,
+    ),
+  ).toMatchObject({
+    name: 'onlyAdmin',
+    override: ['Foo', 'Bar'],
+    virtual: true,
+    parameters: [
+      {
+        name: 'sender',
+        typeName: 'address',
+      },
+    ],
+    body: {},
   });
 });

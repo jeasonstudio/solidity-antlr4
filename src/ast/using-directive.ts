@@ -25,7 +25,7 @@ export class UsingDirective extends BaseNode {
     } else {
       this.functionList = ctx.identifierPath().map((p) => {
         const definition = p.accept(visitor);
-        // TODO: 如何将 operator 和 definition 关联在一起
+        // TODO: How to relate operator and definition together
         // const operator = p.userDefinableOperator()?.accept(visitor);
         return { definition };
       });

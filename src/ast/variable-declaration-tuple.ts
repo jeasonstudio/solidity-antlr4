@@ -1,9 +1,10 @@
-import { BaseNode } from './base';
+import { BaseNodeList } from './base';
 import { VariableDeclarationTupleContext, SolidityParserVisitor } from '../grammar';
+import { VariableDeclaration } from './variable-declaration';
 
-export class VariableDeclarationTuple extends BaseNode {
-  public type = 'VariableDeclarationTuple';
+export class VariableDeclarationTuple extends BaseNodeList<VariableDeclaration> {
+  type = 'VariableDeclarationTuple';
   public constructor(ctx: VariableDeclarationTupleContext, visitor: SolidityParserVisitor<any>) {
-    super(ctx, visitor);
+    super(ctx.variableDeclaration(), visitor);
   }
 }

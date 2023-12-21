@@ -5,11 +5,10 @@ export type Range = [number, number];
 export type SrcLocation = `${number}:${number}`;
 export type ContractKind = 'contract' | 'interface' | 'library';
 export type FunctionKind = 'function' | 'constructor' | 'receive' | 'fallback';
-export type FunctionVisibility = 'external' | 'public' | 'internal' | 'private' | 'default';
-export type FunctionStateMutability = 'pure' | 'view' | 'payable';
-export type TypeDataLocation = 'storage' | 'memory' | 'calldata';
+export type VisibilityKind = 'external' | 'public' | 'internal' | 'private';
+export type StateMutabilityKind = 'pure' | 'view' | 'payable';
+export type DataLocationKind = 'storage' | 'memory' | 'calldata';
 export type LiteralKind = 'number' | 'bool' | 'string' | 'hexString' | 'unicodeString';
-
 export type EtherUnit = 'wei' | 'gwei' | 'szabo' | 'finney' | 'ether';
 export type TimeUnit = 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'years';
 
@@ -88,3 +87,7 @@ export abstract class BaseNodeUnion<T extends BaseNode = BaseNode> extends BaseN
     }
   }
 }
+
+export const formatString = (str: string) => {
+  return str.substring(1, str.length - 1);
+};

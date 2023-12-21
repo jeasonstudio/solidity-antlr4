@@ -1,10 +1,10 @@
-import { BaseNodeString, TypeDataLocation } from './base';
+import { BaseNodeString, DataLocationKind } from './base';
 import { DataLocationContext, SolidityParserVisitor } from '../grammar';
 
 export class DataLocation extends BaseNodeString {
   type = 'DataLocation';
   // @ts-ignore
-  name: TypeDataLocation | null = null;
+  name: DataLocationKind | null = null;
   public constructor(ctx: DataLocationContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     if (ctx.Storage()) {

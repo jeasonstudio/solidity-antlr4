@@ -1,9 +1,9 @@
-import { BaseNode } from './base';
+import { BaseNodeUnion } from './base';
 import { StatementContext, SolidityParserVisitor } from '../grammar';
 
-export class Statement extends BaseNode {
-  public type = 'Statement';
+export class Statement extends BaseNodeUnion {
+  // public type = 'Statement';
   public constructor(ctx: StatementContext, visitor: SolidityParserVisitor<any>) {
-    super(ctx, visitor);
+    super(ctx, ctx.children as any, visitor);
   }
 }
