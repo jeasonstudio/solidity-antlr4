@@ -102,8 +102,69 @@ test('memberAccess', () => {
   ]);
 });
 
-// createLog((p) => p.tupleExpression())(`(arr[0], arr[:10], arr[0:10])`);
-// createLog((p) => p.tupleExpression())(
-//   `(obj{foo: 1}, obj({bar:bar}), payable({foo:bar}), type({foo:bar}))`,
-// );
-// createLog((p) => p.tupleExpression())(`(new Foo)`);
+test('expression', () => {
+  expect(
+    createParse((p) => p.tupleExpression())(
+      `(call{foo: bar}, obj({foo: bar}), payable({foo: bar}), type(address), new Foo)`,
+    ),
+  ).toMatchObject([
+    {
+      expression: 'call',
+      arguments: [
+        {
+          name: 'foo',
+          expression: 'bar',
+        },
+      ],
+    },
+    {
+      expression: 'obj',
+      arguments: [
+        {
+          name: 'foo',
+          expression: 'bar',
+        },
+      ],
+    },
+    {
+      arguments: [
+        {
+          name: 'foo',
+          expression: 'bar',
+        },
+      ],
+    },
+    {
+      typeName: 'address',
+    },
+    {
+      typeName: 'Foo',
+    },
+  ]);
+});
+
+test('indexAccess', () => {
+  expect(
+    createParse((p) => p.tupleExpression())(`(arr[0], arr[:10], arr[10:], arr[0:10])`),
+  ).toMatchObject([
+    {
+      baseExpression: 'arr',
+      indexExpression: { value: '0' },
+    },
+    {
+      baseExpression: 'arr',
+      startExpression: null,
+      endExpression: { value: '10' },
+    },
+    {
+      baseExpression: 'arr',
+      startExpression: { value: '10' },
+      endExpression: null,
+    },
+    {
+      baseExpression: 'arr',
+      startExpression: { value: '0' },
+      endExpression: { value: '10' },
+    },
+  ]);
+});
