@@ -1,9 +1,10 @@
-import { BaseNode } from './base';
+import { BaseNodeList } from './base';
 import { TupleExpressionContext, SolidityParserVisitor } from '../grammar';
+import { Expression } from './expression';
 
-export class TupleExpression extends BaseNode {
-  public type = 'TupleExpression';
+export class TupleExpression extends BaseNodeList<Expression> {
+  type = 'TupleExpression';
   public constructor(ctx: TupleExpressionContext, visitor: SolidityParserVisitor<any>) {
-    super(ctx, visitor);
+    super(ctx.expression(), visitor);
   }
 }

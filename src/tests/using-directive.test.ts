@@ -4,47 +4,48 @@ import { CharStreams, CommonTokenStream, SolidityLexer, SolidityParser } from '.
 const parse = (input: string) => {
   const lexer = new SolidityLexer(CharStreams.fromString(input));
   const parser = new SolidityParser(new CommonTokenStream(lexer));
-  return visitor.visit(parser.usingDirective())!.serialize();
+  const tree = parser.usingDirective();
+  return JSON.parse(JSON.stringify(tree.accept(visitor)));
 };
 
 describe('usingDirective', () => {
   test('usingDirective', () => {
     expect(parse(`using A for uint;`)).toMatchObject({
-      libraryName: { name: 'A' },
-      typeName: { name: 'uint' },
+      libraryName: 'A',
+      typeName: 'uint',
     });
     expect(parse(`using A for B.C;`)).toMatchObject({
-      libraryName: { name: 'A' },
-      typeName: { name: 'B.C' },
+      libraryName: 'A',
+      typeName: 'B.C',
     });
     expect(parse(`using A for unit[] global;`)).toMatchObject({
-      libraryName: { name: 'A' },
-      typeName: { name: 'unit[]' },
+      libraryName: 'A',
+      typeName: 'unit[]',
       global: true,
     });
     expect(parse(`using { A, C.D } for B;`)).toMatchObject({
       functionList: [
         {
-          definition: { name: 'A' },
+          definition: 'A',
         },
         {
-          definition: { name: 'C.D' },
+          definition: 'C.D',
         },
       ],
-      typeName: { name: 'B' },
+      typeName: 'B',
       global: false,
     });
     expect(parse(`using { B, add as + } for B;`)).toMatchObject({
       functionList: [
         {
-          definition: { name: 'B' },
+          definition: 'B',
         },
         {
-          definition: { name: 'add' },
+          definition: 'add',
           // operator: '+', // TODO
         },
       ],
-      typeName: { name: 'B' },
+      typeName: 'B',
       global: false,
     });
   });

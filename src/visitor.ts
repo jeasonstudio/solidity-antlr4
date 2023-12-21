@@ -26,6 +26,8 @@ export class SolidityASTVisitor extends parser.SolidityParserVisitor<ast.ASTNode
   visitIdentifierPath = (ctx: parser.IdentifierPathContext) => new ast.IdentifierPath(ctx, this);
   visitModifierInvocation = (ctx: parser.ModifierInvocationContext) =>
     new ast.ModifierInvocation(ctx, this);
+  visitMemberAccess = (ctx: parser.MemberAccessContext) =>
+    new ast.MemberAccess(ctx, this);
   visitVisibility = (ctx: parser.VisibilityContext) => new ast.Visibility(ctx, this);
   visitParameterList = (ctx: parser.ParameterListContext) => new ast.ParameterList(ctx, this);
   visitParameterDeclaration = (ctx: parser.ParameterDeclarationContext) =>

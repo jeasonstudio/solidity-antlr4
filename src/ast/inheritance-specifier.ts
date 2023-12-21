@@ -10,6 +10,6 @@ export class InheritanceSpecifier extends BaseNode {
   public constructor(ctx: InheritanceSpecifierContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.baseName = ctx.identifierPath().accept(visitor);
-    this.arguments = this.visitContextList(ctx.callArgumentList()?.children);
+    this.arguments = ctx.callArgumentList()?.accept(visitor) ?? [];
   }
 }

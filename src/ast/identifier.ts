@@ -8,4 +8,5 @@ export class Identifier extends BaseNode {
     super(ctx, visitor);
     this.name = ctx.getText();
   }
+  public toJSON = () => this.name;
 }

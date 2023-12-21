@@ -31,7 +31,7 @@
     "release:beta": "changeset version --snapshot beta && changeset publish --tag beta",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch --coverage",
+    "test:watch": "jest --watch",
     "test:ci": "jest --coverage --maxWorkers=4 --forceExit",
     "lint": "pnpm run \"/^lint:.+/\"",
     "lint:eslint": "eslint --quiet --fix --ext .ts .",

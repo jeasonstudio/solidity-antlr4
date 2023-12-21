@@ -4,7 +4,8 @@ import { CharStreams, CommonTokenStream, SolidityLexer, SolidityParser } from '.
 const parse = (input: string) => {
   const lexer = new SolidityLexer(CharStreams.fromString(input));
   const parser = new SolidityParser(new CommonTokenStream(lexer));
-  return visitor.visit(parser.eventDefinition())!.serialize();
+  const tree = parser.eventDefinition();
+  return JSON.parse(JSON.stringify(tree.accept(visitor)));
 };
 
 describe('eventDefinition', () => {
@@ -16,8 +17,8 @@ describe('eventDefinition', () => {
     expect(parse(`event Transfer(address, uint indexed amount);`)).toMatchObject({
       name: 'Transfer',
       parameters: [
-        { indexed: false, typeName: { name: 'address', type: 'ElementaryTypeName' } },
-        { indexed: true, typeName: { name: 'uint', type: 'ElementaryTypeName' }, name: 'amount' },
+        { indexed: false, typeName: 'address' },
+        { indexed: true, typeName: 'uint', name: 'amount' },
       ],
     });
   });

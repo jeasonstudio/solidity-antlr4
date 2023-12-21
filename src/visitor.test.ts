@@ -9,6 +9,8 @@ const getParser = (input: string) => {
   return parser;
 };
 
+console.log(Object.entries(visitor).filter(([k, v]) => !v));
+
 describe('ast-builder', () => {
   test('visitSourceUnit', () => {
     const source = `// SPDX-License-Identifier: MIT
@@ -31,7 +33,7 @@ describe('ast-builder', () => {
 `;
     const cst = getParser(source).sourceUnit();
     const ast = visitor.visit(cst);
-    // console.log(ast!.serialize());
+    // console.log(ast);
     // expect(ast).toMatchObject({
     //   type: 'SourceUnit',
     // });

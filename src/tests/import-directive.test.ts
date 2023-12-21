@@ -4,12 +4,8 @@ import { CharStreams, CommonTokenStream, SolidityLexer, SolidityParser } from '.
 const parse = (input: string) => {
   const lexer = new SolidityLexer(CharStreams.fromString(input));
   const parser = new SolidityParser(new CommonTokenStream(lexer));
-  return visitor.visit(parser.importDirective())!.serialize();
-};
-
-const parsel = (input: string) => {
-  console.log(JSON.stringify(parse(input), null, 2));
-  return parse(input);
+  const tree = parser.importDirective();
+  return JSON.parse(JSON.stringify(tree.accept(visitor)));
 };
 
 describe('visitImportDirective', () => {
@@ -18,21 +14,21 @@ describe('visitImportDirective', () => {
       path: './Foo.sol',
     });
     expect(parse(`import * as Foo from "./Foo.sol";`)).toMatchObject({
-      unitAlias: { name: 'Foo' },
+      unitAlias: 'Foo',
       symbolAliases: [],
     });
     expect(parse(`import "./Foo.sol" as Foo;`)).toMatchObject({
-      unitAlias: { name: 'Foo' },
+      unitAlias: 'Foo',
       symbolAliases: [],
     });
     expect(parse(`import { Foo, Bar as Me } from "./Foo.sol";`)).toMatchObject({
       symbolAliases: [
         {
-          foreign: { name: 'Foo' },
+          foreign: 'Foo',
         },
         {
-          foreign: { name: 'Bar' },
-          local: { name: 'Me' },
+          foreign: 'Bar',
+          local: 'Me',
         },
       ],
     });

@@ -2,8 +2,10 @@ import { BaseNode } from './base';
 import { BooleanLiteralContext, SolidityParserVisitor } from '../grammar';
 
 export class BooleanLiteral extends BaseNode {
-  public type = 'BooleanLiteral';
+  type = 'BooleanLiteral';
+  value: boolean | null = null;
   public constructor(ctx: BooleanLiteralContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
+    this.value = ctx.True() ? true : ctx.False() ? false : null;
   }
 }

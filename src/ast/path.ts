@@ -1,11 +1,13 @@
-import { BaseNodeString } from './base';
+import { BaseNode } from './base';
 import { PathContext, SolidityParserVisitor } from '../grammar';
 
-export class Path extends BaseNodeString {
+export class Path extends BaseNode {
   type = 'Path';
+  name: string;
   public constructor(ctx: PathContext, visitor: SolidityParserVisitor<any>) {
+    super(ctx, visitor);
     const pathString = ctx.NonEmptyStringLiteral().getText();
-    const value = pathString.substring(1, pathString.length - 1);
-    super(value, visitor);
+    this.name = pathString.substring(1, pathString.length - 1);
   }
+  public toJSON = () => this.name;
 }

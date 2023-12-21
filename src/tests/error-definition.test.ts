@@ -4,17 +4,15 @@ import { CharStreams, CommonTokenStream, SolidityLexer, SolidityParser } from '.
 const parse = (input: string) => {
   const lexer = new SolidityLexer(CharStreams.fromString(input));
   const parser = new SolidityParser(new CommonTokenStream(lexer));
-  return visitor.visit(parser.errorDefinition())!.serialize();
+  const tree = parser.errorDefinition();
+  return JSON.parse(JSON.stringify(tree.accept(visitor)));
 };
 
 describe('errorDefinition', () => {
   test('errorDefinition', () => {
     expect(parse(`error MyError(address, uint amount);`)).toMatchObject({
       name: 'MyError',
-      parameters: [
-        { typeName: { name: 'address', type: 'ElementaryTypeName' } },
-        { typeName: { name: 'uint', type: 'ElementaryTypeName' }, name: 'amount' },
-      ],
+      parameters: [{ typeName: 'address' }, { typeName: 'uint', name: 'amount' }],
     });
   });
 });

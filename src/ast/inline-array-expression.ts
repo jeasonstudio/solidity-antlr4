@@ -1,9 +1,10 @@
-import { BaseNode } from './base';
+import { BaseNodeList } from './base';
 import { InlineArrayExpressionContext, SolidityParserVisitor } from '../grammar';
+import { Expression } from './expression';
 
-export class InlineArrayExpression extends BaseNode {
-  public type = 'InlineArrayExpression';
+export class InlineArrayExpression extends BaseNodeList<Expression> {
+  type = 'InlineArrayExpression';
   public constructor(ctx: InlineArrayExpressionContext, visitor: SolidityParserVisitor<any>) {
-    super(ctx, visitor);
+    super(ctx.expression(), visitor);
   }
 }

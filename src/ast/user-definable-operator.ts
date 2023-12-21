@@ -1,9 +1,9 @@
-import { BaseNodeString } from './base';
+import { BaseNode } from './base';
 import { UserDefinableOperatorContext, SolidityParserVisitor } from '../grammar';
 
-export class UserDefinableOperator extends BaseNodeString {
+export class UserDefinableOperator extends BaseNode {
   type = 'UserDefinableOperator';
   public constructor(ctx: UserDefinableOperatorContext, visitor: SolidityParserVisitor<any>) {
-    super(ctx.getChild(0)?.getText() ?? '', visitor);
+    super(ctx, visitor);
   }
 }

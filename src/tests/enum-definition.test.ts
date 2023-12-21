@@ -4,14 +4,15 @@ import { CharStreams, CommonTokenStream, SolidityLexer, SolidityParser } from '.
 const parse = (input: string) => {
   const lexer = new SolidityLexer(CharStreams.fromString(input));
   const parser = new SolidityParser(new CommonTokenStream(lexer));
-  return visitor.visit(parser.enumDefinition())!.serialize();
+  const tree = parser.enumDefinition();
+  return JSON.parse(JSON.stringify(tree.accept(visitor)));
 };
 
 describe('enumDefinition', () => {
   test('enumDefinition', () => {
     expect(parse(`enum TokenType { Fungible, NonFungible }`)).toMatchObject({
-      name: { name: 'TokenType' },
-      members: [{ name: 'Fungible' }, { name: 'NonFungible' }],
+      name: 'TokenType',
+      members: ['Fungible', 'NonFungible'],
     });
   });
 });

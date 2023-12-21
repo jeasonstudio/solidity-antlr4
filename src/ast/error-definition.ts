@@ -9,6 +9,6 @@ export class ErrorDefinition extends BaseNode {
   public constructor(ctx: ErrorDefinitionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx.identifier().getText();
-    this.parameters = this.visitContextList(ctx.errorParameter());
+    this.parameters = ctx.errorParameter().map((param) => param.accept(visitor));
   }
 }

@@ -4,7 +4,8 @@ import { CharStreams, CommonTokenStream, SolidityLexer, SolidityParser } from '.
 const parse = (input: string) => {
   const lexer = new SolidityLexer(CharStreams.fromString(input));
   const parser = new SolidityParser(new CommonTokenStream(lexer));
-  return visitor.visit(parser.pragmaDirective())!.serialize();
+  const tree = parser.pragmaDirective();
+  return JSON.parse(JSON.stringify(tree.accept(visitor)));
 };
 
 describe('visitPragmaDirective', () => {

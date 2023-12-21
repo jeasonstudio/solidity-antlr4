@@ -8,11 +8,8 @@ export class TypeName extends BaseNode {
     super(ctx, visitor);
     this.name = ctx.getText();
 
-    const unionTypes = [
-      ctx.elementaryTypeName(),
-      ctx.functionTypeName(),
-      ctx.mappingType(),
-    ];
+    const unionTypes = [ctx.elementaryTypeName(), ctx.functionTypeName(), ctx.mappingType()];
     Object.assign(this, unionTypes.find(Boolean)?.accept(visitor));
   }
+  public toJSON = () => this.name;
 }

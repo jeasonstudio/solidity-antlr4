@@ -11,6 +11,6 @@ export class EventDefinition extends BaseNode {
     super(ctx, visitor);
     this.name = ctx.identifier().getText();
     this.anonymous = !!ctx.Anonymous();
-    this.parameters = this.visitContextList(ctx.eventParameter());
+    this.parameters = ctx.eventParameter().map((param) => param.accept(visitor));
   }
 }
