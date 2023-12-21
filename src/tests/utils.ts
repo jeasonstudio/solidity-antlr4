@@ -5,7 +5,7 @@ import {
   CommonTokenStream,
   ParserRuleContext,
 } from '../grammar';
-import { ASTNode } from '../node';
+import { ASTNode } from '../ast';
 import { solidityASTVisitor } from '../visitor';
 
 export const format = (ast: ASTNode) => JSON.parse(JSON.stringify(ast));

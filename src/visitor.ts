@@ -1,5 +1,5 @@
 import * as parser from './grammar';
-import * as ast from './node';
+import * as ast from './ast';
 
 export class SolidityASTVisitor extends parser.SolidityParserVisitor<ast.ASTNode> {
   visitSourceUnit = (ctx: parser.SourceUnitContext) => new ast.SourceUnit(ctx, this);
