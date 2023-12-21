@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.0.0
+
+### Major Changes
+
+- support syntax tree and tokenizer
+
 ## 1.1.0
 
 ### Minor Changes
