@@ -1,15 +1,21 @@
-import { BaseNode } from './base';
 import { MemberAccessContext, SolidityParserVisitor } from '../grammar';
 import { Identifier } from './identifier';
 import { Expression } from './expression';
 
-export class MemberAccess extends BaseNode {
+export class MemberAccess extends Expression {
   type = 'MemberAccess';
   expression: Expression;
-  member: Identifier | null = null;
+  memberName: string | null = null;
+
   public constructor(ctx: MemberAccessContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.expression = ctx.expression().accept(visitor);
-    this.member = ctx.identifier()?.accept(visitor) ?? null;
+    if (ctx.Address()) {
+      this.memberName = 'address';
+    } else if (!!ctx.identifier()) {
+      this.memberName = ctx.identifier()!.getText();
+    } else {
+      this.memberName = null;
+    }
   }
 }

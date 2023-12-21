@@ -1,12 +1,9 @@
-import { BaseNode } from './base';
+import { BaseNodeString } from './base';
 import { ElementaryTypeNameContext, SolidityParserVisitor } from '../grammar';
 
-export class ElementaryTypeName extends BaseNode {
+export class ElementaryTypeName extends BaseNodeString {
   type = 'ElementaryTypeName';
-  name: string;
   public constructor(ctx: ElementaryTypeNameContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
-    this.name = ctx.getText();
   }
-  public toJSON = () => this.name;
 }

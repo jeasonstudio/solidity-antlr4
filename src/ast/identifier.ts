@@ -1,12 +1,9 @@
-import { BaseNode } from './base';
+import { BaseNodeString } from './base';
 import { IdentifierContext, SolidityParserVisitor } from '../grammar';
 
-export class Identifier extends BaseNode {
+export class Identifier extends BaseNodeString {
   type = 'Identifier';
-  name: string;
   public constructor(ctx: IdentifierContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
-    this.name = ctx.getText();
   }
-  public toJSON = () => this.name;
 }

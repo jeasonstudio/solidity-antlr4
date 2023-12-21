@@ -1,9 +1,10 @@
-import { BaseNode, TypeDataLocation } from './base';
+import { BaseNodeString, TypeDataLocation } from './base';
 import { DataLocationContext, SolidityParserVisitor } from '../grammar';
 
-export class DataLocation extends BaseNode {
+export class DataLocation extends BaseNodeString {
   type = 'DataLocation';
-  name: TypeDataLocation | null;
+  // @ts-ignore
+  name: TypeDataLocation | null = null;
   public constructor(ctx: DataLocationContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     if (ctx.Storage()) {
@@ -14,5 +15,4 @@ export class DataLocation extends BaseNode {
       this.name = 'calldata';
     }
   }
-  public toJSON = () => this.name;
 }

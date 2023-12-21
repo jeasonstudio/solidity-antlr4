@@ -9,7 +9,7 @@ test('named-argument', () => {
       name: 'value',
       expression: {
         expression: 'msg',
-        member: 'value',
+        memberName: 'value',
       },
     },
     {
@@ -65,7 +65,9 @@ test('literal', () => {
 });
 
 test('assignment', () => {
-  expect(createParse((p) => p.tupleExpression())(`(a += b, a++, --b)`)).toMatchObject([
+  expect(
+    createParse((p) => p.tupleExpression())(`(a += b, a++, delete b, foo ? x : 2)`),
+  ).toMatchObject([
     {
       left: 'a',
       right: 'b',
@@ -76,9 +78,32 @@ test('assignment', () => {
       left: 'a',
     },
     {
-      operator: '--',
+      operator: 'delete',
       right: 'b',
+    },
+    {
+      condition: 'foo',
+      trueExpression: 'x',
+      falseExpression: { value: '2' },
     },
   ]);
 });
-createLog((p) => p.tupleExpression())(`(a += b, a++, --b)`);
+
+test('memberAccess', () => {
+  expect(createParse((p) => p.tupleExpression())(`(msg.value, foo.address)`)).toMatchObject([
+    {
+      expression: 'msg',
+      memberName: 'value',
+    },
+    {
+      expression: 'foo',
+      memberName: 'address',
+    },
+  ]);
+});
+
+// createLog((p) => p.tupleExpression())(`(arr[0], arr[:10], arr[0:10])`);
+// createLog((p) => p.tupleExpression())(
+//   `(obj{foo: 1}, obj({bar:bar}), payable({foo:bar}), type({foo:bar}))`,
+// );
+// createLog((p) => p.tupleExpression())(`(new Foo)`);
