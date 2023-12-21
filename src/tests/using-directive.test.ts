@@ -1,12 +1,8 @@
 import { solidityASTVisitor as visitor } from '../visitor';
 import { CharStreams, CommonTokenStream, SolidityLexer, SolidityParser } from '../grammar';
+import { createLog, createParse } from './utils';
 
-const parse = (input: string) => {
-  const lexer = new SolidityLexer(CharStreams.fromString(input));
-  const parser = new SolidityParser(new CommonTokenStream(lexer));
-  const tree = parser.usingDirective();
-  return JSON.parse(JSON.stringify(tree.accept(visitor)));
-};
+const parse = createParse((p) => p.usingDirective());
 
 describe('usingDirective', () => {
   test('usingDirective', () => {

@@ -7,6 +7,6 @@ export class ElementaryTypeName extends BaseNode {
   public constructor(ctx: ElementaryTypeNameContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx.getText();
-    // TODO
   }
+  public toJSON = () => this.name;
 }

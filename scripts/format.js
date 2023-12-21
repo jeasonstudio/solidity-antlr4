@@ -77,6 +77,7 @@ const list = [
   'ExpressionStatement',
   'MappingType',
   'MappingKeyType',
+  'MemberAccess',
   'YulStatement',
   'YulBlock',
   'YulVariableDeclaration',
@@ -91,13 +92,38 @@ const list = [
   'YulBoolean',
   'YulLiteral',
   'YulExpression',
+  'UnaryPrefixOperation',
+  'PrimaryExpression',
+  'OrderComparison',
+  'Conditional',
+  'PayableConversion',
+  'Assignment',
+  'UnarySuffixOperation',
+  'ShiftOperation',
+  'BitAndOperation',
+  'FunctionCall',
+  'IndexRangeAccess',
+  'IndexAccess',
+  'AddSubOperation',
+  'BitOrOperation',
+  'ExpOperation',
+  'AndOperation',
+  'InlineArray',
+  'OrOperation',
+  'MulDivModOperation',
+  'FunctionCallOptions',
+  'NewExpr',
+  'BitXorOperation',
+  'Tuple',
+  'EqualityComparison',
+  'MetaType',
 ];
 
 const template = (name) => `import { BaseNode } from './base';
 import { ${name}Context, SolidityParserVisitor } from '../grammar';
 
 export class ${name} extends BaseNode {
-  public type = '${name}';
+  type = '${name}';
   public constructor(ctx: ${name}Context, visitor: SolidityParserVisitor<BaseNode>) {
     super(ctx, visitor);
   }
@@ -120,7 +146,7 @@ list.forEach((name) => {
   const fileContent = template(name);
 
   // console.log(filePath);
-  fs.writeFileSync(filePath, fileContent, 'utf8');
+  // fs.writeFileSync(filePath, fileContent, 'utf8');
 });
 
 // fs.writeFileSync(
@@ -130,7 +156,7 @@ list.forEach((name) => {
 // );
 
 // fs.writeFileSync(
-//   path.resolve(__dirname, '../node.ts'),
+//   path.resolve(__dirname, '../src/node.ts'),
 //   `${list.map((name) => `import { ${name} } from './ast/${filename(name)}';`).join('\n')}
 
 // export type ASTNode = ${list.join(' | ')};
@@ -140,14 +166,16 @@ list.forEach((name) => {
 //   'utf-8',
 // );
 
-// fs.writeFileSync(
-//   path.resolve(__dirname, '../visitor.ts'),
-//   `import * as parser from './grammar';
-// import * as ast from './node';
+fs.writeFileSync(
+  path.resolve(__dirname, '../src/visitor.ts'),
+  `import * as parser from './grammar';
+import * as ast from './node';
 
-// export class SolidityASTVisitor extends parser.SolidityParserVisitor<ast.ASTNode> {
-//   ${list.map(n => `visit${n} = (ctx: parser.${n}Context) => new ast.${n}(ctx);`).join('\n\t')}
-// }
-// `,
-//   'utf-8',
-// );
+export class SolidityASTVisitor extends parser.SolidityParserVisitor<ast.ASTNode> {
+  ${list.map(n => `visit${n} = (ctx: parser.${n}Context) => new ast.${n}(ctx, this);`).join('\n\t')}
+}
+
+export const solidityASTVisitor = new SolidityASTVisitor();
+`,
+  'utf-8',
+);

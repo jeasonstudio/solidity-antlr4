@@ -26,8 +26,6 @@ export class SolidityASTVisitor extends parser.SolidityParserVisitor<ast.ASTNode
   visitIdentifierPath = (ctx: parser.IdentifierPathContext) => new ast.IdentifierPath(ctx, this);
   visitModifierInvocation = (ctx: parser.ModifierInvocationContext) =>
     new ast.ModifierInvocation(ctx, this);
-  visitMemberAccess = (ctx: parser.MemberAccessContext) =>
-    new ast.MemberAccess(ctx, this);
   visitVisibility = (ctx: parser.VisibilityContext) => new ast.Visibility(ctx, this);
   visitParameterList = (ctx: parser.ParameterListContext) => new ast.ParameterList(ctx, this);
   visitParameterDeclaration = (ctx: parser.ParameterDeclarationContext) =>
@@ -116,6 +114,7 @@ export class SolidityASTVisitor extends parser.SolidityParserVisitor<ast.ASTNode
     new ast.ExpressionStatement(ctx, this);
   visitMappingType = (ctx: parser.MappingTypeContext) => new ast.MappingType(ctx, this);
   visitMappingKeyType = (ctx: parser.MappingKeyTypeContext) => new ast.MappingKeyType(ctx, this);
+  visitMemberAccess = (ctx: parser.MemberAccessContext) => new ast.MemberAccess(ctx, this);
   visitYulStatement = (ctx: parser.YulStatementContext) => new ast.YulStatement(ctx, this);
   visitYulBlock = (ctx: parser.YulBlockContext) => new ast.YulBlock(ctx, this);
   visitYulVariableDeclaration = (ctx: parser.YulVariableDeclarationContext) =>
@@ -133,6 +132,39 @@ export class SolidityASTVisitor extends parser.SolidityParserVisitor<ast.ASTNode
   visitYulBoolean = (ctx: parser.YulBooleanContext) => new ast.YulBoolean(ctx, this);
   visitYulLiteral = (ctx: parser.YulLiteralContext) => new ast.YulLiteral(ctx, this);
   visitYulExpression = (ctx: parser.YulExpressionContext) => new ast.YulExpression(ctx, this);
+  visitUnaryPrefixOperation = (ctx: parser.UnaryPrefixOperationContext) =>
+    new ast.UnaryPrefixOperation(ctx, this);
+  visitPrimaryExpression = (ctx: parser.PrimaryExpressionContext) =>
+    new ast.PrimaryExpression(ctx, this);
+  visitOrderComparison = (ctx: parser.OrderComparisonContext) => new ast.OrderComparison(ctx, this);
+  visitConditional = (ctx: parser.ConditionalContext) => new ast.Conditional(ctx, this);
+  visitPayableConversion = (ctx: parser.PayableConversionContext) =>
+    new ast.PayableConversion(ctx, this);
+  visitAssignment = (ctx: parser.AssignmentContext) => new ast.Assignment(ctx, this);
+  visitUnarySuffixOperation = (ctx: parser.UnarySuffixOperationContext) =>
+    new ast.UnarySuffixOperation(ctx, this);
+  visitShiftOperation = (ctx: parser.ShiftOperationContext) => new ast.ShiftOperation(ctx, this);
+  visitBitAndOperation = (ctx: parser.BitAndOperationContext) => new ast.BitAndOperation(ctx, this);
+  visitFunctionCall = (ctx: parser.FunctionCallContext) => new ast.FunctionCall(ctx, this);
+  visitIndexRangeAccess = (ctx: parser.IndexRangeAccessContext) =>
+    new ast.IndexRangeAccess(ctx, this);
+  visitIndexAccess = (ctx: parser.IndexAccessContext) => new ast.IndexAccess(ctx, this);
+  visitAddSubOperation = (ctx: parser.AddSubOperationContext) => new ast.AddSubOperation(ctx, this);
+  visitBitOrOperation = (ctx: parser.BitOrOperationContext) => new ast.BitOrOperation(ctx, this);
+  visitExpOperation = (ctx: parser.ExpOperationContext) => new ast.ExpOperation(ctx, this);
+  visitAndOperation = (ctx: parser.AndOperationContext) => new ast.AndOperation(ctx, this);
+  visitInlineArray = (ctx: parser.InlineArrayContext) => new ast.InlineArray(ctx, this);
+  visitOrOperation = (ctx: parser.OrOperationContext) => new ast.OrOperation(ctx, this);
+  visitMulDivModOperation = (ctx: parser.MulDivModOperationContext) =>
+    new ast.MulDivModOperation(ctx, this);
+  visitFunctionCallOptions = (ctx: parser.FunctionCallOptionsContext) =>
+    new ast.FunctionCallOptions(ctx, this);
+  visitNewExpr = (ctx: parser.NewExprContext) => new ast.NewExpr(ctx, this);
+  visitBitXorOperation = (ctx: parser.BitXorOperationContext) => new ast.BitXorOperation(ctx, this);
+  visitTuple = (ctx: parser.TupleContext) => new ast.Tuple(ctx, this);
+  visitEqualityComparison = (ctx: parser.EqualityComparisonContext) =>
+    new ast.EqualityComparison(ctx, this);
+  visitMetaType = (ctx: parser.MetaTypeContext) => new ast.MetaType(ctx, this);
 }
 
 export const solidityASTVisitor = new SolidityASTVisitor();

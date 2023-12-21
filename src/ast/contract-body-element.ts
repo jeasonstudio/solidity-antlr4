@@ -1,14 +1,10 @@
-import { BaseNode } from './base';
+import { BaseNodeUnion } from './base';
 import { ContractBodyElementContext, SolidityParserVisitor } from '../grammar';
 
-export class ContractBodyElement extends BaseNode {
-  type = 'ContractBodyElement';
-  element: BaseNode;
+export class ContractBodyElement extends BaseNodeUnion {
+  // type = 'ContractBodyElement';
   public constructor(ctx: ContractBodyElementContext, visitor: SolidityParserVisitor<any>) {
-    super(ctx, visitor);
-    this.element = ctx.getChild(0)?.accept(visitor);
-  }
-  toJSON() {
-    return this.element;
+    if (ctx.getChildCount() > 1) throw new Error('??'); // TODO@jeason
+    super(ctx, ctx.children as any, visitor);
   }
 }

@@ -36,10 +36,10 @@ export class Location {
 }
 
 export abstract class BaseNode {
-  public readonly type: string;
-  public readonly src: SrcLocation; // `{start}:{length}:{file}`
-  public readonly range: Range;
-  public readonly location: Location;
+  public type: string;
+  public src: SrcLocation; // `{start}:{length}:{file}`
+  public range: Range;
+  public location: Location;
 
   public constructor(ctx: ParserRuleContext, _visitor: SolidityParserVisitor<any>) {
     const start = ctx.start?.start ?? 0;
@@ -54,6 +54,8 @@ export abstract class BaseNode {
     );
     this.location = Location.create(startPosition, endPosition);
   }
+
+  toJSON: () => any;
 }
 
 export abstract class BaseNodeList<T extends BaseNode> extends Array<T> {
@@ -62,8 +64,27 @@ export abstract class BaseNodeList<T extends BaseNode> extends Array<T> {
   }
 }
 
-export abstract class BaseNodeString extends String {
-  public constructor(str: string, _visitor: SolidityParserVisitor<any>) {
-    super(str);
+export abstract class BaseNodeString extends BaseNode {
+  name: string;
+  public constructor(ctx: ParserRuleContext, visitor: SolidityParserVisitor<any>) {
+    super(ctx, visitor);
+    this.name = ctx.getText();
+    this.toJSON = () => this.name;
+  }
+}
+
+export abstract class BaseNodeUnion<T extends BaseNode = BaseNode> extends BaseNode {
+  public constructor(
+    _ctx: ParserRuleContext,
+    list: (ParserRuleContext | null)[],
+    visitor: SolidityParserVisitor<any>,
+  ) {
+    super(_ctx, visitor);
+    const target = list.find(Boolean);
+    if (target) {
+      // this = target.accept(visitor) as T;
+      // Object.assign(this, target.accept(visitor) as T);
+      return target.accept(visitor) as T;
+    }
   }
 }

@@ -9,7 +9,7 @@ const getParser = (input: string) => {
   return parser;
 };
 
-console.log(Object.entries(visitor).filter(([k, v]) => !v));
+// console.log(Object.entries(visitor).filter(([k, v]) => !v));
 
 describe('ast-builder', () => {
   test('visitSourceUnit', () => {

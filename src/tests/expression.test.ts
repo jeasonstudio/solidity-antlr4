@@ -64,4 +64,21 @@ test('literal', () => {
   ]);
 });
 
-createLog((p) => p.tupleExpression())(`(a == b)`);
+test('assignment', () => {
+  expect(createParse((p) => p.tupleExpression())(`(a += b, a++, --b)`)).toMatchObject([
+    {
+      left: 'a',
+      right: 'b',
+      operator: '+=',
+    },
+    {
+      operator: '++',
+      left: 'a',
+    },
+    {
+      operator: '--',
+      right: 'b',
+    },
+  ]);
+});
+createLog((p) => p.tupleExpression())(`(a += b, a++, --b)`);

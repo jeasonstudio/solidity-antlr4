@@ -14,7 +14,6 @@ import { NamedArgument } from './ast/named-argument';
 import { CallArgumentList } from './ast/call-argument-list';
 import { IdentifierPath } from './ast/identifier-path';
 import { ModifierInvocation } from './ast/modifier-invocation';
-import { MemberAccess } from './ast/member-access';
 import { Visibility } from './ast/visibility';
 import { ParameterList } from './ast/parameter-list';
 import { ParameterDeclaration } from './ast/parameter-declaration';
@@ -77,6 +76,7 @@ import { VariableDeclarationStatement } from './ast/variable-declaration-stateme
 import { ExpressionStatement } from './ast/expression-statement';
 import { MappingType } from './ast/mapping-type';
 import { MappingKeyType } from './ast/mapping-key-type';
+import { MemberAccess } from './ast/member-access';
 import { YulStatement } from './ast/yul-statement';
 import { YulBlock } from './ast/yul-block';
 import { YulVariableDeclaration } from './ast/yul-variable-declaration';
@@ -91,289 +91,32 @@ import { YulFunctionCall } from './ast/yul-function-call';
 import { YulBoolean } from './ast/yul-boolean';
 import { YulLiteral } from './ast/yul-literal';
 import { YulExpression } from './ast/yul-expression';
+import { UnaryPrefixOperation } from './ast/unary-prefix-operation';
+import { PrimaryExpression } from './ast/primary-expression';
+import { OrderComparison } from './ast/order-comparison';
+import { Conditional } from './ast/conditional';
+import { PayableConversion } from './ast/payable-conversion';
+import { Assignment } from './ast/assignment';
+import { UnarySuffixOperation } from './ast/unary-suffix-operation';
+import { ShiftOperation } from './ast/shift-operation';
+import { BitAndOperation } from './ast/bit-and-operation';
+import { FunctionCall } from './ast/function-call';
+import { IndexRangeAccess } from './ast/index-range-access';
+import { IndexAccess } from './ast/index-access';
+import { AddSubOperation } from './ast/add-sub-operation';
+import { BitOrOperation } from './ast/bit-or-operation';
+import { ExpOperation } from './ast/exp-operation';
+import { AndOperation } from './ast/and-operation';
+import { InlineArray } from './ast/inline-array';
+import { OrOperation } from './ast/or-operation';
+import { MulDivModOperation } from './ast/mul-div-mod-operation';
+import { FunctionCallOptions } from './ast/function-call-options';
+import { NewExpr } from './ast/new-expr';
+import { BitXorOperation } from './ast/bit-xor-operation';
+import { Tuple } from './ast/tuple';
+import { EqualityComparison } from './ast/equality-comparison';
+import { MetaType } from './ast/meta-type';
 
-export type ASTNode =
-  | SourceUnit
-  | PragmaDirective
-  | ImportDirective
-  | ImportAliases
-  | Path
-  | SymbolAliases
-  | ContractDefinition
-  | InterfaceDefinition
-  | LibraryDefinition
-  | InheritanceSpecifierList
-  | InheritanceSpecifier
-  | ContractBodyElement
-  | NamedArgument
-  | CallArgumentList
-  | IdentifierPath
-  | ModifierInvocation
-  | MemberAccess
-  | Visibility
-  | ParameterList
-  | ParameterDeclaration
-  | ConstructorDefinition
-  | StateMutability
-  | OverrideSpecifier
-  | FunctionDefinition
-  | ModifierDefinition
-  | FallbackFunctionDefinition
-  | ReceiveFunctionDefinition
-  | StructDefinition
-  | StructMember
-  | EnumDefinition
-  | UserDefinedValueTypeDefinition
-  | StateVariableDeclaration
-  | ConstantVariableDeclaration
-  | EventParameter
-  | EventDefinition
-  | ErrorParameter
-  | ErrorDefinition
-  | UserDefinableOperator
-  | UsingDirective
-  | TypeName
-  | ElementaryTypeName
-  | FunctionTypeName
-  | VariableDeclaration
-  | DataLocation
-  | Expression
-  | AssignOp
-  | TupleExpression
-  | InlineArrayExpression
-  | Identifier
-  | Literal
-  | LiteralWithSubDenomination
-  | BooleanLiteral
-  | StringLiteral
-  | HexStringLiteral
-  | UnicodeStringLiteral
-  | NumberLiteral
-  | Block
-  | UncheckedBlock
-  | Statement
-  | SimpleStatement
-  | IfStatement
-  | ForStatement
-  | WhileStatement
-  | DoWhileStatement
-  | ContinueStatement
-  | BreakStatement
-  | TryStatement
-  | CatchClause
-  | ReturnStatement
-  | EmitStatement
-  | RevertStatement
-  | AssemblyStatement
-  | AssemblyFlags
-  | VariableDeclarationList
-  | VariableDeclarationTuple
-  | VariableDeclarationStatement
-  | ExpressionStatement
-  | MappingType
-  | MappingKeyType
-  | YulStatement
-  | YulBlock
-  | YulVariableDeclaration
-  | YulAssignment
-  | YulIfStatement
-  | YulForStatement
-  | YulSwitchCase
-  | YulSwitchStatement
-  | YulFunctionDefinition
-  | YulPath
-  | YulFunctionCall
-  | YulBoolean
-  | YulLiteral
-  | YulExpression;
-
-export type ASTNodeType =
-  | 'SourceUnit'
-  | 'PragmaDirective'
-  | 'ImportDirective'
-  | 'ImportAliases'
-  | 'Path'
-  | 'SymbolAliases'
-  | 'ContractDefinition'
-  | 'InterfaceDefinition'
-  | 'LibraryDefinition'
-  | 'InheritanceSpecifierList'
-  | 'InheritanceSpecifier'
-  | 'ContractBodyElement'
-  | 'NamedArgument'
-  | 'CallArgumentList'
-  | 'IdentifierPath'
-  | 'ModifierInvocation'
-  | 'MemberAccess'
-  | 'Visibility'
-  | 'ParameterList'
-  | 'ParameterDeclaration'
-  | 'ConstructorDefinition'
-  | 'StateMutability'
-  | 'OverrideSpecifier'
-  | 'FunctionDefinition'
-  | 'ModifierDefinition'
-  | 'FallbackFunctionDefinition'
-  | 'ReceiveFunctionDefinition'
-  | 'StructDefinition'
-  | 'StructMember'
-  | 'EnumDefinition'
-  | 'UserDefinedValueTypeDefinition'
-  | 'StateVariableDeclaration'
-  | 'ConstantVariableDeclaration'
-  | 'EventParameter'
-  | 'EventDefinition'
-  | 'ErrorParameter'
-  | 'ErrorDefinition'
-  | 'UserDefinableOperator'
-  | 'UsingDirective'
-  | 'TypeName'
-  | 'ElementaryTypeName'
-  | 'FunctionTypeName'
-  | 'VariableDeclaration'
-  | 'DataLocation'
-  | 'Expression'
-  | 'AssignOp'
-  | 'TupleExpression'
-  | 'InlineArrayExpression'
-  | 'Identifier'
-  | 'Literal'
-  | 'LiteralWithSubDenomination'
-  | 'BooleanLiteral'
-  | 'StringLiteral'
-  | 'HexStringLiteral'
-  | 'UnicodeStringLiteral'
-  | 'NumberLiteral'
-  | 'Block'
-  | 'UncheckedBlock'
-  | 'Statement'
-  | 'SimpleStatement'
-  | 'IfStatement'
-  | 'ForStatement'
-  | 'WhileStatement'
-  | 'DoWhileStatement'
-  | 'ContinueStatement'
-  | 'BreakStatement'
-  | 'TryStatement'
-  | 'CatchClause'
-  | 'ReturnStatement'
-  | 'EmitStatement'
-  | 'RevertStatement'
-  | 'AssemblyStatement'
-  | 'AssemblyFlags'
-  | 'VariableDeclarationList'
-  | 'VariableDeclarationTuple'
-  | 'VariableDeclarationStatement'
-  | 'ExpressionStatement'
-  | 'MappingType'
-  | 'MappingKeyType'
-  | 'YulStatement'
-  | 'YulBlock'
-  | 'YulVariableDeclaration'
-  | 'YulAssignment'
-  | 'YulIfStatement'
-  | 'YulForStatement'
-  | 'YulSwitchCase'
-  | 'YulSwitchStatement'
-  | 'YulFunctionDefinition'
-  | 'YulPath'
-  | 'YulFunctionCall'
-  | 'YulBoolean'
-  | 'YulLiteral'
-  | 'YulExpression';
-
-export {
-  SourceUnit,
-  PragmaDirective,
-  ImportDirective,
-  ImportAliases,
-  Path,
-  SymbolAliases,
-  ContractDefinition,
-  InterfaceDefinition,
-  LibraryDefinition,
-  InheritanceSpecifierList,
-  InheritanceSpecifier,
-  ContractBodyElement,
-  NamedArgument,
-  CallArgumentList,
-  IdentifierPath,
-  ModifierInvocation,
-  MemberAccess,
-  Visibility,
-  ParameterList,
-  ParameterDeclaration,
-  ConstructorDefinition,
-  StateMutability,
-  OverrideSpecifier,
-  FunctionDefinition,
-  ModifierDefinition,
-  FallbackFunctionDefinition,
-  ReceiveFunctionDefinition,
-  StructDefinition,
-  StructMember,
-  EnumDefinition,
-  UserDefinedValueTypeDefinition,
-  StateVariableDeclaration,
-  ConstantVariableDeclaration,
-  EventParameter,
-  EventDefinition,
-  ErrorParameter,
-  ErrorDefinition,
-  UserDefinableOperator,
-  UsingDirective,
-  TypeName,
-  ElementaryTypeName,
-  FunctionTypeName,
-  VariableDeclaration,
-  DataLocation,
-  Expression,
-  AssignOp,
-  TupleExpression,
-  InlineArrayExpression,
-  Identifier,
-  Literal,
-  LiteralWithSubDenomination,
-  BooleanLiteral,
-  StringLiteral,
-  HexStringLiteral,
-  UnicodeStringLiteral,
-  NumberLiteral,
-  Block,
-  UncheckedBlock,
-  Statement,
-  SimpleStatement,
-  IfStatement,
-  ForStatement,
-  WhileStatement,
-  DoWhileStatement,
-  ContinueStatement,
-  BreakStatement,
-  TryStatement,
-  CatchClause,
-  ReturnStatement,
-  EmitStatement,
-  RevertStatement,
-  AssemblyStatement,
-  AssemblyFlags,
-  VariableDeclarationList,
-  VariableDeclarationTuple,
-  VariableDeclarationStatement,
-  ExpressionStatement,
-  MappingType,
-  MappingKeyType,
-  YulStatement,
-  YulBlock,
-  YulVariableDeclaration,
-  YulAssignment,
-  YulIfStatement,
-  YulForStatement,
-  YulSwitchCase,
-  YulSwitchStatement,
-  YulFunctionDefinition,
-  YulPath,
-  YulFunctionCall,
-  YulBoolean,
-  YulLiteral,
-  YulExpression,
-};
+export type ASTNode = SourceUnit | PragmaDirective | ImportDirective | ImportAliases | Path | SymbolAliases | ContractDefinition | InterfaceDefinition | LibraryDefinition | InheritanceSpecifierList | InheritanceSpecifier | ContractBodyElement | NamedArgument | CallArgumentList | IdentifierPath | ModifierInvocation | Visibility | ParameterList | ParameterDeclaration | ConstructorDefinition | StateMutability | OverrideSpecifier | FunctionDefinition | ModifierDefinition | FallbackFunctionDefinition | ReceiveFunctionDefinition | StructDefinition | StructMember | EnumDefinition | UserDefinedValueTypeDefinition | StateVariableDeclaration | ConstantVariableDeclaration | EventParameter | EventDefinition | ErrorParameter | ErrorDefinition | UserDefinableOperator | UsingDirective | TypeName | ElementaryTypeName | FunctionTypeName | VariableDeclaration | DataLocation | Expression | AssignOp | TupleExpression | InlineArrayExpression | Identifier | Literal | LiteralWithSubDenomination | BooleanLiteral | StringLiteral | HexStringLiteral | UnicodeStringLiteral | NumberLiteral | Block | UncheckedBlock | Statement | SimpleStatement | IfStatement | ForStatement | WhileStatement | DoWhileStatement | ContinueStatement | BreakStatement | TryStatement | CatchClause | ReturnStatement | EmitStatement | RevertStatement | AssemblyStatement | AssemblyFlags | VariableDeclarationList | VariableDeclarationTuple | VariableDeclarationStatement | ExpressionStatement | MappingType | MappingKeyType | MemberAccess | YulStatement | YulBlock | YulVariableDeclaration | YulAssignment | YulIfStatement | YulForStatement | YulSwitchCase | YulSwitchStatement | YulFunctionDefinition | YulPath | YulFunctionCall | YulBoolean | YulLiteral | YulExpression | UnaryPrefixOperation | PrimaryExpression | OrderComparison | Conditional | PayableConversion | Assignment | UnarySuffixOperation | ShiftOperation | BitAndOperation | FunctionCall | IndexRangeAccess | IndexAccess | AddSubOperation | BitOrOperation | ExpOperation | AndOperation | InlineArray | OrOperation | MulDivModOperation | FunctionCallOptions | NewExpr | BitXorOperation | Tuple | EqualityComparison | MetaType;
+export type ASTNodeType = 'SourceUnit' | 'PragmaDirective' | 'ImportDirective' | 'ImportAliases' | 'Path' | 'SymbolAliases' | 'ContractDefinition' | 'InterfaceDefinition' | 'LibraryDefinition' | 'InheritanceSpecifierList' | 'InheritanceSpecifier' | 'ContractBodyElement' | 'NamedArgument' | 'CallArgumentList' | 'IdentifierPath' | 'ModifierInvocation' | 'Visibility' | 'ParameterList' | 'ParameterDeclaration' | 'ConstructorDefinition' | 'StateMutability' | 'OverrideSpecifier' | 'FunctionDefinition' | 'ModifierDefinition' | 'FallbackFunctionDefinition' | 'ReceiveFunctionDefinition' | 'StructDefinition' | 'StructMember' | 'EnumDefinition' | 'UserDefinedValueTypeDefinition' | 'StateVariableDeclaration' | 'ConstantVariableDeclaration' | 'EventParameter' | 'EventDefinition' | 'ErrorParameter' | 'ErrorDefinition' | 'UserDefinableOperator' | 'UsingDirective' | 'TypeName' | 'ElementaryTypeName' | 'FunctionTypeName' | 'VariableDeclaration' | 'DataLocation' | 'Expression' | 'AssignOp' | 'TupleExpression' | 'InlineArrayExpression' | 'Identifier' | 'Literal' | 'LiteralWithSubDenomination' | 'BooleanLiteral' | 'StringLiteral' | 'HexStringLiteral' | 'UnicodeStringLiteral' | 'NumberLiteral' | 'Block' | 'UncheckedBlock' | 'Statement' | 'SimpleStatement' | 'IfStatement' | 'ForStatement' | 'WhileStatement' | 'DoWhileStatement' | 'ContinueStatement' | 'BreakStatement' | 'TryStatement' | 'CatchClause' | 'ReturnStatement' | 'EmitStatement' | 'RevertStatement' | 'AssemblyStatement' | 'AssemblyFlags' | 'VariableDeclarationList' | 'VariableDeclarationTuple' | 'VariableDeclarationStatement' | 'ExpressionStatement' | 'MappingType' | 'MappingKeyType' | 'MemberAccess' | 'YulStatement' | 'YulBlock' | 'YulVariableDeclaration' | 'YulAssignment' | 'YulIfStatement' | 'YulForStatement' | 'YulSwitchCase' | 'YulSwitchStatement' | 'YulFunctionDefinition' | 'YulPath' | 'YulFunctionCall' | 'YulBoolean' | 'YulLiteral' | 'YulExpression' | 'UnaryPrefixOperation' | 'PrimaryExpression' | 'OrderComparison' | 'Conditional' | 'PayableConversion' | 'Assignment' | 'UnarySuffixOperation' | 'ShiftOperation' | 'BitAndOperation' | 'FunctionCall' | 'IndexRangeAccess' | 'IndexAccess' | 'AddSubOperation' | 'BitOrOperation' | 'ExpOperation' | 'AndOperation' | 'InlineArray' | 'OrOperation' | 'MulDivModOperation' | 'FunctionCallOptions' | 'NewExpr' | 'BitXorOperation' | 'Tuple' | 'EqualityComparison' | 'MetaType';
+export { SourceUnit, PragmaDirective, ImportDirective, ImportAliases, Path, SymbolAliases, ContractDefinition, InterfaceDefinition, LibraryDefinition, InheritanceSpecifierList, InheritanceSpecifier, ContractBodyElement, NamedArgument, CallArgumentList, IdentifierPath, ModifierInvocation, Visibility, ParameterList, ParameterDeclaration, ConstructorDefinition, StateMutability, OverrideSpecifier, FunctionDefinition, ModifierDefinition, FallbackFunctionDefinition, ReceiveFunctionDefinition, StructDefinition, StructMember, EnumDefinition, UserDefinedValueTypeDefinition, StateVariableDeclaration, ConstantVariableDeclaration, EventParameter, EventDefinition, ErrorParameter, ErrorDefinition, UserDefinableOperator, UsingDirective, TypeName, ElementaryTypeName, FunctionTypeName, VariableDeclaration, DataLocation, Expression, AssignOp, TupleExpression, InlineArrayExpression, Identifier, Literal, LiteralWithSubDenomination, BooleanLiteral, StringLiteral, HexStringLiteral, UnicodeStringLiteral, NumberLiteral, Block, UncheckedBlock, Statement, SimpleStatement, IfStatement, ForStatement, WhileStatement, DoWhileStatement, ContinueStatement, BreakStatement, TryStatement, CatchClause, ReturnStatement, EmitStatement, RevertStatement, AssemblyStatement, AssemblyFlags, VariableDeclarationList, VariableDeclarationTuple, VariableDeclarationStatement, ExpressionStatement, MappingType, MappingKeyType, MemberAccess, YulStatement, YulBlock, YulVariableDeclaration, YulAssignment, YulIfStatement, YulForStatement, YulSwitchCase, YulSwitchStatement, YulFunctionDefinition, YulPath, YulFunctionCall, YulBoolean, YulLiteral, YulExpression, UnaryPrefixOperation, PrimaryExpression, OrderComparison, Conditional, PayableConversion, Assignment, UnarySuffixOperation, ShiftOperation, BitAndOperation, FunctionCall, IndexRangeAccess, IndexAccess, AddSubOperation, BitOrOperation, ExpOperation, AndOperation, InlineArray, OrOperation, MulDivModOperation, FunctionCallOptions, NewExpr, BitXorOperation, Tuple, EqualityComparison, MetaType };
