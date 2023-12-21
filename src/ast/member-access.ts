@@ -1,5 +1,4 @@
 import { MemberAccessContext, SolidityParserVisitor } from '../grammar';
-import { Identifier } from './identifier';
 import { Expression } from './expression';
 
 export class MemberAccess extends Expression {

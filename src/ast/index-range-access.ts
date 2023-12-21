@@ -1,4 +1,3 @@
-import { BaseNode } from './base';
 import { IndexRangeAccessContext, SolidityParserVisitor } from '../grammar';
 import { Expression } from './expression';
 
