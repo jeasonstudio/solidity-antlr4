@@ -1,16 +1,14 @@
 import { SolidityASTVisitor } from './visitor';
-import { ASTNode, Position, Range } from './ast';
+import { Position, SyntaxNode } from './ast';
 import { SolidityParser, ParseTree, SolidityLexer, CommonTokenStream, CharStream } from './grammar';
 import { ParseError, SolidityErrorListener } from './error';
-
-export type SyntaxTree = ASTNode;
 
 export type SyntaxTokenType = (typeof SolidityLexer.symbolicNames)[number];
 
 export interface SyntaxToken {
   text: string;
   type: SyntaxTokenType;
-  range: Range;
+  range: [number, number];
   position: Position;
 }
 
@@ -20,7 +18,7 @@ export interface ParseOptions {
 
 export interface ParseResult {
   parseTree: ParseTree;
-  syntaxTree: SyntaxTree;
+  syntaxTree: SyntaxNode;
   syntaxTokens: SyntaxToken[];
   errors: ParseError[];
 }

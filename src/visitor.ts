@@ -1,7 +1,7 @@
 import * as parser from './grammar';
 import * as ast from './ast';
 
-export class SolidityASTVisitor extends parser.SolidityParserVisitor<ast.ASTNode> {
+export class SolidityASTVisitor extends parser.SolidityParserVisitor<ast.SyntaxNode> {
   visitSourceUnit = (ctx: parser.SourceUnitContext) => new ast.SourceUnit(ctx, this);
   visitPragmaDirective = (ctx: parser.PragmaDirectiveContext) => new ast.PragmaDirective(ctx, this);
   visitImportDirective = (ctx: parser.ImportDirectiveContext) => new ast.ImportDirective(ctx, this);

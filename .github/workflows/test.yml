@@ -39,3 +39,13 @@ jobs:
 
       - name: Run jest
         run: pnpm run test:ci
+
+      - name: Code coverage report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: coverage/cobertura-coverage.xml
+          badge: true
+          fail_below_min: true
+          format: markdown
+          output: both
+          thresholds: '80 100'

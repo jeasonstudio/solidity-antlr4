@@ -28,5 +28,5 @@ module.exports = {
   },
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   coveragePathIgnorePatterns: ['/node_modules/', '/(.*)mock(.*)/', '<rootDir>/src/antlr4'],
-  coverageReporters: ['json', 'text', 'text-summary', 'html'],
+  coverageReporters: ['json', 'text', 'text-summary', 'html', 'cobertura'],
 };
