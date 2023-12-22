@@ -1,5 +1,5 @@
-import { BaseNodeString } from './base';
-import { YulStatementContext, SolidityParserVisitor } from '../grammar';
+import { BaseNodeString } from '../base';
+import { YulStatementContext, SolidityParserVisitor } from '../../grammar';
 
 export class YulStatement extends BaseNodeString {
   // public type = 'YulStatement';

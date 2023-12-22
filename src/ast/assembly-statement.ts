@@ -1,7 +1,7 @@
 import { BaseNode, formatString } from './base';
 import { AssemblyStatementContext, SolidityParserVisitor } from '../grammar';
 import { AssemblyFlags } from './assembly-flags';
-import { YulStatement } from './yul-statement';
+import { YulStatement } from './yul/yul-statement';
 
 export class AssemblyStatement extends BaseNode {
   type = 'AssemblyStatement';

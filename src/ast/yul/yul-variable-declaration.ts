@@ -1,5 +1,5 @@
-import { BaseNode } from './base';
-import { YulVariableDeclarationContext, SolidityParserVisitor } from '../grammar';
+import { BaseNode } from '../base';
+import { YulVariableDeclarationContext, SolidityParserVisitor } from '../../grammar';
 import { YulExpression } from './yul-expression';
 
 export class YulVariableDeclaration extends BaseNode {

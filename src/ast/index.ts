@@ -1,4 +1,5 @@
 export * from './base';
+export * from './yul';
 import { SourceUnit } from './source-unit';
 import { PragmaDirective } from './pragma-directive';
 import { ImportDirective } from './import-directive';
@@ -78,20 +79,6 @@ import { ExpressionStatement } from './expression-statement';
 import { MappingType } from './mapping-type';
 import { MappingKeyType } from './mapping-key-type';
 import { MemberAccess } from './member-access';
-import { YulStatement } from './yul-statement';
-import { YulBlock } from './yul-block';
-import { YulVariableDeclaration } from './yul-variable-declaration';
-import { YulAssignment } from './yul-assignment';
-import { YulIfStatement } from './yul-if-statement';
-import { YulForStatement } from './yul-for-statement';
-import { YulSwitchCase } from './yul-switch-case';
-import { YulSwitchStatement } from './yul-switch-statement';
-import { YulFunctionDefinition } from './yul-function-definition';
-import { YulPath } from './yul-path';
-import { YulFunctionCall } from './yul-function-call';
-import { YulBoolean } from './yul-boolean';
-import { YulLiteral } from './yul-literal';
-import { YulExpression } from './yul-expression';
 import { UnaryPrefixOperation } from './unary-prefix-operation';
 import { PrimaryExpression } from './primary-expression';
 import { OrderComparison } from './order-comparison';
@@ -117,6 +104,8 @@ import { BitXorOperation } from './bit-xor-operation';
 import { Tuple } from './tuple';
 import { EqualityComparison } from './equality-comparison';
 import { MetaType } from './meta-type';
+
+import { YulNode, YulNodeType } from './yul';
 
 export type ASTNode =
   | SourceUnit
@@ -198,20 +187,6 @@ export type ASTNode =
   | MappingType
   | MappingKeyType
   | MemberAccess
-  | YulStatement
-  | YulBlock
-  | YulVariableDeclaration
-  | YulAssignment
-  | YulIfStatement
-  | YulForStatement
-  | YulSwitchCase
-  | YulSwitchStatement
-  | YulFunctionDefinition
-  | YulPath
-  | YulFunctionCall
-  | YulBoolean
-  | YulLiteral
-  | YulExpression
   | UnaryPrefixOperation
   | PrimaryExpression
   | OrderComparison
@@ -236,7 +211,9 @@ export type ASTNode =
   | BitXorOperation
   | Tuple
   | EqualityComparison
-  | MetaType;
+  | MetaType
+  | YulNode;
+
 export type ASTNodeType =
   | 'SourceUnit'
   | 'PragmaDirective'
@@ -355,7 +332,9 @@ export type ASTNodeType =
   | 'BitXorOperation'
   | 'Tuple'
   | 'EqualityComparison'
-  | 'MetaType';
+  | 'MetaType'
+  | YulNodeType;
+
 export {
   SourceUnit,
   PragmaDirective,
@@ -436,20 +415,6 @@ export {
   MappingType,
   MappingKeyType,
   MemberAccess,
-  YulStatement,
-  YulBlock,
-  YulVariableDeclaration,
-  YulAssignment,
-  YulIfStatement,
-  YulForStatement,
-  YulSwitchCase,
-  YulSwitchStatement,
-  YulFunctionDefinition,
-  YulPath,
-  YulFunctionCall,
-  YulBoolean,
-  YulLiteral,
-  YulExpression,
   UnaryPrefixOperation,
   PrimaryExpression,
   OrderComparison,

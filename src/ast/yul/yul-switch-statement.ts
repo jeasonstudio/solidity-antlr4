@@ -1,5 +1,5 @@
-import { BaseNode } from './base';
-import { YulSwitchStatementContext, SolidityParserVisitor } from '../grammar';
+import { BaseNode } from '../base';
+import { YulSwitchStatementContext, SolidityParserVisitor } from '../../grammar';
 import { YulExpression } from './yul-expression';
 import { YulSwitchCase } from './yul-switch-case';
 import { YulBlock } from './yul-block';

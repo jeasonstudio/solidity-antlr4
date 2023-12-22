@@ -1,5 +1,5 @@
-import { BaseNodeString } from './base';
-import { YulBooleanContext, SolidityParserVisitor } from '../grammar';
+import { BaseNodeString } from '../base';
+import { YulBooleanContext, SolidityParserVisitor } from '../../grammar';
 
 export class YulBoolean extends BaseNodeString {
   type = 'YulBoolean';
