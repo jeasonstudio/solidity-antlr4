@@ -1,5 +1,4 @@
 import { ParseTree, ParserRuleContext, SolidityParserVisitor } from '../grammar';
-// import { NodeType } from 'solidity-ast/node';
 
 export type Range = [number, number];
 export type SrcLocation = `${number}:${number}`;

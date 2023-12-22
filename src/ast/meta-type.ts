@@ -1,5 +1,5 @@
-import { TypeName } from 'solidity-ast';
 import { MetaTypeContext, SolidityParserVisitor } from '../grammar';
+import { TypeName } from './type-name';
 import { Expression } from './expression';
 
 export class MetaType extends Expression {

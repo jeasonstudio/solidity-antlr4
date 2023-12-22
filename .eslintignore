@@ -1,3 +1,4 @@
 *.js
 *.md
 src/antlr4/*
+dist/*

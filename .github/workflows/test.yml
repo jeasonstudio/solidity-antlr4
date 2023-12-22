@@ -3,7 +3,7 @@ on:
   - pull_request
 
 jobs:
-  cache-and-install:
+  unit-test-and-lint:
     runs-on: ubuntu-latest
 
     steps:

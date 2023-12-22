@@ -1,6 +1,6 @@
 import { BaseNode } from './base';
 import { YulForStatementContext, SolidityParserVisitor } from '../grammar';
-import { YulExpression } from 'solidity-ast';
+import { YulExpression } from './yul-expression';
 import { YulBlock } from './yul-block';
 
 export class YulForStatement extends BaseNode {
