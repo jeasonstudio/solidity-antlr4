@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.1.0
+
+### Minor Changes
+
+- 90fa8b5: update readme and format file locations
+
 ## 2.0.0
 
 ### Major Changes

@@ -5,15 +5,15 @@ import {
   CommonTokenStream,
   ParserRuleContext,
 } from '../grammar';
-import { ASTNode } from '../ast';
+import { SyntaxNode } from '../ast';
 import { solidityASTVisitor } from '../visitor';
 
-export const format = (ast: ASTNode) => JSON.parse(JSON.stringify(ast));
+export const format = (ast: SyntaxNode) => JSON.parse(JSON.stringify(ast));
 
 export const parse = (
   input: string,
   callback: (parser: SolidityParser) => ParserRuleContext = (p) => p.sourceUnit(),
-  afterParse: (ast: ASTNode) => any = format,
+  afterParse: (ast: SyntaxNode) => any = format,
 ) => {
   const lexer = new SolidityLexer(CharStreams.fromString(input));
   const parser = new SolidityParser(new CommonTokenStream(lexer));
@@ -24,7 +24,7 @@ export const parse = (
 
 export const createParse = (
   callback: (parser: SolidityParser) => ParserRuleContext = (p) => p.sourceUnit(),
-  afterParse: (ast: ASTNode) => any = format,
+  afterParse: (ast: SyntaxNode) => any = format,
 ) => {
   return (input: string) => parse(input, callback, afterParse);
 };
