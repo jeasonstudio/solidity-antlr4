@@ -11,7 +11,7 @@ export class TryStatement extends BaseNode {
   returnParameters: ParameterList | null = null;
   body: Block;
   catchClauses: CatchClause[];
-  public constructor(ctx: TryStatementContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: TryStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.expression = ctx.expression().accept(visitor);
     this.returnParameters = ctx.parameterList()?.accept(visitor) ?? null;

@@ -39,7 +39,7 @@ export class FunctionDefinition extends BaseNodeUnion<
   returnParameters: ParameterList[] = [];
   body: Block | null = null;
 
-  public constructor(
+  constructor(
     ctx:
       | FunctionDefinitionContext
       | FunctionTypeNameContext

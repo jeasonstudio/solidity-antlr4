@@ -3,7 +3,7 @@ import { PrimaryExpressionContext, SolidityParserVisitor } from '../grammar';
 
 export class PrimaryExpression extends BaseNodeUnion {
   // type = 'PrimaryExpression';
-  public constructor(ctx: PrimaryExpressionContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: PrimaryExpressionContext, visitor: SolidityParserVisitor<any>) {
     super(
       ctx,
       [ctx.literalWithSubDenomination(), ctx.literal(), ctx.elementaryTypeName(), ctx.identifier()],

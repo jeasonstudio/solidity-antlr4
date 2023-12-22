@@ -4,12 +4,12 @@ import { VisibilityContext, SolidityParserVisitor, TerminalNode } from '../gramm
 export class Visibility extends BaseNode {
   type = 'Visibility';
   visibility: VisibilityKind | null = null;
-  public constructor(ctx: VisibilityContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: VisibilityContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.visibility = this.getVisibility(ctx);
   }
 
-  public getVisibility(ctx: VisibilityContext): VisibilityKind | null {
+  getVisibility(ctx: VisibilityContext): VisibilityKind | null {
     const format = (n: TerminalNode | TerminalNode[] | null | undefined) => {
       if (Array.isArray(n)) {
         return !!n.length;
@@ -32,5 +32,5 @@ export class Visibility extends BaseNode {
     }
   }
 
-  public toJSON = () => this.visibility;
+  toJSON = () => this.visibility;
 }

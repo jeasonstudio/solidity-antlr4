@@ -6,7 +6,7 @@ export class ImportAliases extends BaseNode {
   type = 'ImportAliases';
   foreign: Identifier;
   local: Identifier | null = null;
-  public constructor(ctx: ImportAliasesContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: ImportAliasesContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.foreign = ctx.identifier(0)!.accept(visitor);
     if (!!ctx.As()) {

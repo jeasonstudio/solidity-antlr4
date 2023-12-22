@@ -12,7 +12,7 @@ export class ModifierDefinition extends BaseNode {
   virtual: boolean = false;
   override: OverrideSpecifier | null = null;
   body: Block | null = null;
-  public constructor(ctx: ModifierDefinitionContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: ModifierDefinitionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx.identifier().accept(visitor);
     this.parameters = ctx.parameterList()?.accept(visitor) ?? null;

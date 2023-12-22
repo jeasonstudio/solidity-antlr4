@@ -8,7 +8,7 @@ export class VariableDeclarationStatement extends BaseNode {
   variables: VariableDeclaration[] = [];
   expression: Expression | null = null;
 
-  public constructor(
+  constructor(
     ctx: VariableDeclarationStatementContext,
     visitor: SolidityParserVisitor<any>,
   ) {

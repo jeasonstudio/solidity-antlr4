@@ -6,7 +6,7 @@ export class ErrorDefinition extends BaseNode {
   type = 'ErrorDefinition';
   name: string;
   parameters: ErrorParameter[];
-  public constructor(ctx: ErrorDefinitionContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: ErrorDefinitionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx.identifier().getText();
     this.parameters = ctx.errorParameter().map((param) => param.accept(visitor));

@@ -11,7 +11,7 @@ export class ForStatement extends BaseNode {
   conditionExpression: ExpressionStatement | null = null;
   loopExpression: Expression | null = null;
   body: Statement;
-  public constructor(ctx: ForStatementContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: ForStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.initializationExpression = ctx.simpleStatement()?.accept(visitor) ?? null;
     this.conditionExpression = ctx.expressionStatement()?.accept(visitor) ?? null;

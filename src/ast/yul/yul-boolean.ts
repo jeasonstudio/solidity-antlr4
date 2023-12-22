@@ -3,7 +3,7 @@ import { YulBooleanContext, SolidityParserVisitor } from '../../grammar';
 
 export class YulBoolean extends BaseNodeString {
   type = 'YulBoolean';
-  public constructor(ctx: YulBooleanContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: YulBooleanContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx.YulTrue() ? 'true' : 'false';
   }

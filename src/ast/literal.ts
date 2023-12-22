@@ -2,8 +2,8 @@ import { BaseNodeUnion } from './base';
 import { LiteralContext, SolidityParserVisitor } from '../grammar';
 
 export class Literal extends BaseNodeUnion {
-  // public type = 'Literal';
-  public constructor(ctx: LiteralContext, visitor: SolidityParserVisitor<any>) {
+  // type = 'Literal';
+  constructor(ctx: LiteralContext, visitor: SolidityParserVisitor<any>) {
     super(
       ctx,
       [

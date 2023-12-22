@@ -5,8 +5,8 @@ import { YulPath } from './yul-path';
 import { YulLiteral } from './yul-literal';
 
 export class YulExpression extends BaseNodeUnion<YulFunctionCall | YulPath | YulLiteral> {
-  // public type = 'YulExpression';
-  public constructor(ctx: YulExpressionContext, visitor: SolidityParserVisitor<any>) {
+  // type = 'YulExpression';
+  constructor(ctx: YulExpressionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, [ctx.yulPath(), ctx.yulFunctionCall(), ctx.yulLiteral()], visitor);
   }
 }

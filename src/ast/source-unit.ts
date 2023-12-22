@@ -25,7 +25,7 @@ export class SourceUnit extends BaseNode {
     | UsingDirective
     | VariableDeclaration
   )[] = [];
-  public constructor(ctx: SourceUnitContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: SourceUnitContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.nodes = (ctx.children || []).map((child) => visitor.visit(child)!).filter(Boolean);
   }

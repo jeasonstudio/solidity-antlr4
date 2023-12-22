@@ -14,7 +14,7 @@ export class UsingDirective extends BaseNode {
     operator?: UserDefinableOperator;
   }[];
   typeName?: TypeName;
-  public constructor(ctx: UsingDirectiveContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: UsingDirectiveContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.global = !!ctx.Global();
     this.typeName = ctx.typeName()?.accept(visitor);

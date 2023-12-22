@@ -8,7 +8,7 @@ export class YulAssignment extends BaseNode {
   type = 'YulAssignment';
   paths: YulPath[] = [];
   expression: YulExpression | YulFunctionCall;
-  public constructor(ctx: YulAssignmentContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: YulAssignmentContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.paths = ctx.yulPath()?.map((p) => p.accept(visitor)) ?? [];
     this.expression = (ctx.yulFunctionCall() || ctx.yulExpression())!.accept(visitor);

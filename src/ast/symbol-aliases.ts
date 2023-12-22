@@ -4,7 +4,7 @@ import { ImportAliases } from './import-aliases';
 
 export class SymbolAliases extends BaseNodeList<ImportAliases> {
   type = 'SymbolAliases';
-  public constructor(ctx: SymbolAliasesContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: SymbolAliasesContext, visitor: SolidityParserVisitor<any>) {
     super(ctx.importAliases(), visitor);
   }
 }

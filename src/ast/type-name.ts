@@ -6,7 +6,7 @@ export class TypeName extends BaseNode {
   // type = 'TypeName';
   name: string | null;
   expression: Expression | null;
-  public constructor(ctx: TypeNameContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: TypeNameContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
 
     const target = [

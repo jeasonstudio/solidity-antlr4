@@ -4,7 +4,7 @@ import { Expression } from './expression';
 
 export class InlineArrayExpression extends BaseNodeList<Expression> {
   type = 'InlineArrayExpression';
-  public constructor(ctx: InlineArrayExpressionContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: InlineArrayExpressionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx.expression(), visitor);
   }
 }

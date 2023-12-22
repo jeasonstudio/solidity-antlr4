@@ -8,7 +8,7 @@ export class IfStatement extends BaseNode {
   condition: Expression;
   ifStatement: Statement;
   elseStatement: Statement | null = null;
-  public constructor(ctx: IfStatementContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: IfStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.condition = ctx.expression().accept(visitor);
     this.ifStatement = ctx.statement(0)!.accept(visitor);

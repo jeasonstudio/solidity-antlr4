@@ -9,7 +9,7 @@ export class YulForStatement extends BaseNode {
   conditionExpression: YulExpression | null = null;
   loopBlock: YulBlock | null = null;
   body: YulBlock | null = null;
-  public constructor(ctx: YulForStatementContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: YulForStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.initializationBlock = ctx._init?.accept(visitor) ?? null;
     this.conditionExpression = ctx._cond?.accept(visitor) ?? null;

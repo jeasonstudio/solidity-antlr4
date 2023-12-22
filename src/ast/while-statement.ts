@@ -7,7 +7,7 @@ export class WhileStatement extends BaseNode {
   type = 'WhileStatement';
   condition: Expression;
   body: Statement;
-  public constructor(ctx: WhileStatementContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: WhileStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.condition = ctx.expression().accept(visitor);
     this.body = ctx.statement().accept(visitor);

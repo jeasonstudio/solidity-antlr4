@@ -6,10 +6,10 @@ export class IdentifierPath extends BaseNode {
   type = 'IdentifierPath';
   name: string;
   identifiers: Identifier[];
-  public constructor(ctx: IdentifierPathContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: IdentifierPathContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx.getText();
     this.identifiers = ctx.identifier().map((identifier) => identifier.accept(visitor));
   }
-  public toJSON = () => this.name;
+  toJSON = () => this.name;
 }

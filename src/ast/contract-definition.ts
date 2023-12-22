@@ -35,7 +35,7 @@ export class ContractDefinition extends BaseNode {
   baseContracts: InheritanceSpecifier[] = [];
   contractKind: ContractKind = 'contract';
   nodes: ContractDefinitionNodes[] = [];
-  public constructor(
+  constructor(
     ctx: ContractDefinitionContext | InterfaceDefinitionContext | LibraryDefinitionContext,
     visitor: SolidityParserVisitor<any>,
   ) {

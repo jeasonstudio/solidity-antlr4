@@ -10,7 +10,7 @@ export class CatchClause extends BaseNode {
   parameters: ParameterList | null = null;
   body: Block;
 
-  public constructor(ctx: CatchClauseContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: CatchClauseContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.errorName = ctx.identifier()?.accept(visitor) ?? null;
     this.body = ctx.block().accept(visitor);

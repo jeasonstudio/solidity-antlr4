@@ -6,7 +6,7 @@ export class MemberAccess extends Expression {
   expression: Expression;
   memberName: string | null = null;
 
-  public constructor(ctx: MemberAccessContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: MemberAccessContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.expression = ctx.expression().accept(visitor);
     if (ctx.Address()) {

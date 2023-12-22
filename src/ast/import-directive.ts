@@ -8,7 +8,7 @@ export class ImportDirective extends BaseNode {
   path: PathContext;
   unitAlias: Identifier | null = null;
   symbolAliases: SymbolAliases[] = [];
-  public constructor(ctx: ImportDirectiveContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: ImportDirectiveContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.path = ctx.path()!.accept(visitor);
     if (!!ctx.As() && ctx.identifier()) {

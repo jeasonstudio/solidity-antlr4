@@ -7,7 +7,7 @@ export class InheritanceSpecifier extends BaseNode {
   type = 'InheritanceSpecifier';
   baseName: IdentifierPath;
   arguments: Expression[] = [];
-  public constructor(ctx: InheritanceSpecifierContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: InheritanceSpecifierContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.baseName = ctx.identifierPath().accept(visitor);
     this.arguments = ctx.callArgumentList()?.accept(visitor) ?? [];

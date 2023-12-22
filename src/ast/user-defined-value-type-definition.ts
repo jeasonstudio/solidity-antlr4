@@ -6,7 +6,7 @@ export class UserDefinedValueTypeDefinition extends BaseNode {
   type = 'UserDefinedValueTypeDefinition';
   name: string;
   typeName: ElementaryTypeName;
-  public constructor(
+  constructor(
     ctx: UserDefinedValueTypeDefinitionContext,
     visitor: SolidityParserVisitor<any>,
   ) {

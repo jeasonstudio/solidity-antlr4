@@ -2,8 +2,8 @@ import { BaseNodeString } from '../base';
 import { YulStatementContext, SolidityParserVisitor } from '../../grammar';
 
 export class YulStatement extends BaseNodeString {
-  // public type = 'YulStatement';
-  public constructor(ctx: YulStatementContext, visitor: SolidityParserVisitor<any>) {
+  // type = 'YulStatement';
+  constructor(ctx: YulStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
 
     const target = [

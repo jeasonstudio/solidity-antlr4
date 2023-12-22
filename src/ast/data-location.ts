@@ -5,7 +5,7 @@ export class DataLocation extends BaseNodeString {
   type = 'DataLocation';
   // @ts-ignore
   name: DataLocationKind | null = null;
-  public constructor(ctx: DataLocationContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: DataLocationContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     if (ctx.Storage()) {
       this.name = 'storage';

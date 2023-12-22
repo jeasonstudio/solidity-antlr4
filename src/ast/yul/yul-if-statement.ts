@@ -7,7 +7,7 @@ export class YulIfStatement extends BaseNode {
   type = 'YulIfStatement';
   condition: YulExpression | null = null;
   body: YulBlock | null = null;
-  public constructor(ctx: YulIfStatementContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: YulIfStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.condition = ctx._cond?.accept(visitor) ?? null;
     this.body = ctx._body?.accept(visitor) ?? null;

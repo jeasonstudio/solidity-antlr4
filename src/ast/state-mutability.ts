@@ -5,12 +5,12 @@ export class StateMutability extends BaseNode {
   type = 'StateMutability';
   stateMutability: StateMutabilityKind | null = null;
 
-  public constructor(ctx: StateMutabilityContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: StateMutabilityContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.stateMutability = this.getStateMutability(ctx);
   }
 
-  public getStateMutability(ctx: StateMutabilityContext): StateMutabilityKind | null {
+  getStateMutability(ctx: StateMutabilityContext): StateMutabilityKind | null {
     const format = (n: TerminalNode | TerminalNode[] | null) => {
       if (Array.isArray(n) && !!n.length) {
         return true;
@@ -30,5 +30,5 @@ export class StateMutability extends BaseNode {
     }
   }
 
-  public toJSON = () => this.stateMutability;
+  toJSON = () => this.stateMutability;
 }

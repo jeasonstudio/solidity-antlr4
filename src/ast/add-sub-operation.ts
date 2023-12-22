@@ -6,7 +6,7 @@ export class BinaryOperation<T extends ExpressionContext = ExpressionContext> ex
   operator: string | null = null;
   left: Expression | null = null;
   right: Expression | null = null;
-  public constructor(ctx: T, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: T, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.left = ctx.getChild(0)?.accept(visitor) ?? null;
     this.operator = ctx.getChild(1)?.getText() ?? null;

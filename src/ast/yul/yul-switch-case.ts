@@ -7,7 +7,7 @@ export class YulSwitchCase extends BaseNode {
   type = 'YulSwitchCase';
   case: YulLiteral;
   body: YulBlock;
-  public constructor(ctx: YulSwitchCaseContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: YulSwitchCaseContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.case = ctx.yulLiteral().accept(visitor);
     this.body = ctx.yulBlock().accept(visitor);

@@ -7,7 +7,7 @@ export class DoWhileStatement extends BaseNode {
   type = 'DoWhileStatement';
   condition: Expression;
   body: Statement;
-  public constructor(ctx: DoWhileStatementContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: DoWhileStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.condition = ctx.expression().accept(visitor);
     this.body = ctx.statement().accept(visitor);

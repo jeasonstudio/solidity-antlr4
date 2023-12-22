@@ -4,7 +4,7 @@ import { Expression } from './expression';
 
 export class TupleExpression extends BaseNodeList<Expression> {
   type = 'TupleExpression';
-  public constructor(ctx: TupleExpressionContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: TupleExpressionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx.expression(), visitor);
   }
 }

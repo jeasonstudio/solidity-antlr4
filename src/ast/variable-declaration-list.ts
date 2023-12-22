@@ -3,8 +3,8 @@ import { VariableDeclarationListContext, SolidityParserVisitor } from '../gramma
 import { VariableDeclaration } from './variable-declaration';
 
 export class VariableDeclarationList extends BaseNodeList<VariableDeclaration> {
-  public type = 'VariableDeclarationList';
-  public constructor(ctx: VariableDeclarationListContext, visitor: SolidityParserVisitor<any>) {
+  type = 'VariableDeclarationList';
+  constructor(ctx: VariableDeclarationListContext, visitor: SolidityParserVisitor<any>) {
     super(ctx.variableDeclaration(), visitor);
   }
 }

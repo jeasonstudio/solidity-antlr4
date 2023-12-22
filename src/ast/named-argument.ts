@@ -7,7 +7,7 @@ export class NamedArgument extends BaseNode {
   type = 'NamedArgument';
   name: Identifier;
   expression: Expression;
-  public constructor(ctx: NamedArgumentContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: NamedArgumentContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx.identifier().accept(visitor);
     this.expression = ctx.expression().accept(visitor);

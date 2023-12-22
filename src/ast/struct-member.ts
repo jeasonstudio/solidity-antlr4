@@ -7,7 +7,7 @@ export class StructMember extends BaseNode {
   type = 'StructMember';
   name: Identifier;
   typeName: TypeName;
-  public constructor(ctx: StructMemberContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: StructMemberContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx.identifier().accept(visitor);
     this.typeName = ctx.typeName().accept(visitor);

@@ -9,7 +9,7 @@ export class MappingType extends BaseNode {
   name: Identifier | null = null;
   keyType: MappingKeyType | null = null;
   valueType: TypeName | null = null;
-  public constructor(ctx: MappingTypeContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: MappingTypeContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx._name?.accept(visitor) ?? null;
     this.keyType = ctx._key?.accept(visitor) ?? null;

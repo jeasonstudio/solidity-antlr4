@@ -3,7 +3,7 @@ import { PathContext, SolidityParserVisitor } from '../grammar';
 
 export class Path extends BaseNodeString {
   type = 'Path';
-  public constructor(ctx: PathContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: PathContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = formatString(ctx.NonEmptyStringLiteral().getText());
   }

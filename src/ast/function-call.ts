@@ -6,7 +6,7 @@ export class FunctionCall extends Expression {
   type = 'FunctionCall';
   expression: Expression;
   arguments: CallArgumentList | null = null;
-  public constructor(ctx: FunctionCallContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: FunctionCallContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.expression = ctx.expression().accept(visitor);
     this.arguments = ctx.callArgumentList().accept(visitor);

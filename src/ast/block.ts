@@ -7,7 +7,7 @@ export class Block extends BaseNode {
   type = 'Block';
   statements: Statement[] = [];
   uncheckedBlocks: UncheckedBlock[] = [];
-  public constructor(ctx: BlockContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: BlockContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.statements = ctx.statement().map((s) => s.accept(visitor));
     this.uncheckedBlocks = ctx.uncheckedBlock().map((s) => s.accept(visitor));

@@ -10,7 +10,7 @@ export class NumberLiteral extends BaseNode {
   value: string | null = null;
   hexValue: string | null = null;
   subDenomination: EtherUnit | TimeUnit | null = null;
-  public constructor(
+  constructor(
     ctx: NumberLiteralContext | LiteralWithSubDenominationContext,
     visitor: SolidityParserVisitor<any>,
   ) {

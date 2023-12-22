@@ -3,7 +3,7 @@ import { ExpressionContext, SolidityParserVisitor } from '../grammar';
 
 export class Expression extends BaseNode {
   type = 'Expression';
-  public constructor(ctx: ExpressionContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: ExpressionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
   }
 }

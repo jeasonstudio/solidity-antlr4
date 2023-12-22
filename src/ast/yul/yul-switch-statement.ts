@@ -10,7 +10,7 @@ export class YulSwitchStatement extends BaseNode {
   switchCases: YulSwitchCase[];
   default: boolean;
   body: YulBlock | null = null;
-  public constructor(ctx: YulSwitchStatementContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: YulSwitchStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.expression = ctx.yulExpression().accept(visitor);
     this.switchCases = ctx.yulSwitchCase().map((sc) => sc.accept(visitor));

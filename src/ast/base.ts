@@ -90,7 +90,7 @@ export class Position {
   public static create(line: number, column: number): Position {
     return new Position(line, column);
   }
-  public constructor(
+  constructor(
     // 1-based
     public line: number,
     // 0-based
@@ -102,7 +102,7 @@ export class Location {
   public static create(start: Position, end: Position): Location {
     return new Location(start, end);
   }
-  public constructor(
+  constructor(
     public start: Position,
     public end: Position,
   ) {}
@@ -114,7 +114,7 @@ export abstract class BaseNode {
   public range: Range;
   public location: Location;
 
-  public constructor(ctx: ParserRuleContext, _visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: ParserRuleContext, _visitor: SolidityParserVisitor<any>) {
     const start = ctx.start?.start ?? 0;
     const end = ctx.stop?.stop ?? start;
     this.range = [start, end];
@@ -132,14 +132,14 @@ export abstract class BaseNode {
 }
 
 export abstract class BaseNodeList<T extends BaseNode> extends Array<T> {
-  public constructor(ctxList: ParseTree[], visitor: SolidityParserVisitor<any>) {
+  constructor(ctxList: ParseTree[], visitor: SolidityParserVisitor<any>) {
     super(...ctxList.map((ctx) => ctx.accept(visitor)));
   }
 }
 
 export abstract class BaseNodeString extends BaseNode {
   name: string;
-  public constructor(ctx: ParserRuleContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: ParserRuleContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx.getText();
     this.toJSON = () => this.name;
@@ -147,7 +147,7 @@ export abstract class BaseNodeString extends BaseNode {
 }
 
 export abstract class BaseNodeUnion<T extends BaseNode = BaseNode> extends BaseNode {
-  public constructor(
+  constructor(
     _ctx: ParserRuleContext,
     list: (ParserRuleContext | null)[],
     visitor: SolidityParserVisitor<any>,

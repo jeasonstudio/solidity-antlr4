@@ -10,7 +10,7 @@ export class UnaryOperation extends Expression {
   operator: string | null = null;
   left: Expression | null = null;
   right: Expression | null = null;
-  public constructor(
+  constructor(
     ctx: UnaryPrefixOperationContext | UnarySuffixOperationContext,
     visitor: SolidityParserVisitor<any>,
   ) {

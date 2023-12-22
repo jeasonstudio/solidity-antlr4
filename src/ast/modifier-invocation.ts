@@ -7,7 +7,7 @@ export class ModifierInvocation extends BaseNode {
   type = 'ModifierInvocation';
   name: IdentifierPath;
   arguments: CallArgumentList | null = null;
-  public constructor(ctx: ModifierInvocationContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: ModifierInvocationContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.name = ctx.identifierPath().accept(visitor);
     this.arguments = ctx.callArgumentList()?.accept(visitor) ?? null;

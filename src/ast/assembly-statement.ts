@@ -8,7 +8,7 @@ export class AssemblyStatement extends BaseNode {
   flags: AssemblyFlags | null = null;
   dialect: 'evmasm' | string | null = null;
   yulStatements: YulStatement[] = [];
-  public constructor(ctx: AssemblyStatementContext, visitor: SolidityParserVisitor<any>) {
+  constructor(ctx: AssemblyStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.flags = ctx.assemblyFlags()?.accept(visitor) ?? null;
     this.dialect = ctx.AssemblyDialect() ? formatString(ctx.AssemblyDialect()!.getText()) : null;

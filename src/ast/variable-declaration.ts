@@ -43,7 +43,7 @@ export class VariableDeclaration extends BaseNodeUnion<
   override: OverrideSpecifier | null = null;
   expression: Expression | null = null;
 
-  public constructor(
+  constructor(
     ctx:
       | VariableDeclarationContext
       | ParameterDeclarationContext
