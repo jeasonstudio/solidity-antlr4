@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.1.3
+
+### Patch Changes
+
+- 5e47215: change build targets to es5
+
 ## 2.1.2
 
 ### Patch Changes
