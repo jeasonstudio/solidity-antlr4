@@ -84,7 +84,7 @@ test('forStatement', () => {
 });
 
 test('block', () => {
-  expect(createParse((p) => p.block())(`{ break; unchecked { return; } {} }`)).toMatchObject({
+  expect(createParse((p) => p.block())(`{ break; unchecked { return; } { continue; } }`)).toMatchObject({
     statements: [{}, {}],
     uncheckedBlocks: [{}],
   });

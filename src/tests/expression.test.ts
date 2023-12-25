@@ -1,4 +1,4 @@
-import { createLog, createParse } from './utils';
+import { createParse } from './utils';
 
 test('named-argument', () => {
   expect(

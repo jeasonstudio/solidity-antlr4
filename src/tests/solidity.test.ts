@@ -1,4 +1,4 @@
-import { parse, tokenizer } from './solidity';
+import { parse, tokenizer } from '../solidity';
 
 test('solidity', () => {
   const { parseTree, syntaxTree, syntaxTokens } = parse(`// SPDX-License-Identifier: MIT
