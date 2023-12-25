@@ -1,9 +1,9 @@
-import { formatString } from '../base';
+import { BaseNodeList, formatString } from '../base';
 import { AssemblyFlagsContext, SolidityParserVisitor } from '../../grammar';
 
-export class AssemblyFlags extends Array<string> {
+export class AssemblyFlags extends BaseNodeList<any> {
   type = 'AssemblyFlags';
   constructor(ctx: AssemblyFlagsContext, _visitor: SolidityParserVisitor<any>) {
-    super(...ctx.AssemblyFlagString().map((flag) => formatString(flag.getText())));
+    super(ctx.AssemblyFlagString(), _visitor, (flag) => formatString(flag.getText()));
   }
 }

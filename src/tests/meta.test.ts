@@ -30,26 +30,15 @@ test('usingDirective', () => {
     global: true,
   });
   expect(createParse((p) => p.usingDirective())(`using { A, C.D } for B;`)).toMatchObject({
-    functionList: [
-      {
-        definition: 'A',
-      },
-      {
-        definition: 'C.D',
-      },
-    ],
+    definitions: ['A', 'C.D'],
     typeName: 'B',
     global: false,
   });
   expect(createParse((p) => p.usingDirective())(`using { B, add as + } for B;`)).toMatchObject({
-    functionList: [
-      {
-        definition: 'B',
-      },
-      {
-        definition: 'add',
-        // operator: '+', // TODO
-      },
+    definitions: [
+      'B',
+      'add',
+      // operator: '+', // TODO
     ],
     typeName: 'B',
     global: false,

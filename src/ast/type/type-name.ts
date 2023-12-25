@@ -1,4 +1,4 @@
-import { BaseNode } from '../base';
+import { BaseNode, serializeNodeString } from '../base';
 import { TypeNameContext, SolidityParserVisitor } from '../../grammar';
 import { Expression } from '../expression';
 
@@ -22,7 +22,7 @@ export class TypeName extends BaseNode {
       this.type = 'TypeName';
       this.name = ctx.getText() ?? null;
       this.expression = ctx.expression()?.accept(visitor) ?? null;
-      this.toJSON = () => this.name;
+      this.serialize = () => serializeNodeString(this);
     }
   }
 }

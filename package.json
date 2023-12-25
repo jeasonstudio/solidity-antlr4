@@ -53,13 +53,15 @@
     "*.{ts,json}": "prettier --loglevel warn --write"
   },
   "dependencies": {
-    "antlr4ng": "^2.0.4"
+    "antlr4ng": "^2.0.4",
+    "lodash-es": "^4.17.21"
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",
     "@changesets/cli": "^2.27.1",
     "@swc/jest": "^0.2.29",
     "@types/jest": "^29.5.11",
+    "@types/lodash-es": "^4.17.12",
     "@umijs/fabric": "^4.0.1",
     "antlr4ng-cli": "^1.0.7",
     "changeset": "^0.2.6",

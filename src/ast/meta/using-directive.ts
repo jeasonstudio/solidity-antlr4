@@ -9,10 +9,11 @@ export class UsingDirective extends BaseNode {
   type = 'UsingDirective';
   global: boolean;
   libraryName?: UserDefinedValueTypeDefinition | IdentifierPath;
-  functionList?: {
-    definition: IdentifierPath;
-    operator?: UserDefinableOperator;
-  }[];
+  definitions?: IdentifierPath[];
+  // functionList?: {
+  //   definition: IdentifierPath;
+  //   operator?: UserDefinableOperator;
+  // }[];
   typeName?: TypeName;
   constructor(ctx: UsingDirectiveContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
@@ -23,12 +24,13 @@ export class UsingDirective extends BaseNode {
     if (!isObjectUsing) {
       this.libraryName = ctx.identifierPath(0)?.accept(visitor);
     } else {
-      this.functionList = ctx.identifierPath().map((p) => {
-        const definition = p.accept(visitor);
-        // TODO: How to relate operator and definition together
-        // const operator = p.userDefinableOperator()?.accept(visitor);
-        return { definition };
-      });
+      // this.functionList = ctx.identifierPath().map((p) => {
+      //   const definition = p.accept(visitor);
+      //   // TODO: How to relate operator and definition together
+      //   // const operator = p.userDefinableOperator()?.accept(visitor);
+      //   return { definition };
+      // });
+      this.definitions = ctx.identifierPath().map((p) => p.accept(visitor));
     }
   }
 }

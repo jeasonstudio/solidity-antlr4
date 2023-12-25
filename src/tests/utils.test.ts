@@ -8,7 +8,7 @@ import {
 import { SyntaxNode } from '../ast';
 import { solidityASTVisitor } from '../visitor';
 
-export const format = (ast: SyntaxNode) => JSON.parse(JSON.stringify(ast));
+export const format = (ast: SyntaxNode) => ast.serialize();
 
 export const parse = (
   input: string,
@@ -34,8 +34,8 @@ export const createLog = (
 ) => {
   return (input: string) =>
     parse(input, callback, (ast) => {
-      console.log(ast);
-      return ast;
+      console.log(JSON.stringify(ast.serialize(), null, 2));
+      return ast.serialize();
     });
 };
 
