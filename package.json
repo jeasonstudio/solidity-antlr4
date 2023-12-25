@@ -1,8 +1,7 @@
 {
   "name": "solidity-antlr4",
   "description": "Solidity Lang Lexer and Parser by official ANTLR4 grammar",
-  "version": "2.1.1",
-  "types": "./dist/lib/index.d.ts",
+  "version": "2.1.2",
   "keywords": [
     "solidity",
     "sol",
@@ -11,6 +10,8 @@
     "lexer",
     "antlr4"
   ],
+  "main": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",

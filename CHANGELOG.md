@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.1.2
+
+### Patch Changes
+
+- abe94c4: add main to packagejson for legacy node version
+
 ## 2.1.1
 
 ### Patch Changes
