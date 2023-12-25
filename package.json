@@ -1,8 +1,16 @@
 {
   "name": "solidity-antlr4",
   "description": "Solidity Lang Lexer and Parser by official ANTLR4 grammar",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "types": "./dist/lib/index.d.ts",
+  "keywords": [
+    "solidity",
+    "sol",
+    "ast",
+    "parser",
+    "lexer",
+    "antlr4"
+  ],
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",
@@ -24,7 +32,6 @@
     "grammar": "antlr4ng -Dlanguage=TypeScript -o src/antlr4/ -message-format vs2005 -visitor -listener -long-messages -Xexact-output-dir grammar/SolidityLexer.g4 grammar/SolidityParser.g4",
     "dev": "father dev",
     "build": "father build",
-    "postinstall": "npm run husky:prepare",
     "changeset": "changeset",
     "release": "changeset version && changeset publish",
     "release:alpha": "changeset version --snapshot alpha && changeset publish --tag alpha",

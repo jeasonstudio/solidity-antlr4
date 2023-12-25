@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.1.1
+
+### Patch Changes
+
+- patch for unit tests and npm package keywords
+
 ## 2.1.0
 
 ### Minor Changes
