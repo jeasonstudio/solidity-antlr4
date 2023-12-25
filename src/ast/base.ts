@@ -42,6 +42,7 @@ export abstract class BaseNode {
     this.location = Location.create(startPosition, endPosition);
   }
 
+  /** @ignore */
   toJSON: () => any;
 }
 

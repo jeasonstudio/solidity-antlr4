@@ -283,87 +283,87 @@ export class SolidityParser extends antlr.Parser {
     public static readonly RULE_yulExpression = 91;
 
     public static readonly literalNames = [
-        null, null, "'abstract'", "'address'", "'anonymous'", "'as'", "'assembly'", 
-        "'bool'", null, "'bytes'", "'calldata'", "'catch'", "'constant'", 
-        "'constructor'", null, "'contract'", "'delete'", "'do'", "'else'", 
-        "'emit'", "'enum'", "'error'", "'event'", "'external'", "'fallback'", 
-        null, null, null, null, "'from'", null, "'global'", null, null, 
-        "'immutable'", "'import'", "'indexed'", "'interface'", "'internal'", 
-        "'is'", "'library'", "'mapping'", "'memory'", "'modifier'", "'new'", 
-        null, "'override'", "'payable'", "'pragma'", "'private'", "'public'", 
-        "'pure'", "'receive'", "'return'", "'returns'", "'revert'", null, 
-        "'storage'", "'string'", "'struct'", null, "'try'", "'type'", null, 
-        "'unchecked'", "'unicode'", null, "'using'", "'view'", "'virtual'", 
-        "'while'", null, null, "'['", "']'", null, null, "':'", null, null, 
-        "'?'", "'=>'", null, "'='", "'|='", "'^='", "'&='", "'<<='", "'>>='", 
-        "'>>>='", "'+='", "'-='", "'*='", "'/='", "'%='", null, "'||'", 
-        "'&&'", "'|'", "'^'", "'&'", "'<<'", "'>>'", "'>>>'", "'+'", "'-'", 
-        "'*'", "'/'", "'%'", "'**'", "'=='", "'!='", "'<'", "'>'", "'<='", 
-        "'>='", "'!'", "'~'", "'++'", "'--'", "'\"'", "'''", null, null, 
-        null, null, null, null, null, null, null, null, null, null, "'\"evmasm\"'", 
-        null, null, null, null, null, null, null, null, null, "'case'", 
-        null, "'default'", null, null, null, null, "'leave'", "'let'", "'switch'", 
+        null, null, "'abstract'", "'address'", "'anonymous'", "'as'", "'assembly'",
+        "'bool'", null, "'bytes'", "'calldata'", "'catch'", "'constant'",
+        "'constructor'", null, "'contract'", "'delete'", "'do'", "'else'",
+        "'emit'", "'enum'", "'error'", "'event'", "'external'", "'fallback'",
+        null, null, null, null, "'from'", null, "'global'", null, null,
+        "'immutable'", "'import'", "'indexed'", "'interface'", "'internal'",
+        "'is'", "'library'", "'mapping'", "'memory'", "'modifier'", "'new'",
+        null, "'override'", "'payable'", "'pragma'", "'private'", "'public'",
+        "'pure'", "'receive'", "'return'", "'returns'", "'revert'", null,
+        "'storage'", "'string'", "'struct'", null, "'try'", "'type'", null,
+        "'unchecked'", "'unicode'", null, "'using'", "'view'", "'virtual'",
+        "'while'", null, null, "'['", "']'", null, null, "':'", null, null,
+        "'?'", "'=>'", null, "'='", "'|='", "'^='", "'&='", "'<<='", "'>>='",
+        "'>>>='", "'+='", "'-='", "'*='", "'/='", "'%='", null, "'||'",
+        "'&&'", "'|'", "'^'", "'&'", "'<<'", "'>>'", "'>>>'", "'+'", "'-'",
+        "'*'", "'/'", "'%'", "'**'", "'=='", "'!='", "'<'", "'>'", "'<='",
+        "'>='", "'!'", "'~'", "'++'", "'--'", "'\"'", "'''", null, null,
+        null, null, null, null, null, null, null, null, null, null, "'\"evmasm\"'",
+        null, null, null, null, null, null, null, null, null, "'case'",
+        null, "'default'", null, null, null, null, "'leave'", "'let'", "'switch'",
         null, null, null, null, null, null, null, "':='"
     ];
 
     public static readonly symbolicNames = [
-        null, "ReservedKeywords", "Abstract", "Address", "Anonymous", "As", 
-        "Assembly", "Bool", "Break", "Bytes", "Calldata", "Catch", "Constant", 
-        "Constructor", "Continue", "Contract", "Delete", "Do", "Else", "Emit", 
-        "Enum", "Error", "Event", "External", "Fallback", "False", "Fixed", 
-        "FixedBytes", "For", "From", "Function", "Global", "Hex", "If", 
-        "Immutable", "Import", "Indexed", "Interface", "Internal", "Is", 
-        "Library", "Mapping", "Memory", "Modifier", "New", "SubDenomination", 
-        "Override", "Payable", "Pragma", "Private", "Public", "Pure", "Receive", 
-        "Return", "Returns", "Revert", "SignedIntegerType", "Storage", "String", 
-        "Struct", "True", "Try", "Type", "Ufixed", "Unchecked", "Unicode", 
-        "UnsignedIntegerType", "Using", "View", "Virtual", "While", "LParen", 
-        "RParen", "LBrack", "RBrack", "LBrace", "RBrace", "Colon", "Semicolon", 
-        "Period", "Conditional", "DoubleArrow", "RightArrow", "Assign", 
-        "AssignBitOr", "AssignBitXor", "AssignBitAnd", "AssignShl", "AssignSar", 
-        "AssignShr", "AssignAdd", "AssignSub", "AssignMul", "AssignDiv", 
-        "AssignMod", "Comma", "Or", "And", "BitOr", "BitXor", "BitAnd", 
-        "Shl", "Sar", "Shr", "Add", "Sub", "Mul", "Div", "Mod", "Exp", "Equal", 
-        "NotEqual", "LessThan", "GreaterThan", "LessThanOrEqual", "GreaterThanOrEqual", 
-        "Not", "BitNot", "Inc", "Dec", "DoubleQuote", "SingleQuote", "NonEmptyStringLiteral", 
-        "EmptyStringLiteral", "UnicodeStringLiteral", "HexString", "HexNumber", 
-        "OctalNumber", "DecimalNumber", "DecimalNumberFollowedByIdentifier", 
-        "Identifier", "WS", "COMMENT", "LINE_COMMENT", "AssemblyDialect", 
-        "AssemblyLBrace", "AssemblyFlagString", "AssemblyBlockLParen", "AssemblyBlockRParen", 
-        "AssemblyBlockComma", "AssemblyBlockWS", "AssemblyBlockCOMMENT", 
-        "AssemblyBlockLINE_COMMENT", "YulBreak", "YulCase", "YulContinue", 
-        "YulDefault", "YulFalse", "YulFor", "YulFunction", "YulIf", "YulLeave", 
-        "YulLet", "YulSwitch", "YulTrue", "YulHex", "YulEVMBuiltin", "YulLBrace", 
-        "YulRBrace", "YulLParen", "YulRParen", "YulAssign", "YulPeriod", 
-        "YulComma", "YulArrow", "YulIdentifier", "YulHexNumber", "YulDecimalNumber", 
-        "YulStringLiteral", "YulHexStringLiteral", "YulWS", "YulCOMMENT", 
-        "YulLINE_COMMENT", "PragmaToken", "PragmaSemicolon", "PragmaWS", 
+        null, "ReservedKeywords", "Abstract", "Address", "Anonymous", "As",
+        "Assembly", "Bool", "Break", "Bytes", "Calldata", "Catch", "Constant",
+        "Constructor", "Continue", "Contract", "Delete", "Do", "Else", "Emit",
+        "Enum", "Error", "Event", "External", "Fallback", "False", "Fixed",
+        "FixedBytes", "For", "From", "Function", "Global", "Hex", "If",
+        "Immutable", "Import", "Indexed", "Interface", "Internal", "Is",
+        "Library", "Mapping", "Memory", "Modifier", "New", "SubDenomination",
+        "Override", "Payable", "Pragma", "Private", "Public", "Pure", "Receive",
+        "Return", "Returns", "Revert", "SignedIntegerType", "Storage", "String",
+        "Struct", "True", "Try", "Type", "Ufixed", "Unchecked", "Unicode",
+        "UnsignedIntegerType", "Using", "View", "Virtual", "While", "LParen",
+        "RParen", "LBrack", "RBrack", "LBrace", "RBrace", "Colon", "Semicolon",
+        "Period", "Conditional", "DoubleArrow", "RightArrow", "Assign",
+        "AssignBitOr", "AssignBitXor", "AssignBitAnd", "AssignShl", "AssignSar",
+        "AssignShr", "AssignAdd", "AssignSub", "AssignMul", "AssignDiv",
+        "AssignMod", "Comma", "Or", "And", "BitOr", "BitXor", "BitAnd",
+        "Shl", "Sar", "Shr", "Add", "Sub", "Mul", "Div", "Mod", "Exp", "Equal",
+        "NotEqual", "LessThan", "GreaterThan", "LessThanOrEqual", "GreaterThanOrEqual",
+        "Not", "BitNot", "Inc", "Dec", "DoubleQuote", "SingleQuote", "NonEmptyStringLiteral",
+        "EmptyStringLiteral", "UnicodeStringLiteral", "HexString", "HexNumber",
+        "OctalNumber", "DecimalNumber", "DecimalNumberFollowedByIdentifier",
+        "Identifier", "WS", "COMMENT", "LINE_COMMENT", "AssemblyDialect",
+        "AssemblyLBrace", "AssemblyFlagString", "AssemblyBlockLParen", "AssemblyBlockRParen",
+        "AssemblyBlockComma", "AssemblyBlockWS", "AssemblyBlockCOMMENT",
+        "AssemblyBlockLINE_COMMENT", "YulBreak", "YulCase", "YulContinue",
+        "YulDefault", "YulFalse", "YulFor", "YulFunction", "YulIf", "YulLeave",
+        "YulLet", "YulSwitch", "YulTrue", "YulHex", "YulEVMBuiltin", "YulLBrace",
+        "YulRBrace", "YulLParen", "YulRParen", "YulAssign", "YulPeriod",
+        "YulComma", "YulArrow", "YulIdentifier", "YulHexNumber", "YulDecimalNumber",
+        "YulStringLiteral", "YulHexStringLiteral", "YulWS", "YulCOMMENT",
+        "YulLINE_COMMENT", "PragmaToken", "PragmaSemicolon", "PragmaWS",
         "PragmaCOMMENT", "PragmaLINE_COMMENT"
     ];
     public static readonly ruleNames = [
-        "sourceUnit", "pragmaDirective", "importDirective", "importAliases", 
-        "path", "symbolAliases", "contractDefinition", "interfaceDefinition", 
-        "libraryDefinition", "inheritanceSpecifierList", "inheritanceSpecifier", 
-        "contractBodyElement", "namedArgument", "callArgumentList", "identifierPath", 
-        "modifierInvocation", "visibility", "parameterList", "parameterDeclaration", 
-        "constructorDefinition", "stateMutability", "overrideSpecifier", 
-        "functionDefinition", "modifierDefinition", "fallbackFunctionDefinition", 
-        "receiveFunctionDefinition", "structDefinition", "structMember", 
-        "enumDefinition", "userDefinedValueTypeDefinition", "stateVariableDeclaration", 
-        "constantVariableDeclaration", "eventParameter", "eventDefinition", 
-        "errorParameter", "errorDefinition", "userDefinableOperator", "usingDirective", 
-        "typeName", "elementaryTypeName", "functionTypeName", "variableDeclaration", 
-        "dataLocation", "expression", "assignOp", "tupleExpression", "inlineArrayExpression", 
-        "identifier", "literal", "literalWithSubDenomination", "booleanLiteral", 
-        "stringLiteral", "hexStringLiteral", "unicodeStringLiteral", "numberLiteral", 
-        "block", "uncheckedBlock", "statement", "simpleStatement", "ifStatement", 
-        "forStatement", "whileStatement", "doWhileStatement", "continueStatement", 
-        "breakStatement", "tryStatement", "catchClause", "returnStatement", 
-        "emitStatement", "revertStatement", "assemblyStatement", "assemblyFlags", 
-        "variableDeclarationList", "variableDeclarationTuple", "variableDeclarationStatement", 
-        "expressionStatement", "mappingType", "mappingKeyType", "yulStatement", 
-        "yulBlock", "yulVariableDeclaration", "yulAssignment", "yulIfStatement", 
-        "yulForStatement", "yulSwitchCase", "yulSwitchStatement", "yulFunctionDefinition", 
+        "sourceUnit", "pragmaDirective", "importDirective", "importAliases",
+        "path", "symbolAliases", "contractDefinition", "interfaceDefinition",
+        "libraryDefinition", "inheritanceSpecifierList", "inheritanceSpecifier",
+        "contractBodyElement", "namedArgument", "callArgumentList", "identifierPath",
+        "modifierInvocation", "visibility", "parameterList", "parameterDeclaration",
+        "constructorDefinition", "stateMutability", "overrideSpecifier",
+        "functionDefinition", "modifierDefinition", "fallbackFunctionDefinition",
+        "receiveFunctionDefinition", "structDefinition", "structMember",
+        "enumDefinition", "userDefinedValueTypeDefinition", "stateVariableDeclaration",
+        "constantVariableDeclaration", "eventParameter", "eventDefinition",
+        "errorParameter", "errorDefinition", "userDefinableOperator", "usingDirective",
+        "typeName", "elementaryTypeName", "functionTypeName", "variableDeclaration",
+        "dataLocation", "expression", "assignOp", "tupleExpression", "inlineArrayExpression",
+        "identifier", "literal", "literalWithSubDenomination", "booleanLiteral",
+        "stringLiteral", "hexStringLiteral", "unicodeStringLiteral", "numberLiteral",
+        "block", "uncheckedBlock", "statement", "simpleStatement", "ifStatement",
+        "forStatement", "whileStatement", "doWhileStatement", "continueStatement",
+        "breakStatement", "tryStatement", "catchClause", "returnStatement",
+        "emitStatement", "revertStatement", "assemblyStatement", "assemblyFlags",
+        "variableDeclarationList", "variableDeclarationTuple", "variableDeclarationStatement",
+        "expressionStatement", "mappingType", "mappingKeyType", "yulStatement",
+        "yulBlock", "yulVariableDeclaration", "yulAssignment", "yulIfStatement",
+        "yulForStatement", "yulSwitchCase", "yulSwitchStatement", "yulFunctionDefinition",
         "yulPath", "yulFunctionCall", "yulBoolean", "yulLiteral", "yulExpression",
     ];
 
@@ -1458,7 +1458,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 387;
                         this.match(SolidityParser.Payable);
-                        localContext.payableSet =  true;
+                        localContext!.payableSet =  true;
                         }
                         break;
                     case 3:
@@ -1469,7 +1469,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 390;
                         this.match(SolidityParser.Internal);
-                        localContext.visibilitySet =  true;
+                        localContext!.visibilitySet =  true;
                         }
                         break;
                     case 4:
@@ -1480,7 +1480,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 393;
                         this.match(SolidityParser.Public);
-                        localContext.visibilitySet =  true;
+                        localContext!.visibilitySet =  true;
                         }
                         break;
                     }
@@ -1666,7 +1666,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 430;
                         this.visibility();
-                        localContext.visibilitySet =  true;
+                        localContext!.visibilitySet =  true;
                         }
                         break;
                     case 2:
@@ -1677,7 +1677,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 434;
                         this.stateMutability();
-                        localContext.mutabilitySet =  true;
+                        localContext!.mutabilitySet =  true;
                         }
                         break;
                     case 3:
@@ -1694,7 +1694,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 439;
                         this.match(SolidityParser.Virtual);
-                        localContext.virtualSet =  true;
+                        localContext!.virtualSet =  true;
                         }
                         break;
                     case 5:
@@ -1705,7 +1705,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 442;
                         this.overrideSpecifier();
-                        localContext.overrideSpecifierSet =  true;
+                        localContext!.overrideSpecifierSet =  true;
                         }
                         break;
                     }
@@ -1815,7 +1815,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 471;
                         this.match(SolidityParser.Virtual);
-                        localContext.virtualSet =  true;
+                        localContext!.virtualSet =  true;
                         }
                         break;
                     case 2:
@@ -1826,7 +1826,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 474;
                         this.overrideSpecifier();
-                        localContext.overrideSpecifierSet =  true;
+                        localContext!.overrideSpecifierSet =  true;
                         }
                         break;
                     }
@@ -1888,7 +1888,7 @@ export class SolidityParser extends antlr.Parser {
                 {
                 this.state = 488;
                 this.parameterList();
-                 localContext.hasParameters =  true; 
+                 localContext!.hasParameters =  true;
                 }
                 break;
             }
@@ -1911,7 +1911,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 495;
                         this.match(SolidityParser.External);
-                        localContext.visibilitySet =  true;
+                        localContext!.visibilitySet =  true;
                         }
                         break;
                     case 2:
@@ -1922,7 +1922,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 498;
                         this.stateMutability();
-                        localContext.mutabilitySet =  true;
+                        localContext!.mutabilitySet =  true;
                         }
                         break;
                     case 3:
@@ -1939,7 +1939,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 503;
                         this.match(SolidityParser.Virtual);
-                        localContext.virtualSet =  true;
+                        localContext!.virtualSet =  true;
                         }
                         break;
                     case 5:
@@ -1950,7 +1950,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 506;
                         this.overrideSpecifier();
-                        localContext.overrideSpecifierSet =  true;
+                        localContext!.overrideSpecifierSet =  true;
                         }
                         break;
                     }
@@ -2052,7 +2052,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 531;
                         this.match(SolidityParser.External);
-                        localContext.visibilitySet =  true;
+                        localContext!.visibilitySet =  true;
                         }
                         break;
                     case 2:
@@ -2063,7 +2063,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 534;
                         this.match(SolidityParser.Payable);
-                        localContext.mutabilitySet =  true;
+                        localContext!.mutabilitySet =  true;
                         }
                         break;
                     case 3:
@@ -2080,7 +2080,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 538;
                         this.match(SolidityParser.Virtual);
-                        localContext.virtualSet =  true;
+                        localContext!.virtualSet =  true;
                         }
                         break;
                     case 5:
@@ -2091,7 +2091,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 541;
                         this.overrideSpecifier();
-                        localContext.overrideSpecifierSet =  true;
+                        localContext!.overrideSpecifierSet =  true;
                         }
                         break;
                     }
@@ -2324,7 +2324,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 588;
                         this.match(SolidityParser.Public);
-                        localContext.visibilitySet =  true;
+                        localContext!.visibilitySet =  true;
                         }
                         break;
                     case 2:
@@ -2335,7 +2335,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 591;
                         this.match(SolidityParser.Private);
-                        localContext.visibilitySet =  true;
+                        localContext!.visibilitySet =  true;
                         }
                         break;
                     case 3:
@@ -2346,7 +2346,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 594;
                         this.match(SolidityParser.Internal);
-                        localContext.visibilitySet =  true;
+                        localContext!.visibilitySet =  true;
                         }
                         break;
                     case 4:
@@ -2357,7 +2357,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 597;
                         this.match(SolidityParser.Constant);
-                        localContext.constantnessSet =  true;
+                        localContext!.constantnessSet =  true;
                         }
                         break;
                     case 5:
@@ -2368,7 +2368,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 600;
                         this.overrideSpecifier();
-                        localContext.overrideSpecifierSet =  true;
+                        localContext!.overrideSpecifierSet =  true;
                         }
                         break;
                     case 6:
@@ -2379,7 +2379,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 604;
                         this.match(SolidityParser.Immutable);
-                        localContext.constantnessSet =  true;
+                        localContext!.constantnessSet =  true;
                         }
                         break;
                     }
@@ -3062,7 +3062,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 745;
                         this.visibility();
-                        localContext.visibilitySet =  true;
+                        localContext!.visibilitySet =  true;
                         }
                         break;
                     case 2:
@@ -3073,7 +3073,7 @@ export class SolidityParser extends antlr.Parser {
                         }
                         this.state = 749;
                         this.stateMutability();
-                        localContext.mutabilitySet =  true;
+                        localContext!.mutabilitySet =  true;
                         }
                         break;
                     }
@@ -9105,7 +9105,7 @@ export class TypeNameContext extends antlr.ParserRuleContext {
 
 export class ElementaryTypeNameContext extends antlr.ParserRuleContext {
     public allowAddressPayable: boolean;
-    public constructor(parent: antlr.ParserRuleContext, invokingState: number, allowAddressPayable: boolean) {
+    public constructor(parent: antlr.ParserRuleContext | null, invokingState: number, allowAddressPayable: boolean) {
         super(parent, invokingState);
         this.allowAddressPayable = allowAddressPayable;
     }

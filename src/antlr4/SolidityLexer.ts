@@ -188,7 +188,7 @@ export class SolidityLexer extends antlr.Lexer {
 
     public static readonly channelNames = [
         "DEFAULT_TOKEN_CHANNEL", "HIDDEN"
-    ];
+    ] as const;
 
     public static readonly literalNames = [
         null, null, "'abstract'", "'address'", "'anonymous'", "'as'", "'assembly'",
@@ -212,7 +212,7 @@ export class SolidityLexer extends antlr.Lexer {
         null, null, null, null, null, null, null, null, null, "'case'",
         null, "'default'", null, null, null, null, "'leave'", "'let'", "'switch'",
         null, null, null, null, null, null, null, "':='"
-    ];
+    ] as const;
 
     public static readonly symbolicNames = [
         null, "ReservedKeywords", "Abstract", "Address", "Anonymous", "As",
@@ -251,7 +251,7 @@ export class SolidityLexer extends antlr.Lexer {
 
     public static readonly modeNames = [
         "DEFAULT_MODE", "AssemblyBlockMode", "YulMode", "PragmaMode",
-    ];
+    ] as const;
 
     public static readonly ruleNames = [
         "ReservedKeywords", "Abstract", "Address", "Anonymous", "As", "Assembly",
@@ -290,7 +290,7 @@ export class SolidityLexer extends antlr.Lexer {
         "YulHexNumber", "YulDecimalNumber", "YulStringLiteral", "YulHexStringLiteral",
         "YulWS", "YulCOMMENT", "YulLINE_COMMENT", "PragmaToken", "PragmaSemicolon",
         "PragmaWS", "PragmaCOMMENT", "PragmaLINE_COMMENT",
-    ];
+    ] as const;
 
 
     public constructor(input: antlr.CharStream) {

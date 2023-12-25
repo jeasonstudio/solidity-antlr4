@@ -33,6 +33,7 @@
     "grammar": "antlr4ng -Dlanguage=TypeScript -o src/antlr4/ -message-format vs2005 -visitor -listener -long-messages -Xexact-output-dir grammar/SolidityLexer.g4 grammar/SolidityParser.g4",
     "dev": "father dev",
     "build": "father build",
+    "build:typedoc": "typedoc --tsconfig ./tsconfig.json --skipErrorChecking src/index.ts",
     "changeset": "changeset",
     "release": "changeset version && changeset publish",
     "release:alpha": "changeset version --snapshot alpha && changeset publish --tag alpha",
@@ -69,6 +70,7 @@
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
     "ts-jest": "^29.1.1",
+    "typedoc": "^0.25.4",
     "typescript": "~5.1.0"
   },
   "publishConfig": {
