@@ -1,4 +1,4 @@
-import { createParse } from './utils';
+import { createParse } from './utils.test';
 
 test('typeName', () => {
   expect(createParse((p) => p.typeName())(`address`)).toBe('address');

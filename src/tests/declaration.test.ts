@@ -1,4 +1,4 @@
-import { createParse } from './utils';
+import { createParse } from './utils.test';
 
 test('variableDeclaration', () => {
   expect(createParse((p) => p.variableDeclaration())(`address memory user`)).toMatchObject({

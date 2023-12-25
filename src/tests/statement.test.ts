@@ -1,4 +1,4 @@
-import { createLog, createParse } from './utils';
+import { createParse } from './utils.test';
 
 test('ifStatement', () => {
   expect(createParse((p) => p.ifStatement())(`if (foo) {} else if (bar) {} else {}`)).toMatchObject(

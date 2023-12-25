@@ -1,4 +1,4 @@
-import { createParse } from './utils';
+import { createParse } from './utils.test';
 
 test('sourceUnit', () => {
   expect(createParse((p) => p.sourceUnit())(`// SPDX-License-Identifier: MIT`)).toMatchObject({

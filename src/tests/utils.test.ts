@@ -40,3 +40,5 @@ export const createLog = (
 };
 
 export const visitor = solidityASTVisitor;
+
+test('utils', () => {});

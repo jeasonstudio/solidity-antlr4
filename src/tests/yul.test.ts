@@ -1,4 +1,4 @@
-import { createLog, createParse } from './utils';
+import { createParse } from './utils.test';
 
 test('assemblyStatement', () => {
   expect(createParse((p) => p.assemblyStatement())(`assembly { let x := 123 }`)).toMatchObject({
