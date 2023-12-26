@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.2.0
+
+### Minor Changes
+
+- 4bc5dea: use unbuild to build standard esm/cjs dists
+
 ## 2.1.3
 
 ### Patch Changes
