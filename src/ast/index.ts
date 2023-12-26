@@ -5,7 +5,14 @@ import { StatementNode, StatementNodeType } from './statement';
 import { TypeNode, TypeNodeType } from './type';
 import { YulNode, YulNodeType } from './yul';
 
-export type SyntaxNode = DeclarationNode | ExpressionNode | MetaNode | StatementNode | TypeNode | YulNode;
+export type SyntaxNode =
+  | DeclarationNode
+  | ExpressionNode
+  | MetaNode
+  | StatementNode
+  | TypeNode
+  | YulNode;
+
 export type SyntaxNodeType =
   | DeclarationNodeType
   | ExpressionNodeType

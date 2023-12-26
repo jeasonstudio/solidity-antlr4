@@ -1,4 +1,6 @@
 *.js
+*.cjs
+*.mjs
 *.md
 src/antlr4/*
 dist/*

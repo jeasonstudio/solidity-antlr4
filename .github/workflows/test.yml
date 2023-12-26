@@ -37,6 +37,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Lint ant prettier
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
+
       - name: Run jest
         run: pnpm run test:ci
 

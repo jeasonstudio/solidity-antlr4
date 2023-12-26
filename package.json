@@ -40,7 +40,7 @@
   "repository": "git@github.com:jeasonstudio/solidity-antlr4.git",
   "lint-staged": {
     "*.ts": "eslint --quiet --fix",
-    "*.{ts,json}": "prettier --loglevel warn --write"
+    "*.{ts}": "prettier --loglevel warn --write"
   },
   "dependencies": {
     "antlr4ng": "^2.0.4",
@@ -84,7 +84,7 @@
     "test:ci": "jest --coverage --maxWorkers=4 --forceExit",
     "lint": "pnpm run \"/^lint:.+/\"",
     "lint:eslint": "eslint --quiet --fix --ext .ts .",
-    "lint:prettier": "prettier --log-level warn --write '**/*.{ts,tsx,json}'",
+    "lint:prettier": "prettier **/*.ts --log-level warn --write",
     "husky:prepare": "husky install",
     "husky:pre-commit": "lint-staged"
   }
