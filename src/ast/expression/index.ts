@@ -35,91 +35,51 @@ import { PrimaryExpression } from './primary-expression';
 import { StringLiteral } from './string-literal';
 import { TupleExpression } from './tuple-expression';
 import { Tuple } from './tuple';
-import { UnaryPrefixOperation, UnarySuffixOperation } from './unary-operation';
+import { UnaryOperation, UnaryPrefixOperation, UnarySuffixOperation } from './unary-operation';
 import { UnicodeStringLiteral } from './unicode-string-literal';
 import { UserDefinableOperator } from './user-definable-operator';
 
 export type ExpressionNode =
   | AssignOp
   | Assignment
-  | AndOperation
-  | AddSubOperation
-  | BitAndOperation
-  | BitOrOperation
-  | BitXorOperation
-  | EqualityComparison
-  | ExpOperation
-  | MulDivModOperation
-  | ShiftOperation
-  | OrderComparison
-  | OrOperation
   | BooleanLiteral
-  | CallArgumentList
   | Conditional
-  | Expression
   | FunctionCallOptions
   | FunctionCall
   | HexStringLiteral
   | Identifier
   | IndexAccess
   | IndexRangeAccess
-  | InlineArrayExpression
-  | InlineArray
-  | Literal
   | MemberAccess
   | NamedArgument
   | NewExpr
   | NumberLiteral
   | LiteralWithSubDenomination
   | PayableConversion
-  | PrimaryExpression
   | StringLiteral
-  | TupleExpression
-  | Tuple
-  | UnaryPrefixOperation
-  | UnarySuffixOperation
+  | UnaryOperation
   | UnicodeStringLiteral
   | UserDefinableOperator;
 
 export type ExpressionNodeType =
   | 'AssignOp'
   | 'Assignment'
-  | 'AndOperation'
-  | 'AddSubOperation'
-  | 'BitAndOperation'
-  | 'BitOrOperation'
-  | 'BitXorOperation'
-  | 'EqualityComparison'
-  | 'ExpOperation'
-  | 'MulDivModOperation'
-  | 'ShiftOperation'
-  | 'OrderComparison'
-  | 'OrOperation'
   | 'BooleanLiteral'
-  | 'CallArgumentList'
   | 'Conditional'
-  | 'Expression'
   | 'FunctionCallOptions'
   | 'FunctionCall'
   | 'HexStringLiteral'
   | 'Identifier'
   | 'IndexAccess'
   | 'IndexRangeAccess'
-  | 'InlineArrayExpression'
-  | 'InlineArray'
-  | 'Literal'
   | 'MemberAccess'
   | 'NamedArgument'
   | 'NewExpr'
   | 'NumberLiteral'
   | 'LiteralWithSubDenomination'
   | 'PayableConversion'
-  | 'PrimaryExpression'
   | 'StringLiteral'
-  | 'TupleExpression'
-  | 'Tuple'
-  | 'UnaryPrefixOperation'
-  | 'UnarySuffixOperation'
+  | 'UnaryOperation'
   | 'UnicodeStringLiteral'
   | 'UserDefinableOperator';
 

@@ -5,7 +5,7 @@ import {
 } from '../../grammar';
 import { Expression } from './expression';
 
-class UnaryOperation extends Expression {
+export class UnaryOperation extends Expression {
   type = 'UnaryOperation';
   operator: string | null = null;
   left: Expression | null = null;

@@ -1,8 +1,8 @@
+import { BaseNode } from '../base';
 import { MetaTypeContext, SolidityParserVisitor } from '../../grammar';
 import { TypeName } from './type-name';
-import { Expression } from '../expression';
 
-export class MetaType extends Expression {
+export class MetaType extends BaseNode {
   type = 'MetaType';
   typeName: TypeName;
   constructor(ctx: MetaTypeContext, visitor: SolidityParserVisitor<any>) {

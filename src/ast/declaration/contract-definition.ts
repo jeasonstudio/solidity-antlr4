@@ -32,9 +32,9 @@ type ContractDefinitionNodes =
 export class ContractDefinition extends BaseNode {
   type = 'ContractDefinition';
   name: Identifier;
+  contractKind: ContractKind = 'contract';
   abstract: boolean = false;
   baseContracts: InheritanceSpecifier[] = [];
-  contractKind: ContractKind = 'contract';
   nodes: ContractDefinitionNodes[] = [];
   constructor(
     ctx: ContractDefinitionContext | InterfaceDefinitionContext | LibraryDefinitionContext,
@@ -45,13 +45,10 @@ export class ContractDefinition extends BaseNode {
     this.nodes = ctx.contractBodyElement().map((element) => element.accept(visitor));
 
     if (ctx instanceof InterfaceDefinitionContext) {
-      this.type = 'InterfaceDefinition';
       this.contractKind = 'interface';
     } else if (ctx instanceof LibraryDefinitionContext) {
-      this.type = 'LibraryDefinition';
       this.contractKind = 'library';
     } else {
-      this.type = 'ContractDefinition';
       this.contractKind = 'contract';
       this.abstract = !!ctx.Abstract();
       this.baseContracts = ctx.inheritanceSpecifierList()?.accept(visitor) ?? [];
@@ -59,10 +56,4 @@ export class ContractDefinition extends BaseNode {
   }
 }
 
-export class InterfaceDefinition extends ContractDefinition {
-  type = 'InterfaceDefinition';
-}
-
-export class LibraryDefinition extends ContractDefinition {
-  type = 'InterfaceDefinition';
-}
+export { ContractDefinition as InterfaceDefinition, ContractDefinition as LibraryDefinition };

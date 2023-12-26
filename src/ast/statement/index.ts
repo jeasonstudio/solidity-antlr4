@@ -1,6 +1,6 @@
 import { AssemblyFlags } from './assembly-flags';
 import { AssemblyStatement } from './assembly-statement';
-import { Block } from './block';
+import { Block, UncheckedBlock } from './block';
 import { BreakStatement } from './break-statement';
 import { CatchClause } from './catch-clause';
 import { ContinueStatement } from './continue-statement';
@@ -14,12 +14,10 @@ import { RevertStatement } from './revert-statement';
 import { SimpleStatement } from './simple-statement';
 import { Statement } from './statement';
 import { TryStatement } from './try-statement';
-import { UncheckedBlock } from './unchecked-block';
 import { VariableDeclarationStatement } from './variable-declaration-statement';
 import { WhileStatement } from './while-statement';
 
 export type StatementNode =
-  | AssemblyFlags
   | AssemblyStatement
   | Block
   | BreakStatement
@@ -32,15 +30,11 @@ export type StatementNode =
   | IfStatement
   | ReturnStatement
   | RevertStatement
-  | SimpleStatement
-  | Statement
   | TryStatement
-  | UncheckedBlock
   | VariableDeclarationStatement
   | WhileStatement;
 
 export type StatementNodeType =
-  | 'AssemblyFlags'
   | 'AssemblyStatement'
   | 'Block'
   | 'BreakStatement'
@@ -53,10 +47,7 @@ export type StatementNodeType =
   | 'IfStatement'
   | 'ReturnStatement'
   | 'RevertStatement'
-  | 'SimpleStatement'
-  | 'Statement'
   | 'TryStatement'
-  | 'UncheckedBlock'
   | 'VariableDeclarationStatement'
   | 'WhileStatement';
 

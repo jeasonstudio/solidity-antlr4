@@ -27,57 +27,31 @@ import {
 import { Visibility } from './visibility';
 
 export type DeclarationNode =
-  | ContractBodyElement
   | ContractDefinition
-  | InterfaceDefinition
-  | LibraryDefinition
   | EnumDefinition
   | ErrorDefinition
   | EventDefinition
-  | ConstructorDefinition
   | FunctionDefinition
-  | FallbackFunctionDefinition
-  | ReceiveFunctionDefinition
   | ModifierDefinition
   | StateMutability
   | StructDefinition
   | StructMember
   | UserDefinedValueTypeDefinition
-  | VariableDeclarationList
-  | VariableDeclarationTuple
   | VariableDeclaration
-  | ParameterDeclaration
-  | StateVariableDeclaration
-  | ConstantVariableDeclaration
-  | ErrorParameter
-  | EventParameter
   | Visibility;
 
 export type DeclarationNodeType =
-  | 'ContractBodyElement'
   | 'ContractDefinition'
-  | 'InterfaceDefinition'
-  | 'LibraryDefinition'
   | 'EnumDefinition'
   | 'ErrorDefinition'
   | 'EventDefinition'
-  | 'ConstructorDefinition'
   | 'FunctionDefinition'
-  | 'FallbackFunctionDefinition'
-  | 'ReceiveFunctionDefinition'
   | 'ModifierDefinition'
   | 'StateMutability'
   | 'StructDefinition'
   | 'StructMember'
   | 'UserDefinedValueTypeDefinition'
-  | 'VariableDeclarationList'
-  | 'VariableDeclarationTuple'
   | 'VariableDeclaration'
-  | 'ParameterDeclaration'
-  | 'StateVariableDeclaration'
-  | 'ConstantVariableDeclaration'
-  | 'ErrorParameter'
-  | 'EventParameter'
   | 'Visibility';
 
 export {
