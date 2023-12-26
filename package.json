@@ -63,6 +63,7 @@
     "grammar": "antlr4ng -Dlanguage=TypeScript -o src/antlr4/ -message-format vs2005 -visitor -listener -long-messages -Xexact-output-dir grammar/SolidityLexer.g4 grammar/SolidityParser.g4",
     "dev": "unbuild --stub",
     "build": "unbuild --clean",
+    "build:typedoc": "typedoc --tsconfig ./tsconfig.json --skipErrorChecking src/index.ts",
     "changeset": "changeset",
     "release": "changeset version && changeset publish",
     "test": "jest",
