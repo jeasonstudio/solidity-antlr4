@@ -1,13 +1,14 @@
-import { defineBuildConfig, BuildEntry } from 'unbuild';
-
-const createEntry = (format: 'esm' | 'cjs'): BuildEntry => ({
-  builder: 'mkdist',
-  input: './src/',
-  outDir: `./dist/${format}/`,
-  format,
-});
+import { defineBuildConfig, MkdistBuildEntry } from 'unbuild';
 
 export default defineBuildConfig({
-  entries: [createEntry('esm'), createEntry('cjs')],
+  entries: [
+    {
+      builder: 'mkdist',
+      input: './src/',
+      format: 'esm',
+      ext: 'mjs',
+    },
+  ],
   declaration: true,
+  failOnWarn: false,
 });
