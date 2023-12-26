@@ -1,4 +1,3 @@
-// const transform = [require.resolve('ts-jest'), { diagnostics: false }];
 const transform = [
   require.resolve('@swc/jest'),
   {
@@ -13,7 +12,7 @@ const transform = [
   },
 ];
 
-/** @type {import('ts-jest').JestConfigWithTsJest} */
+/** @type {import('jest').Config} */
 module.exports = {
   testEnvironment: 'node',
   testMatch: ['**/*.(test|spec).(t|j)s'],

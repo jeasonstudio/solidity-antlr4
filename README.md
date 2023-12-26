@@ -50,7 +50,7 @@ $ npm install solidity-antlr4
 ## Usage
 
 ```ts
-import { parse } from 'solididty-antlr4';
+import { parse } from 'solidity-antlr4';
 
 const code = `// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;

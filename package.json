@@ -10,12 +10,13 @@
     "lexer",
     "antlr4"
   ],
-  "main": "./dist/lib/index.js",
-  "types": "./dist/lib/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/esm/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/lib/index.js",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.js",
       "types": "./dist/esm/index.d.ts"
     }
   },
@@ -28,26 +29,6 @@
   "sideEffects": false,
   "author": "jeason.eth <me@cowpoke.cc>",
   "repository": "git@github.com:jeasonstudio/solidity-antlr4.git",
-  "scripts": {
-    "prepublishOnly": "npm run build",
-    "grammar": "antlr4ng -Dlanguage=TypeScript -o src/antlr4/ -message-format vs2005 -visitor -listener -long-messages -Xexact-output-dir grammar/SolidityLexer.g4 grammar/SolidityParser.g4",
-    "dev": "father dev",
-    "build": "father build",
-    "build:typedoc": "typedoc --tsconfig ./tsconfig.json --skipErrorChecking src/index.ts",
-    "changeset": "changeset",
-    "release": "changeset version && changeset publish",
-    "release:alpha": "changeset version --snapshot alpha && changeset publish --tag alpha",
-    "release:beta": "changeset version --snapshot beta && changeset publish --tag beta",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch",
-    "test:ci": "jest --coverage --maxWorkers=4 --forceExit",
-    "lint": "pnpm run \"/^lint:.+/\"",
-    "lint:eslint": "eslint --quiet --fix --ext .ts .",
-    "lint:prettier": "prettier --log-level warn --write '**/*.{ts,tsx,json}'",
-    "husky:prepare": "husky install",
-    "husky:pre-commit": "lint-staged"
-  },
   "lint-staged": {
     "*.ts": "eslint --quiet --fix",
     "*.{ts,json}": "prettier --loglevel warn --write"
@@ -66,17 +47,32 @@
     "antlr4ng-cli": "^1.0.7",
     "changeset": "^0.2.6",
     "eslint": "^8.56.0",
-    "father": "^4.3.8",
     "husky": "^8.0.3",
     "jest": "^29.7.0",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
-    "ts-jest": "^29.1.1",
     "typedoc": "^0.25.4",
-    "typescript": "~5.1.0"
+    "typescript": "~5.1.0",
+    "unbuild": "^2.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
+  },
+  "scripts": {
+    "grammar": "antlr4ng -Dlanguage=TypeScript -o src/antlr4/ -message-format vs2005 -visitor -listener -long-messages -Xexact-output-dir grammar/SolidityLexer.g4 grammar/SolidityParser.g4",
+    "dev": "unbuild --stub",
+    "build": "unbuild --clean",
+    "changeset": "changeset",
+    "release": "changeset version && changeset publish",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --coverage --maxWorkers=4 --forceExit",
+    "lint": "pnpm run \"/^lint:.+/\"",
+    "lint:eslint": "eslint --quiet --fix --ext .ts .",
+    "lint:prettier": "prettier --log-level warn --write '**/*.{ts,tsx,json}'",
+    "husky:prepare": "husky install",
+    "husky:pre-commit": "lint-staged"
   }
 }
