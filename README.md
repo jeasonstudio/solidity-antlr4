@@ -50,7 +50,7 @@ $ npm install solidity-antlr4
 ## Usage
 
 ```ts
-import { parse } from 'solididty-antlr4';
+import { parse } from 'solidity-antlr4';
 
 const code = `// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
@@ -61,7 +61,7 @@ contract HelloWorld {
 `;
 
 const { parseTree, syntaxTree: ast, errors } = parse(code);
-// SyntaxTree: { type: "SourceUnit", nodes: [...], rage: [0, 136], location: {...} }
+// SyntaxTree: { type: "SourceUnit", nodes: [...], rage: [32, 120], location: {...} }
 ```
 
 ## Usage (low-level api)

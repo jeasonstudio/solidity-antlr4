@@ -3,7 +3,7 @@ import { UsingDirectiveContext, SolidityParserVisitor } from '../../grammar';
 import { UserDefinedValueTypeDefinition } from '../declaration';
 import { IdentifierPath } from './identifier-path';
 import { TypeName } from '../type';
-import { UserDefinableOperator } from '../expression';
+// import { UserDefinableOperator } from '../expression';
 
 export class UsingDirective extends BaseNode {
   type = 'UsingDirective';

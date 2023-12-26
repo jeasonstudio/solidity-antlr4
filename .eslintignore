@@ -2,3 +2,4 @@
 *.md
 src/antlr4/*
 dist/*
+build.config.ts
