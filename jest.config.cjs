@@ -1,17 +1,3 @@
-const transform = [
-  require.resolve('@swc/jest'),
-  {
-    jsc: {
-      parser: {
-        syntax: 'typescript',
-        decorators: true,
-        dynamicImport: true,
-      },
-      transform: null,
-    },
-  },
-];
-
 /** @type {import('jest').Config} */
 module.exports = {
   testEnvironment: 'node',
@@ -22,8 +8,19 @@ module.exports = {
   modulePathIgnorePatterns: [],
   setupFiles: [],
   transform: {
-    '^.+\\.(t|j)s$': transform,
-    '^.+\\.mjs$': transform,
+    '^.+\\.m?(t|j)s$': [
+      require.resolve('@swc/jest'),
+      {
+        jsc: {
+          parser: {
+            syntax: 'typescript',
+            decorators: true,
+            dynamicImport: true,
+          },
+          transform: null,
+        },
+      },
+    ],
   },
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
   coveragePathIgnorePatterns: ['/node_modules/', '/(.*)mock(.*)/', '<rootDir>/src/antlr4'],

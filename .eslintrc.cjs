@@ -5,11 +5,12 @@ module.exports = {
     '@typescript-eslint/no-parameter-properties': 0,
     '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/consistent-type-imports': 0,
+    '@typescript-eslint/no-useless-constructor': 0,
     'import/no-extraneous-dependencies': 0,
     'no-console': 0,
   },
   // https://www.npmjs.com/package/@typescript-eslint/parser
   parserOptions: {
-    project: ['tsconfig.json', 'tsconfig.*.json', './packages/**/tsconfig.json'],
+    project: ['tsconfig.json', 'tsconfig.*.json'],
   },
 };
