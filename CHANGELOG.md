@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.2.1
+
+### Patch Changes
+
+- faa6480: format dist files
+
 ## 2.2.0
 
 ### Minor Changes
