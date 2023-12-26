@@ -61,7 +61,7 @@ contract HelloWorld {
 `;
 
 const { parseTree, syntaxTree: ast, errors } = parse(code);
-// SyntaxTree: { type: "SourceUnit", nodes: [...], rage: [0, 136], location: {...} }
+// SyntaxTree: { type: "SourceUnit", nodes: [...], rage: [32, 120], location: {...} }
 ```
 
 ## Usage (low-level api)
