@@ -1,10 +1,10 @@
 import { BaseNode } from '../base';
-import { IfStatementContext, SolidityParserVisitor } from '../../grammar';
+import { IfStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from '../expression';
 import { Statement } from './statement';
 
 export class IfStatement extends BaseNode {
-  type = 'IfStatement';
+  type = 'IfStatement' as const;
   condition: Expression;
   ifStatement: Statement;
   elseStatement: Statement | null = null;

@@ -1,9 +1,9 @@
-import { FunctionCallContext, SolidityParserVisitor } from '../../grammar';
+import { FunctionCallContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 import { CallArgumentList } from './call-argument-list';
 
 export class FunctionCall extends Expression {
-  type = 'FunctionCall';
+  type = 'FunctionCall' as const;
   expression: Expression;
   arguments: CallArgumentList | null = null;
   constructor(ctx: FunctionCallContext, visitor: SolidityParserVisitor<any>) {

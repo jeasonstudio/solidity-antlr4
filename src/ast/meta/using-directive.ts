@@ -1,12 +1,12 @@
 import { BaseNode } from '../base';
-import { UsingDirectiveContext, SolidityParserVisitor } from '../../grammar';
+import { UsingDirectiveContext, SolidityParserVisitor } from '../../antlr4';
 import { UserDefinedValueTypeDefinition } from '../declaration';
 import { IdentifierPath } from './identifier-path';
 import { TypeName } from '../type';
 import { UserDefinableOperator } from '../expression';
 
 export class UsingDirective extends BaseNode {
-  type = 'UsingDirective';
+  type = 'UsingDirective' as const;
   global: boolean;
   libraryName: UserDefinedValueTypeDefinition | IdentifierPath | null = null;
   definitions: IdentifierPath[] | null = null;

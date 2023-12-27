@@ -1,8 +1,8 @@
-import { ExpressionContext, SolidityParserVisitor } from '../../grammar';
+import { ExpressionContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 
 export class BinaryOperation<T extends ExpressionContext = ExpressionContext> extends Expression {
-  type = 'BinaryOperation';
+  type = 'BinaryOperation' as const;
   operator: string | null = null;
   left: Expression | null = null;
   right: Expression | null = null;

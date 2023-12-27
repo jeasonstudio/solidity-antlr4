@@ -40,19 +40,7 @@ export type DeclarationNode =
   | VariableDeclaration
   | Visibility;
 
-export type DeclarationNodeType =
-  | 'ContractDefinition'
-  | 'EnumDefinition'
-  | 'ErrorDefinition'
-  | 'EventDefinition'
-  | 'FunctionDefinition'
-  | 'ModifierDefinition'
-  | 'StateMutability'
-  | 'StructDefinition'
-  | 'StructMember'
-  | 'UserDefinedValueTypeDefinition'
-  | 'VariableDeclaration'
-  | 'Visibility';
+export type DeclarationNodeType = DeclarationNode['type'];
 
 export {
   ContractBodyElement,

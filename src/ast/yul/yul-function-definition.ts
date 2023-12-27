@@ -1,9 +1,9 @@
 import { BaseNode } from '../base';
-import { YulFunctionDefinitionContext, SolidityParserVisitor } from '../../grammar';
+import { YulFunctionDefinitionContext, SolidityParserVisitor } from '../../antlr4';
 import { YulBlock } from './yul-block';
 
 export class YulFunctionDefinition extends BaseNode {
-  type = 'YulFunctionDefinition';
+  type = 'YulFunctionDefinition' as const;
   name: string | null = null;
   parameters: (string | null)[] = [];
   returnParameters: (string | null)[] = [];

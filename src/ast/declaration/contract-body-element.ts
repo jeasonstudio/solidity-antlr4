@@ -1,5 +1,5 @@
 import { BaseNodeUnion } from '../base';
-import { ContractBodyElementContext, SolidityParserVisitor } from '../../grammar';
+import { ContractBodyElementContext, SolidityParserVisitor } from '../../antlr4';
 import {
   ConstructorDefinition,
   FallbackFunctionDefinition,
@@ -29,7 +29,7 @@ export class ContractBodyElement extends BaseNodeUnion<
   | ErrorDefinition
   | UsingDirective
 > {
-  // type = 'ContractBodyElement';
+  // type = 'ContractBodyElement' as const;
   constructor(ctx: ContractBodyElementContext, visitor: SolidityParserVisitor<any>) {
     super(
       ctx,

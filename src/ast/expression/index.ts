@@ -54,34 +54,13 @@ export type ExpressionNode =
   | NamedArgument
   | NewExpr
   | NumberLiteral
-  | LiteralWithSubDenomination
   | PayableConversion
   | StringLiteral
   | UnaryOperation
   | UnicodeStringLiteral
   | UserDefinableOperator;
 
-export type ExpressionNodeType =
-  | 'AssignOp'
-  | 'Assignment'
-  | 'BooleanLiteral'
-  | 'Conditional'
-  | 'FunctionCallOptions'
-  | 'FunctionCall'
-  | 'HexStringLiteral'
-  | 'Identifier'
-  | 'IndexAccess'
-  | 'IndexRangeAccess'
-  | 'MemberAccess'
-  | 'NamedArgument'
-  | 'NewExpr'
-  | 'NumberLiteral'
-  | 'LiteralWithSubDenomination'
-  | 'PayableConversion'
-  | 'StringLiteral'
-  | 'UnaryOperation'
-  | 'UnicodeStringLiteral'
-  | 'UserDefinableOperator';
+export type ExpressionNodeType = ExpressionNode['type'];
 
 export {
   AssignOp,
@@ -120,6 +99,7 @@ export {
   StringLiteral,
   TupleExpression,
   Tuple,
+  UnaryOperation,
   UnaryPrefixOperation,
   UnarySuffixOperation,
   UnicodeStringLiteral,

@@ -1,9 +1,9 @@
 import { BaseNode } from '../base';
-import { ReturnStatementContext, SolidityParserVisitor } from '../../grammar';
+import { ReturnStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from '../expression';
 
 export class ReturnStatement extends BaseNode {
-  type = 'ReturnStatement';
+  type = 'ReturnStatement' as const;
   expression: Expression | null = null;
   constructor(ctx: ReturnStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);

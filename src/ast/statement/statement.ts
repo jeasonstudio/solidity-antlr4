@@ -1,5 +1,5 @@
 import { BaseNodeUnion } from '../base';
-import { StatementContext, SolidityParserVisitor } from '../../grammar';
+import { StatementContext, SolidityParserVisitor } from '../../antlr4';
 import { Block } from './block';
 import { SimpleStatement } from './simple-statement';
 import { IfStatement } from './if-statement';
@@ -29,7 +29,7 @@ export class Statement extends BaseNodeUnion<
   | RevertStatement
   | AssemblyStatement
 > {
-  // type = 'Statement';
+  // type = 'Statement' as const;
   constructor(ctx: StatementContext, visitor: SolidityParserVisitor<any>) {
     super(
       ctx,

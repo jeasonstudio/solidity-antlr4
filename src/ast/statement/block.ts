@@ -1,9 +1,9 @@
 import { BaseNode } from '../base';
-import { BlockContext, SolidityParserVisitor, UncheckedBlockContext } from '../../grammar';
+import { BlockContext, SolidityParserVisitor, UncheckedBlockContext } from '../../antlr4';
 import { Statement } from './statement';
 
 export class Block extends BaseNode {
-  type = 'Block';
+  type = 'Block' as const;
   unchecked: boolean = false;
   statements: Statement[] = [];
   constructor(_ctx: BlockContext | UncheckedBlockContext, visitor: SolidityParserVisitor<any>) {

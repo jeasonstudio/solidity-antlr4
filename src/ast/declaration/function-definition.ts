@@ -7,7 +7,7 @@ import {
   OverrideSpecifierContext,
   ReceiveFunctionDefinitionContext,
   SolidityParserVisitor,
-} from '../../grammar';
+} from '../../antlr4';
 import { Identifier } from '../expression';
 import { StateMutability } from './state-mutability';
 import { Visibility } from './visibility';
@@ -16,7 +16,7 @@ import { Block } from '../statement';
 
 type FunctionKind = 'function' | 'constructor' | 'receive' | 'fallback';
 
-export class FunctionDefinition extends BaseNode {
+export class BaseFunctionDefinition extends BaseNode {
   type = 'FunctionDefinition';
   name: Identifier | null = null;
   functionKind: FunctionKind = 'function';
@@ -82,8 +82,12 @@ export class FunctionDefinition extends BaseNode {
   }
 }
 
+export class FunctionDefinition extends BaseFunctionDefinition {
+  type = 'FunctionDefinition' as const;
+}
+
 export {
   FunctionDefinition as ConstructorDefinition,
   FunctionDefinition as FallbackFunctionDefinition,
   FunctionDefinition as ReceiveFunctionDefinition,
-}
+};

@@ -7,7 +7,7 @@ import {
   ConstantVariableDeclarationContext,
   EventParameterContext,
   ErrorParameterContext,
-} from '../../grammar';
+} from '../../antlr4';
 import { Identifier } from '../expression';
 import { DataLocation } from '../meta';
 import { TypeName } from '../type';
@@ -15,7 +15,7 @@ import { Expression } from '../expression';
 import { OverrideSpecifier } from '../meta';
 
 export class VariableDeclaration extends BaseNode {
-  type = 'VariableDeclaration';
+  type = 'VariableDeclaration' as const;
   name: Identifier | null = null;
   typeName: TypeName;
   dataLocation: DataLocation | null = null;

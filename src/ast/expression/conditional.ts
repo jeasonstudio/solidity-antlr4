@@ -1,8 +1,8 @@
-import { ConditionalContext, SolidityParserVisitor } from '../../grammar';
+import { ConditionalContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 
 export class Conditional extends Expression {
-  type = 'Conditional';
+  type = 'Conditional' as const;
   condition: Expression;
   trueExpression: Expression;
   falseExpression: Expression;

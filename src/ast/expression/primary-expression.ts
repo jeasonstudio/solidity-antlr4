@@ -1,5 +1,5 @@
 import { BaseNodeUnion } from '../base';
-import { PrimaryExpressionContext, SolidityParserVisitor } from '../../grammar';
+import { PrimaryExpressionContext, SolidityParserVisitor } from '../../antlr4';
 import { LiteralWithSubDenomination } from './number-literal';
 import { Literal } from './literal';
 import { ElementaryTypeName } from '../type';
@@ -8,7 +8,7 @@ import { Identifier } from './identifier';
 export class PrimaryExpression extends BaseNodeUnion<
   LiteralWithSubDenomination | Literal | ElementaryTypeName | Identifier
 > {
-  // type = 'PrimaryExpression';
+  // type = 'PrimaryExpression' as const;
   constructor(ctx: PrimaryExpressionContext, visitor: SolidityParserVisitor<any>) {
     super(
       ctx,

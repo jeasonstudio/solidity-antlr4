@@ -1,9 +1,9 @@
 import { BaseNodeString } from '../base';
-import { IdentifierPathContext, SolidityParserVisitor } from '../../grammar';
+import { IdentifierPathContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from '../expression';
 
 export class IdentifierPath extends BaseNodeString {
-  type = 'IdentifierPath';
+  type = 'IdentifierPath' as const;
   name: string;
   identifiers: Identifier[];
   constructor(ctx: IdentifierPathContext, visitor: SolidityParserVisitor<any>) {

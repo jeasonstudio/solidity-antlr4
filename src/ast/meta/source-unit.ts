@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { SourceUnitContext, SolidityParserVisitor } from '../../grammar';
+import { SourceUnitContext, SolidityParserVisitor } from '../../antlr4';
 import { ImportDirective } from './import-directive';
 import { PragmaDirective } from './pragma-directive';
 import { UsingDirective } from './using-directive';
@@ -26,7 +26,7 @@ type SourceUnitNodes =
   | VariableDeclaration;
 
 export class SourceUnit extends BaseNode {
-  type = 'SourceUnit';
+  type = 'SourceUnit' as const;
   nodes: SourceUnitNodes[] = [];
   constructor(ctx: SourceUnitContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);

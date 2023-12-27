@@ -1,10 +1,10 @@
 import { BaseNode } from '../base';
-import { NamedArgumentContext, SolidityParserVisitor } from '../../grammar';
+import { NamedArgumentContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from './identifier';
 import { Expression } from './expression';
 
 export class NamedArgument extends BaseNode {
-  type = 'NamedArgument';
+  type = 'NamedArgument' as const;
   name: Identifier;
   expression: Expression;
   constructor(ctx: NamedArgumentContext, visitor: SolidityParserVisitor<any>) {

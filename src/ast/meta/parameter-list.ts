@@ -1,9 +1,9 @@
 import { BaseNodeList } from '../base';
-import { ParameterListContext, SolidityParserVisitor } from '../../grammar';
+import { ParameterListContext, SolidityParserVisitor } from '../../antlr4';
 import { ParameterDeclaration } from '../declaration';
 
 export class ParameterList extends BaseNodeList<ParameterDeclaration> {
-  type = 'ParameterList';
+  type = 'ParameterList' as const;
   constructor(ctx: ParameterListContext, visitor: SolidityParserVisitor<any>) {
     super(ctx.parameterDeclaration(), visitor);
   }

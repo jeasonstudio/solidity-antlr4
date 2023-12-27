@@ -1,10 +1,10 @@
 import { BaseNode } from '../base';
-import { StructDefinitionContext, SolidityParserVisitor } from '../../grammar';
+import { StructDefinitionContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from '../expression';
 import { StructMember } from './struct-member';
 
 export class StructDefinition extends BaseNode {
-  type = 'StructDefinition';
+  type = 'StructDefinition' as const;
   name: Identifier;
   members: StructMember[];
   constructor(ctx: StructDefinitionContext, visitor: SolidityParserVisitor<any>) {

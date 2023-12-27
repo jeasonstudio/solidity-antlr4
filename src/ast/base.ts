@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { ParseTree, ParserRuleContext, SolidityParserVisitor } from '../grammar';
-import { keysIn } from 'lodash-es';
+import { SyntaxNodeType } from './index';
+import { ParseTree, ParserRuleContext, SolidityParserVisitor } from '../antlr4';
 
 export class Position {
   static create(line: number, column: number): Position {
@@ -29,47 +29,23 @@ export const formatString = (str: string) => {
 };
 
 export const isSyntaxNode = <T extends any>(node: T): boolean => {
-  return (
-    node instanceof BaseNode ||
-    node instanceof BaseNodeList ||
-    node instanceof BaseNodeString ||
-    node instanceof BaseNodeUnion
-  );
+  return node instanceof BaseNode && !!node.type;
 };
 
-export const serializeNode = <T extends BaseNode>(node: T) => {
-  if (!isSyntaxNode(node)) return node;
+export const keysInNode = <T extends BaseNode>(node: T): string[] => {
+  const forbiddenKeys = ['context', 'serialize'];
+  const keys: string[] = [];
 
-  const accessableKeys = keysIn(node).filter(
-    (key) => !['context'].includes(key) && typeof node[key] !== 'function',
-  );
-  return Object.fromEntries(
-    accessableKeys.map((key) => {
-      if (isSyntaxNode(node[key])) {
-        return [key, node[key].serialize()];
-      } else if (Array.isArray(node[key])) {
-        return [key, serializeNodeList(node[key])];
-      }
-      return [key, node[key]];
-    }),
-  );
-};
-
-export const serializeNodeList = <T extends BaseNodeList<any> | any[]>(list: T) => {
-  const result: any[] = [];
-  for (let index = 0; index < list.length; index += 1) {
-    const item = list[index];
-    result.push(isSyntaxNode(item) ? item.serialize() : item);
+  for (const key in node) {
+    if (Object.prototype.hasOwnProperty.call(node, key) && !forbiddenKeys.includes(key)) {
+      keys.push(key);
+    }
   }
-  return result;
-};
-
-export const serializeNodeString = <T extends BaseNodeString>(node: T) => {
-  return node.name;
+  return keys;
 };
 
 export abstract class BaseNode {
-  type: string;
+  type: SyntaxNodeType;
   src: `${number}:${number}`; // `{start}:{length}`
   range: [number, number];
   location: Location;
@@ -89,7 +65,7 @@ export abstract class BaseNode {
     this.context = ctx;
   }
 
-  serialize = () => serializeNode(this);
+  /** @ignore */
   context: ParserRuleContext;
 }
 
@@ -101,7 +77,6 @@ export abstract class BaseNodeList<T extends any = BaseNode> extends Array<T> {
   ) {
     super(...ctxList.map(formatter));
   }
-  serialize = () => serializeNodeList(this);
 }
 
 export abstract class BaseNodeString extends BaseNode {
@@ -110,7 +85,6 @@ export abstract class BaseNodeString extends BaseNode {
     super(ctx, visitor);
     this.name = ctx.getText();
   }
-  serialize = () => serializeNodeString(this);
 }
 
 export abstract class BaseNodeUnion<

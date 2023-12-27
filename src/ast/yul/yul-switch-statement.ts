@@ -1,11 +1,11 @@
 import { BaseNode } from '../base';
-import { YulSwitchStatementContext, SolidityParserVisitor } from '../../grammar';
+import { YulSwitchStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { YulExpression } from './yul-expression';
 import { YulSwitchCase } from './yul-switch-case';
 import { YulBlock } from './yul-block';
 
 export class YulSwitchStatement extends BaseNode {
-  type = 'YulSwitchStatement';
+  type = 'YulSwitchStatement' as const;
   expression: YulExpression;
   switchCases: YulSwitchCase[];
   default: boolean;

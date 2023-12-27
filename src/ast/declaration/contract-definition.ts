@@ -4,7 +4,7 @@ import {
   InterfaceDefinitionContext,
   LibraryDefinitionContext,
   SolidityParserVisitor,
-} from '../../grammar';
+} from '../../antlr4';
 import { EnumDefinition } from './enum-definition';
 import { ErrorDefinition } from './error-definition';
 import { EventDefinition } from './event-definition';
@@ -30,10 +30,25 @@ type ContractDefinitionNodes =
   | VariableDeclaration;
 
 export class ContractDefinition extends BaseNode {
-  type = 'ContractDefinition';
+  type = 'ContractDefinition' as const;
+  /**
+   * The contract name
+   */
   name: Identifier;
+  /**
+   * Type of contract declaration, e.g. `contract`, `library` or `interface`.
+   */
   contractKind: ContractKind = 'contract';
+  /**
+   * Is `true` if contract is declared as an abstract
+   * (using `abstract` keyword since Solidity 0.6).
+   *
+   * Is `false` otherwise.
+   */
   abstract: boolean = false;
+  /**
+   * Base contracts
+   */
   baseContracts: InheritanceSpecifier[] = [];
   nodes: ContractDefinitionNodes[] = [];
   constructor(

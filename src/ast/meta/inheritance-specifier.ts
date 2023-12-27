@@ -1,10 +1,10 @@
 import { BaseNode } from '../base';
-import { InheritanceSpecifierContext, SolidityParserVisitor } from '../../grammar';
+import { InheritanceSpecifierContext, SolidityParserVisitor } from '../../antlr4';
 import { IdentifierPath } from './identifier-path';
 import { Expression } from '../expression';
 
 export class InheritanceSpecifier extends BaseNode {
-  type = 'InheritanceSpecifier';
+  type = 'InheritanceSpecifier' as const;
   baseName: IdentifierPath;
   arguments: Expression[] = [];
   constructor(ctx: InheritanceSpecifierContext, visitor: SolidityParserVisitor<any>) {

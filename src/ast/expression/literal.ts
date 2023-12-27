@@ -1,5 +1,5 @@
 import { BaseNodeUnion } from '../base';
-import { LiteralContext, SolidityParserVisitor } from '../../grammar';
+import { LiteralContext, SolidityParserVisitor } from '../../antlr4';
 import { StringLiteral } from './string-literal';
 import { NumberLiteral } from './number-literal';
 import { BooleanLiteral } from './boolean-literal';
@@ -9,7 +9,7 @@ import { UnicodeStringLiteral } from './unicode-string-literal';
 export class Literal extends BaseNodeUnion<
   StringLiteral | NumberLiteral | BooleanLiteral | HexStringLiteral | UnicodeStringLiteral
 > {
-  // type = 'Literal';
+  // type = 'Literal' as const;
   constructor(ctx: LiteralContext, visitor: SolidityParserVisitor<any>) {
     super(
       ctx,

@@ -1,12 +1,12 @@
 import { BaseNode } from '../base';
-import { TryStatementContext, SolidityParserVisitor } from '../../grammar';
+import { TryStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from '../expression';
 import { ParameterList } from '../meta';
 import { Block } from './block';
 import { CatchClause } from './catch-clause';
 
 export class TryStatement extends BaseNode {
-  type = 'TryStatement';
+  type = 'TryStatement' as const;
   expression: Expression;
   returnParameters: ParameterList | null = null;
   body: Block;

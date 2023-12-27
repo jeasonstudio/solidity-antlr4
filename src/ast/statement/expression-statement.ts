@@ -1,9 +1,9 @@
 import { BaseNode } from '../base';
-import { ExpressionStatementContext, SolidityParserVisitor } from '../../grammar';
+import { ExpressionStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from '../expression';
 
 export class ExpressionStatement extends BaseNode {
-  type = 'ExpressionStatement';
+  type = 'ExpressionStatement' as const;
   expression: Expression;
   constructor(ctx: ExpressionStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);

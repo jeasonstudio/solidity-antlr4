@@ -1,7 +1,4 @@
-export * from './grammar';
+export * from './antlr4';
 export * from './ast';
-export * from './visitor';
-export { solidityASTVisitor as visitor } from './visitor';
-export * from './error';
-export { solidityErrorListener as errorListener } from './error';
-export * from './solidity';
+export * from './parser';
+export * from './traverse';

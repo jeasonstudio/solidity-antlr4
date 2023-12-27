@@ -1,11 +1,11 @@
 import { BaseNode } from '../base';
-import { YulAssignmentContext, SolidityParserVisitor } from '../../grammar';
+import { YulAssignmentContext, SolidityParserVisitor } from '../../antlr4';
 import { YulPath } from './yul-path';
 import { YulExpression } from './yul-expression';
 import { YulFunctionCall } from './yul-function-call';
 
 export class YulAssignment extends BaseNode {
-  type = 'YulAssignment';
+  type = 'YulAssignment' as const;
   paths: YulPath[] = [];
   expression: YulExpression | YulFunctionCall;
   constructor(ctx: YulAssignmentContext, visitor: SolidityParserVisitor<any>) {

@@ -1,9 +1,9 @@
-import { FunctionCallOptionsContext, SolidityParserVisitor } from '../../grammar';
+import { FunctionCallOptionsContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 import { NamedArgument } from './named-argument';
 
 export class FunctionCallOptions extends Expression {
-  type = 'FunctionCallOptions';
+  type = 'FunctionCallOptions' as const;
   expression: Expression;
   arguments: NamedArgument[] = [];
   constructor(ctx: FunctionCallOptionsContext, visitor: SolidityParserVisitor<any>) {

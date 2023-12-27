@@ -1,8 +1,8 @@
-import { IndexAccessContext, SolidityParserVisitor } from '../../grammar';
+import { IndexAccessContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 
 export class IndexAccess extends Expression {
-  type = 'IndexAccess';
+  type = 'IndexAccess' as const;
   baseExpression: Expression;
   indexExpression: Expression | null = null;
   constructor(ctx: IndexAccessContext, visitor: SolidityParserVisitor<any>) {

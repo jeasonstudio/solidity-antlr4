@@ -1,10 +1,10 @@
 import { BaseNode, formatString } from '../base';
-import { AssemblyStatementContext, SolidityParserVisitor } from '../../grammar';
+import { AssemblyStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { AssemblyFlags } from './assembly-flags';
 import { YulStatement } from '../yul';
 
 export class AssemblyStatement extends BaseNode {
-  type = 'AssemblyStatement';
+  type = 'AssemblyStatement' as const;
   flags: AssemblyFlags | null = null;
   dialect: 'evmasm' | string | null = null;
   yulStatements: YulStatement[] = [];

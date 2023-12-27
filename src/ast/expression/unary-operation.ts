@@ -2,11 +2,11 @@ import {
   UnaryPrefixOperationContext,
   SolidityParserVisitor,
   UnarySuffixOperationContext,
-} from '../../grammar';
+} from '../../antlr4';
 import { Expression } from './expression';
 
 export class UnaryOperation extends Expression {
-  type = 'UnaryOperation';
+  type = 'UnaryOperation' as const;
   operator: string | null = null;
   left: Expression | null = null;
   right: Expression | null = null;

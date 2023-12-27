@@ -1,9 +1,9 @@
-import { NewExprContext, SolidityParserVisitor } from '../../grammar';
+import { NewExprContext, SolidityParserVisitor } from '../../antlr4';
 import { TypeName } from '../type';
 import { Expression } from './expression';
 
 export class NewExpr extends Expression {
-  type = 'NewExpr';
+  type = 'NewExpr' as const;
   typeName: TypeName;
   constructor(ctx: NewExprContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);

@@ -1,11 +1,11 @@
 import { BaseNode } from '../base';
-import { MappingTypeContext, SolidityParserVisitor } from '../../grammar';
+import { MappingTypeContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from '../expression';
 import { MappingKeyType } from './mapping-key-type';
 import { TypeName } from './type-name';
 
 export class MappingType extends BaseNode {
-  type = 'MappingType';
+  type = 'MappingType' as const;
   name: Identifier | null = null;
   keyType: MappingKeyType | null = null;
   valueType: TypeName | null = null;
