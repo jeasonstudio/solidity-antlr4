@@ -82,7 +82,7 @@
     "build": "pnpm run build:esm && pnpm run build:cjs",
     "build:esm": "unbuild --clean",
     "build:cjs": "esbuild ./src/index.ts --bundle --outfile=dist/index.cjs --format=cjs --sourcemap --tsconfig=./tsconfig.json",
-    "build:typedoc": "typedoc --tsconfig ./tsconfig.json --skipErrorChecking src/index.ts",
+    "typedoc": "typedoc --tsconfig ./tsconfig.json --skipErrorChecking src/typedoc.ts",
     "changeset": "changeset",
     "release": "changeset version && changeset publish",
     "test": "jest",
