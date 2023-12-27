@@ -1,11 +1,11 @@
-import { Position } from './ast';
+import { Position } from '../ast/base';
 import {
   ATNSimulator,
   BaseErrorListener,
   RecognitionException,
   Recognizer,
   Token,
-} from './grammar';
+} from '../grammar';
 
 export interface ParseError {
   message: string;

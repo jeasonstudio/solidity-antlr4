@@ -29,15 +29,10 @@ export const formatString = (str: string) => {
 };
 
 export const isSyntaxNode = <T extends any>(node: T): boolean => {
-  return (
-    node instanceof BaseNode ||
-    node instanceof BaseNodeList ||
-    node instanceof BaseNodeString ||
-    node instanceof BaseNodeUnion
-  );
+  return (node instanceof BaseNode || node instanceof BaseNodeString) && node.type !== undefined;
 };
 
-export const serializeNode = <T extends BaseNode>(node: T) => {
+const serializeNode = <T extends BaseNode>(node: T) => {
   if (!isSyntaxNode(node)) return node;
 
   const accessableKeys = keysIn(node).filter(
@@ -55,7 +50,7 @@ export const serializeNode = <T extends BaseNode>(node: T) => {
   );
 };
 
-export const serializeNodeList = <T extends BaseNodeList<any> | any[]>(list: T) => {
+const serializeNodeList = <T extends BaseNodeList<any> | any[]>(list: T) => {
   const result: any[] = [];
   for (let index = 0; index < list.length; index += 1) {
     const item = list[index];
@@ -64,7 +59,7 @@ export const serializeNodeList = <T extends BaseNodeList<any> | any[]>(list: T) 
   return result;
 };
 
-export const serializeNodeString = <T extends BaseNodeString>(node: T) => {
+const serializeNodeString = <T extends BaseNodeString>(node: T) => {
   return node.name;
 };
 
@@ -89,8 +84,10 @@ export abstract class BaseNode {
     this.context = ctx;
   }
 
-  serialize = () => serializeNode(this);
+  /** @ignore */
   context: ParserRuleContext;
+  /** @ignore */
+  serialize = () => serializeNode(this);
 }
 
 export abstract class BaseNodeList<T extends any = BaseNode> extends Array<T> {
@@ -101,6 +98,7 @@ export abstract class BaseNodeList<T extends any = BaseNode> extends Array<T> {
   ) {
     super(...ctxList.map(formatter));
   }
+  /** @ignore */
   serialize = () => serializeNodeList(this);
 }
 
@@ -110,6 +108,7 @@ export abstract class BaseNodeString extends BaseNode {
     super(ctx, visitor);
     this.name = ctx.getText();
   }
+  /** @ignore */
   serialize = () => serializeNodeString(this);
 }
 

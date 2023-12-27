@@ -27,6 +27,10 @@
     "./antlr4": {
       "import": "./dist/antlr4/index.mjs",
       "types": "./dist/antlr4/index.d.ts"
+    },
+    "./parser": {
+      "import": "./dist/parser/index.mjs",
+      "types": "./dist/parser/index.d.ts"
     }
   },
   "files": [

@@ -6,7 +6,7 @@ import {
   ParserRuleContext,
 } from '../grammar';
 import { SyntaxNode } from '../ast';
-import { solidityASTVisitor } from '../visitor';
+import { solidityASTBuilder } from '../ast/builder';
 
 export const format = (ast: SyntaxNode) => ast.serialize();
 
@@ -18,7 +18,7 @@ export const parse = (
   const lexer = new SolidityLexer(CharStreams.fromString(input));
   const parser = new SolidityParser(new CommonTokenStream(lexer));
   const tree = callback(parser);
-  const ast = tree.accept(solidityASTVisitor)!;
+  const ast = tree.accept(solidityASTBuilder)!;
   return afterParse(ast);
 };
 
@@ -34,11 +34,11 @@ export const createLog = (
 ) => {
   return (input: string) =>
     parse(input, callback, (ast) => {
-      console.log(JSON.stringify(ast.serialize(), null, 2));
+      console.log(ast.serialize());
       return ast.serialize();
     });
 };
 
-export const visitor = solidityASTVisitor;
+export const visitor = solidityASTBuilder;
 
 test('utils', () => {});
