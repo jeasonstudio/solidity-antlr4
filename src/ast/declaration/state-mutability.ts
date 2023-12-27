@@ -1,5 +1,5 @@
 import { BaseNodeString } from '../base';
-import { StateMutabilityContext, SolidityParserVisitor, TerminalNode } from '../../grammar';
+import { StateMutabilityContext, SolidityParserVisitor, TerminalNode } from '../../antlr4';
 
 type StateMutabilityKind = 'pure' | 'view' | 'payable';
 

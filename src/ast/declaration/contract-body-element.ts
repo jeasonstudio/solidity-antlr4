@@ -1,5 +1,5 @@
 import { BaseNodeUnion } from '../base';
-import { ContractBodyElementContext, SolidityParserVisitor } from '../../grammar';
+import { ContractBodyElementContext, SolidityParserVisitor } from '../../antlr4';
 import {
   ConstructorDefinition,
   FallbackFunctionDefinition,

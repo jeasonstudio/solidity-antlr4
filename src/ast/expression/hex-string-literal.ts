@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { HexStringLiteralContext, SolidityParserVisitor } from '../../grammar';
+import { HexStringLiteralContext, SolidityParserVisitor } from '../../antlr4';
 
 export class HexStringLiteral extends BaseNode {
   type = 'HexStringLiteral';

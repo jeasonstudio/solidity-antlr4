@@ -7,7 +7,7 @@ import {
   OverrideSpecifierContext,
   ReceiveFunctionDefinitionContext,
   SolidityParserVisitor,
-} from '../../grammar';
+} from '../../antlr4';
 import { Identifier } from '../expression';
 import { StateMutability } from './state-mutability';
 import { Visibility } from './visibility';

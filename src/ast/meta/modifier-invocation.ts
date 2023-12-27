@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { ModifierInvocationContext, SolidityParserVisitor } from '../../grammar';
+import { ModifierInvocationContext, SolidityParserVisitor } from '../../antlr4';
 import { CallArgumentList } from '../expression';
 import { IdentifierPath } from './identifier-path';
 

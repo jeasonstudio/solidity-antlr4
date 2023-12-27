@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { ModifierDefinitionContext, SolidityParserVisitor } from '../../grammar';
+import { ModifierDefinitionContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from '../expression';
 import { OverrideSpecifier, ParameterList } from '../meta';
 import { Block } from '../statement';

@@ -7,7 +7,7 @@ import {
   ConstantVariableDeclarationContext,
   EventParameterContext,
   ErrorParameterContext,
-} from '../../grammar';
+} from '../../antlr4';
 import { Identifier } from '../expression';
 import { DataLocation } from '../meta';
 import { TypeName } from '../type';

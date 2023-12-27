@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { TypeNameContext, SolidityParserVisitor } from '../../grammar';
+import { TypeNameContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from '../expression';
 
 export class TypeName extends BaseNode {

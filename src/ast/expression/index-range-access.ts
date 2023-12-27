@@ -1,4 +1,4 @@
-import { IndexRangeAccessContext, SolidityParserVisitor } from '../../grammar';
+import { IndexRangeAccessContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 
 export class IndexRangeAccess extends Expression {

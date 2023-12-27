@@ -1,4 +1,4 @@
-import * as parser from '../grammar';
+import * as parser from '../antlr4';
 import * as ast from './index';
 
 export class SolidityASTBuilder extends parser.SolidityParserVisitor<ast.SyntaxNode | any> {

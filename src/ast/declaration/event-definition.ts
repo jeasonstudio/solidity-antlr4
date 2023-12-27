@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { EventDefinitionContext, SolidityParserVisitor } from '../../grammar';
+import { EventDefinitionContext, SolidityParserVisitor } from '../../antlr4';
 import { EventParameter } from './variable-declaration';
 
 export class EventDefinition extends BaseNode {

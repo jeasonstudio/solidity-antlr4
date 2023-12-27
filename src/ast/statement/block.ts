@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { BlockContext, SolidityParserVisitor, UncheckedBlockContext } from '../../grammar';
+import { BlockContext, SolidityParserVisitor, UncheckedBlockContext } from '../../antlr4';
 import { Statement } from './statement';
 
 export class Block extends BaseNode {

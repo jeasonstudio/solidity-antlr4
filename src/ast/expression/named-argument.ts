@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { NamedArgumentContext, SolidityParserVisitor } from '../../grammar';
+import { NamedArgumentContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from './identifier';
 import { Expression } from './expression';
 

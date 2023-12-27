@@ -1,5 +1,5 @@
 import { Position } from '../ast/base';
-import { SolidityLexer, CharStream } from '../grammar';
+import { SolidityLexer, CharStream } from '../antlr4';
 import { SolidityErrorListener } from './error-listener';
 
 export type SyntaxTokenType = (typeof SolidityLexer.symbolicNames)[number];

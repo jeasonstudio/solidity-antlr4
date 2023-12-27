@@ -1,5 +1,5 @@
 import { BaseNodeList } from '../base';
-import { InheritanceSpecifierListContext, SolidityParserVisitor } from '../../grammar';
+import { InheritanceSpecifierListContext, SolidityParserVisitor } from '../../antlr4';
 import { InheritanceSpecifier } from './inheritance-specifier';
 
 export class InheritanceSpecifierList extends BaseNodeList<InheritanceSpecifier> {

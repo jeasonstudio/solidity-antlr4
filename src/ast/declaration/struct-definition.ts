@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { StructDefinitionContext, SolidityParserVisitor } from '../../grammar';
+import { StructDefinitionContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from '../expression';
 import { StructMember } from './struct-member';
 

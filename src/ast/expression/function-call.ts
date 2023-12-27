@@ -1,4 +1,4 @@
-import { FunctionCallContext, SolidityParserVisitor } from '../../grammar';
+import { FunctionCallContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 import { CallArgumentList } from './call-argument-list';
 

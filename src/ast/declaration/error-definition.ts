@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { ErrorDefinitionContext, SolidityParserVisitor } from '../../grammar';
+import { ErrorDefinitionContext, SolidityParserVisitor } from '../../antlr4';
 import { ErrorParameter } from './variable-declaration';
 
 export class ErrorDefinition extends BaseNode {

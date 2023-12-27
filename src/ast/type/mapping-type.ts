@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { MappingTypeContext, SolidityParserVisitor } from '../../grammar';
+import { MappingTypeContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from '../expression';
 import { MappingKeyType } from './mapping-key-type';
 import { TypeName } from './type-name';

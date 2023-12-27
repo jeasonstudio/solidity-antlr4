@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { UsingDirectiveContext, SolidityParserVisitor } from '../../grammar';
+import { UsingDirectiveContext, SolidityParserVisitor } from '../../antlr4';
 import { UserDefinedValueTypeDefinition } from '../declaration';
 import { IdentifierPath } from './identifier-path';
 import { TypeName } from '../type';

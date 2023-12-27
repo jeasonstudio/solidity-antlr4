@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { ImportDirectiveContext, PathContext, SolidityParserVisitor } from '../../grammar';
+import { ImportDirectiveContext, PathContext, SolidityParserVisitor } from '../../antlr4';
 import { SymbolAliases } from './symbol-aliases';
 import { Identifier } from '../expression';
 

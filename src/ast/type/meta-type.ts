@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { MetaTypeContext, SolidityParserVisitor } from '../../grammar';
+import { MetaTypeContext, SolidityParserVisitor } from '../../antlr4';
 import { TypeName } from './type-name';
 
 export class MetaType extends BaseNode {

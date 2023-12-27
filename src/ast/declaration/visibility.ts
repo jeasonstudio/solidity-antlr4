@@ -1,5 +1,5 @@
 import { BaseNodeString } from '../base';
-import { VisibilityContext, SolidityParserVisitor, TerminalNode } from '../../grammar';
+import { VisibilityContext, SolidityParserVisitor, TerminalNode } from '../../antlr4';
 
 type VisibilityKind = 'external' | 'internal' | 'public' | 'private';
 

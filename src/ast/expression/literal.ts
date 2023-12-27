@@ -1,5 +1,5 @@
 import { BaseNodeUnion } from '../base';
-import { LiteralContext, SolidityParserVisitor } from '../../grammar';
+import { LiteralContext, SolidityParserVisitor } from '../../antlr4';
 import { StringLiteral } from './string-literal';
 import { NumberLiteral } from './number-literal';
 import { BooleanLiteral } from './boolean-literal';

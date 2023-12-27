@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { BooleanLiteralContext, SolidityParserVisitor } from '../../grammar';
+import { BooleanLiteralContext, SolidityParserVisitor } from '../../antlr4';
 
 export class BooleanLiteral extends BaseNode {
   type = 'BooleanLiteral';

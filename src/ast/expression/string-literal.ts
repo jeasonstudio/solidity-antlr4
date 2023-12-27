@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { StringLiteralContext, SolidityParserVisitor } from '../../grammar';
+import { StringLiteralContext, SolidityParserVisitor } from '../../antlr4';
 
 export class StringLiteral extends BaseNode {
   type = 'StringLiteral';

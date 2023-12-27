@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { YulFunctionCallContext, SolidityParserVisitor } from '../../grammar';
+import { YulFunctionCallContext, SolidityParserVisitor } from '../../antlr4';
 import { YulExpression } from './yul-expression';
 
 type YulEVMBuiltIn =

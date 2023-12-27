@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { VariableDeclarationStatementContext, SolidityParserVisitor } from '../../grammar';
+import { VariableDeclarationStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { VariableDeclaration } from '../declaration';
 import { Expression } from '../expression';
 

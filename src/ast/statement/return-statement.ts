@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { ReturnStatementContext, SolidityParserVisitor } from '../../grammar';
+import { ReturnStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from '../expression';
 
 export class ReturnStatement extends BaseNode {

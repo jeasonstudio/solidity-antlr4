@@ -2,7 +2,7 @@ import {
   UnaryPrefixOperationContext,
   SolidityParserVisitor,
   UnarySuffixOperationContext,
-} from '../../grammar';
+} from '../../antlr4';
 import { Expression } from './expression';
 
 export class UnaryOperation extends Expression {

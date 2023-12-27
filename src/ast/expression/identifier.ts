@@ -1,5 +1,5 @@
 import { BaseNodeString } from '../base';
-import { IdentifierContext, SolidityParserVisitor } from '../../grammar';
+import { IdentifierContext, SolidityParserVisitor } from '../../antlr4';
 
 export class Identifier extends BaseNodeString {
   type = 'Identifier';

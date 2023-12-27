@@ -1,5 +1,5 @@
 import { BaseNode, formatString } from '../base';
-import { AssemblyStatementContext, SolidityParserVisitor } from '../../grammar';
+import { AssemblyStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { AssemblyFlags } from './assembly-flags';
 import { YulStatement } from '../yul';
 

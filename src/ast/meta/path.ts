@@ -1,5 +1,5 @@
 import { BaseNodeString, formatString } from '../base';
-import { PathContext, SolidityParserVisitor } from '../../grammar';
+import { PathContext, SolidityParserVisitor } from '../../antlr4';
 
 export class Path extends BaseNodeString {
   type = 'Path';

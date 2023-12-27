@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { EnumDefinitionContext, SolidityParserVisitor } from '../../grammar';
+import { EnumDefinitionContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from '../expression';
 
 export class EnumDefinition extends BaseNode {

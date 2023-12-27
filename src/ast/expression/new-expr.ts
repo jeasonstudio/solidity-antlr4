@@ -1,4 +1,4 @@
-import { NewExprContext, SolidityParserVisitor } from '../../grammar';
+import { NewExprContext, SolidityParserVisitor } from '../../antlr4';
 import { TypeName } from '../type';
 import { Expression } from './expression';
 

@@ -6,7 +6,7 @@ import {
   SolidityLexer,
   CommonTokenStream,
   CharStream,
-} from '../grammar';
+} from '../antlr4';
 import { SolidityErrorListener } from './error-listener';
 
 export interface ParseOptions {

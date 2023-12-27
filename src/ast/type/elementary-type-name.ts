@@ -1,5 +1,5 @@
 import { BaseNodeString } from '../base';
-import { ElementaryTypeNameContext, SolidityParserVisitor } from '../../grammar';
+import { ElementaryTypeNameContext, SolidityParserVisitor } from '../../antlr4';
 
 export class ElementaryTypeName extends BaseNodeString {
   type = 'ElementaryTypeName';

@@ -1,5 +1,5 @@
 import { BaseNodeList } from '../base';
-import { TupleExpressionContext, SolidityParserVisitor } from '../../grammar';
+import { TupleExpressionContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 
 export class TupleExpression extends BaseNodeList<Expression> {

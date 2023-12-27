@@ -5,7 +5,7 @@ import {
   RecognitionException,
   Recognizer,
   Token,
-} from '../grammar';
+} from '../antlr4';
 
 export interface ParseError {
   message: string;

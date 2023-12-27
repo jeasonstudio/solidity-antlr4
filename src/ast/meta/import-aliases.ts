@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { ImportAliasesContext, SolidityParserVisitor } from '../../grammar';
+import { ImportAliasesContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from '../expression';
 
 export class ImportAliases extends BaseNode {

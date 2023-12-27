@@ -1,5 +1,5 @@
 import { BaseNodeList } from '../base';
-import { ParameterListContext, SolidityParserVisitor } from '../../grammar';
+import { ParameterListContext, SolidityParserVisitor } from '../../antlr4';
 import { ParameterDeclaration } from '../declaration';
 
 export class ParameterList extends BaseNodeList<ParameterDeclaration> {

@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { InheritanceSpecifierContext, SolidityParserVisitor } from '../../grammar';
+import { InheritanceSpecifierContext, SolidityParserVisitor } from '../../antlr4';
 import { IdentifierPath } from './identifier-path';
 import { Expression } from '../expression';
 

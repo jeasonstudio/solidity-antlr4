@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { ParseTree, ParserRuleContext, SolidityParserVisitor } from '../grammar';
+import { ParseTree, ParserRuleContext, SolidityParserVisitor } from '../antlr4';
 
 export class Position {
   static create(line: number, column: number): Position {

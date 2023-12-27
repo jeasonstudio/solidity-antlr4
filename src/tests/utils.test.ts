@@ -4,7 +4,7 @@ import {
   SolidityParser,
   CommonTokenStream,
   ParserRuleContext,
-} from '../grammar';
+} from '../antlr4';
 import { SyntaxNode } from '../ast';
 import { solidityASTBuilder } from '../ast/builder';
 import { serialize } from '../traverse';

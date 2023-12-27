@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { CatchClauseContext, SolidityParserVisitor } from '../../grammar';
+import { CatchClauseContext, SolidityParserVisitor } from '../../antlr4';
 import { Identifier } from '../expression';
 import { ParameterList } from '../meta';
 import { Block } from './block';

@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { UserDefinedValueTypeDefinitionContext, SolidityParserVisitor } from '../../grammar';
+import { UserDefinedValueTypeDefinitionContext, SolidityParserVisitor } from '../../antlr4';
 import { ElementaryTypeName } from '../type';
 
 export class UserDefinedValueTypeDefinition extends BaseNode {

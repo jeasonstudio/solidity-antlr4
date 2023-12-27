@@ -1,4 +1,4 @@
-import { ExpressionContext, SolidityParserVisitor } from '../../grammar';
+import { ExpressionContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 
 export class BinaryOperation<T extends ExpressionContext = ExpressionContext> extends Expression {

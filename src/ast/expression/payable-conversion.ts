@@ -1,4 +1,4 @@
-import { PayableConversionContext, SolidityParserVisitor } from '../../grammar';
+import { PayableConversionContext, SolidityParserVisitor } from '../../antlr4';
 import { CallArgumentList } from './call-argument-list';
 import { Expression } from './expression';
 

@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { SourceUnitContext, SolidityParserVisitor } from '../../grammar';
+import { SourceUnitContext, SolidityParserVisitor } from '../../antlr4';
 import { ImportDirective } from './import-directive';
 import { PragmaDirective } from './pragma-directive';
 import { UsingDirective } from './using-directive';

@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { TryStatementContext, SolidityParserVisitor } from '../../grammar';
+import { TryStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from '../expression';
 import { ParameterList } from '../meta';
 import { Block } from './block';

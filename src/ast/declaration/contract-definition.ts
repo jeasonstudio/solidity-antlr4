@@ -4,7 +4,7 @@ import {
   InterfaceDefinitionContext,
   LibraryDefinitionContext,
   SolidityParserVisitor,
-} from '../../grammar';
+} from '../../antlr4';
 import { EnumDefinition } from './enum-definition';
 import { ErrorDefinition } from './error-definition';
 import { EventDefinition } from './event-definition';

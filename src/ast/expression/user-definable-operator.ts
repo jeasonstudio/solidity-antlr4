@@ -1,5 +1,5 @@
 import { BaseNodeString } from '../base';
-import { UserDefinableOperatorContext, SolidityParserVisitor } from '../../grammar';
+import { UserDefinableOperatorContext, SolidityParserVisitor } from '../../antlr4';
 
 export class UserDefinableOperator extends BaseNodeString {
   type = 'UserDefinableOperator';

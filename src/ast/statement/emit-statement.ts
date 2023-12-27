@@ -1,4 +1,4 @@
-import { EmitStatementContext, SolidityParserVisitor } from '../../grammar';
+import { EmitStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { FunctionCall } from '../expression';
 
 export class EmitStatement extends FunctionCall {

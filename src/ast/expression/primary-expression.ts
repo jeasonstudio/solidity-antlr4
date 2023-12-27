@@ -1,5 +1,5 @@
 import { BaseNodeUnion } from '../base';
-import { PrimaryExpressionContext, SolidityParserVisitor } from '../../grammar';
+import { PrimaryExpressionContext, SolidityParserVisitor } from '../../antlr4';
 import { LiteralWithSubDenomination } from './number-literal';
 import { Literal } from './literal';
 import { ElementaryTypeName } from '../type';

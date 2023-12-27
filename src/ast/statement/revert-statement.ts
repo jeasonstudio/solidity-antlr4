@@ -1,4 +1,4 @@
-import { RevertStatementContext, SolidityParserVisitor } from '../../grammar';
+import { RevertStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { FunctionCall } from '../expression';
 
 export class RevertStatement extends FunctionCall {

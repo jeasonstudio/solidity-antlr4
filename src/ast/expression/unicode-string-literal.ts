@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { UnicodeStringLiteralContext, SolidityParserVisitor } from '../../grammar';
+import { UnicodeStringLiteralContext, SolidityParserVisitor } from '../../antlr4';
 
 export class UnicodeStringLiteral extends BaseNode {
   type = 'UnicodeStringLiteral';

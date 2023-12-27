@@ -1,4 +1,4 @@
-import { MemberAccessContext, SolidityParserVisitor } from '../../grammar';
+import { MemberAccessContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 
 export class MemberAccess extends Expression {

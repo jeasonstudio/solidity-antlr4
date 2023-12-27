@@ -1,5 +1,5 @@
 import { BaseNodeString } from '../base';
-import { DataLocationContext, SolidityParserVisitor } from '../../grammar';
+import { DataLocationContext, SolidityParserVisitor } from '../../antlr4';
 
 type DataLocationName = 'storage' | 'memory' | 'calldata';
 

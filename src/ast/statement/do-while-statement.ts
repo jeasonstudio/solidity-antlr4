@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { DoWhileStatementContext, SolidityParserVisitor } from '../../grammar';
+import { DoWhileStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from '../expression';
 import { Statement } from './statement';
 

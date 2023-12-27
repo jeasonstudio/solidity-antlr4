@@ -1,5 +1,5 @@
 import { BaseNode } from '../base';
-import { YulIfStatementContext, SolidityParserVisitor } from '../../grammar';
+import { YulIfStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { YulExpression } from './yul-expression';
 import { YulBlock } from './yul-block';
 
