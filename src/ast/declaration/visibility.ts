@@ -1,7 +1,7 @@
 import { BaseNodeString } from '../base';
 import { VisibilityContext, SolidityParserVisitor, TerminalNode } from '../../grammar';
 
-type VisibilityKind = 'external' | 'public' | 'internal' | 'private';
+type VisibilityKind = 'external'| 'internal' | 'public'  | 'private';
 
 export class Visibility extends BaseNodeString {
   type = 'Visibility';
