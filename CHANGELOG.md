@@ -1,5 +1,15 @@
 # solidity-antlr4
 
+## 2.3.0
+
+### Minor Changes
+
+- dcf10a7: reduce and combine ast nodes, use `xxxKind` to distinguish
+
+### Patch Changes
+
+- 6e87962: support traverse/walker and refact serialize
+
 ## 2.2.1
 
 ### Patch Changes
