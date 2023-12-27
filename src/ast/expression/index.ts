@@ -54,7 +54,6 @@ export type ExpressionNode =
   | NamedArgument
   | NewExpr
   | NumberLiteral
-  | LiteralWithSubDenomination
   | PayableConversion
   | StringLiteral
   | UnaryOperation
@@ -76,7 +75,6 @@ export type ExpressionNodeType =
   | 'NamedArgument'
   | 'NewExpr'
   | 'NumberLiteral'
-  | 'LiteralWithSubDenomination'
   | 'PayableConversion'
   | 'StringLiteral'
   | 'UnaryOperation'
@@ -120,6 +118,7 @@ export {
   StringLiteral,
   TupleExpression,
   Tuple,
+  UnaryOperation,
   UnaryPrefixOperation,
   UnarySuffixOperation,
   UnicodeStringLiteral,
