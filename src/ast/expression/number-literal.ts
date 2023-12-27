@@ -9,7 +9,7 @@ type EtherUnit = 'wei' | 'gwei' | 'szabo' | 'finney' | 'ether';
 type TimeUnit = 'seconds' | 'minutes' | 'hours' | 'days' | 'weeks' | 'years';
 
 export class NumberLiteral extends BaseNode {
-  type = 'NumberLiteral';
+  type = 'NumberLiteral' as const;
   value: string | null = null;
   hexValue: string | null = null;
   subDenomination: EtherUnit | TimeUnit | null = null;

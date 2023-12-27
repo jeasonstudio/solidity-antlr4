@@ -29,7 +29,7 @@ export class ContractBodyElement extends BaseNodeUnion<
   | ErrorDefinition
   | UsingDirective
 > {
-  // type = 'ContractBodyElement';
+  // type = 'ContractBodyElement' as const;
   constructor(ctx: ContractBodyElementContext, visitor: SolidityParserVisitor<any>) {
     super(
       ctx,

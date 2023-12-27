@@ -8,7 +8,7 @@ import { Identifier } from './identifier';
 export class PrimaryExpression extends BaseNodeUnion<
   LiteralWithSubDenomination | Literal | ElementaryTypeName | Identifier
 > {
-  // type = 'PrimaryExpression';
+  // type = 'PrimaryExpression' as const;
   constructor(ctx: PrimaryExpressionContext, visitor: SolidityParserVisitor<any>) {
     super(
       ctx,

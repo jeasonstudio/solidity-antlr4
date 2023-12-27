@@ -4,7 +4,7 @@ import { Expression } from '../expression';
 import { Statement } from './statement';
 
 export class IfStatement extends BaseNode {
-  type = 'IfStatement';
+  type = 'IfStatement' as const;
   condition: Expression;
   ifStatement: Statement;
   elseStatement: Statement | null = null;

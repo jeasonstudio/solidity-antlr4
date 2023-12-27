@@ -7,9 +7,13 @@ import {
   Token,
 } from '../antlr4';
 
-export interface ParseError {
-  message: string;
-  position: Position;
+export class ParseError extends Error {
+  constructor(
+    public message: string,
+    public position?: Position,
+  ) {
+    super(message, { cause: null });
+  }
 }
 
 export class SolidityErrorListener extends BaseErrorListener {
@@ -20,15 +24,16 @@ export class SolidityErrorListener extends BaseErrorListener {
     _offendingSymbol: S | null,
     line: number,
     column: number,
-    msg: string,
-    _e: RecognitionException | null,
+    message: string,
+    _exception: RecognitionException,
   ): void {
-    const error: ParseError = {
-      position: Position.create(line, column),
-      message: msg,
-    };
-    this.errors.push(error);
+    this.errors.push(new ParseError(message, Position.create(line, column)));
   }
+
+  throws = () => {
+    if (!this.errors.length) return;
+    throw this.errors[0];
+  };
 }
 
 export const solidityErrorListener = new SolidityErrorListener();

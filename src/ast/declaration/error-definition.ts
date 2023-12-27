@@ -3,7 +3,7 @@ import { ErrorDefinitionContext, SolidityParserVisitor } from '../../antlr4';
 import { ErrorParameter } from './variable-declaration';
 
 export class ErrorDefinition extends BaseNode {
-  type = 'ErrorDefinition';
+  type = 'ErrorDefinition' as const;
   name: string;
   parameters: ErrorParameter[];
   constructor(ctx: ErrorDefinitionContext, visitor: SolidityParserVisitor<any>) {

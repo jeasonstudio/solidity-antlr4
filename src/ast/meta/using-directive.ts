@@ -6,7 +6,7 @@ import { TypeName } from '../type';
 import { UserDefinableOperator } from '../expression';
 
 export class UsingDirective extends BaseNode {
-  type = 'UsingDirective';
+  type = 'UsingDirective' as const;
   global: boolean;
   libraryName: UserDefinedValueTypeDefinition | IdentifierPath | null = null;
   definitions: IdentifierPath[] | null = null;

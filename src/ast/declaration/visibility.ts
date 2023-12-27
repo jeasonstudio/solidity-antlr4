@@ -4,7 +4,7 @@ import { VisibilityContext, SolidityParserVisitor, TerminalNode } from '../../an
 type VisibilityKind = 'external' | 'internal' | 'public' | 'private';
 
 export class Visibility extends BaseNodeString {
-  type = 'Visibility';
+  type = 'Visibility' as const;
   name: VisibilityKind | null = null;
   constructor(ctx: VisibilityContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);

@@ -4,7 +4,7 @@ import { Expression } from '../expression';
 import { Statement } from './statement';
 
 export class DoWhileStatement extends BaseNode {
-  type = 'DoWhileStatement';
+  type = 'DoWhileStatement' as const;
   condition: Expression;
   body: Statement;
   constructor(ctx: DoWhileStatementContext, visitor: SolidityParserVisitor<any>) {

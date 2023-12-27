@@ -5,7 +5,7 @@ import { YulSwitchCase } from './yul-switch-case';
 import { YulBlock } from './yul-block';
 
 export class YulSwitchStatement extends BaseNode {
-  type = 'YulSwitchStatement';
+  type = 'YulSwitchStatement' as const;
   expression: YulExpression;
   switchCases: YulSwitchCase[];
   default: boolean;

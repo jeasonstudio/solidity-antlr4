@@ -5,7 +5,7 @@ import { OverrideSpecifier, ParameterList } from '../meta';
 import { Block } from '../statement';
 
 export class ModifierDefinition extends BaseNode {
-  type = 'ModifierDefinition';
+  type = 'ModifierDefinition' as const;
   name: Identifier;
   parameters: ParameterList | null = null;
   virtual: boolean = false;

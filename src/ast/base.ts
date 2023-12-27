@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
+import { SyntaxNodeType } from './index';
 import { ParseTree, ParserRuleContext, SolidityParserVisitor } from '../antlr4';
 
 export class Position {
@@ -44,7 +45,7 @@ export const keysInNode = <T extends BaseNode>(node: T): string[] => {
 };
 
 export abstract class BaseNode {
-  type: string;
+  type: SyntaxNodeType;
   src: `${number}:${number}`; // `{start}:{length}`
   range: [number, number];
   location: Location;

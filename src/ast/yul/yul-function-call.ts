@@ -79,7 +79,7 @@ type YulEVMBuiltIn =
   | 'basefee';
 
 export class YulFunctionCall extends BaseNode {
-  type = 'YulFunctionCall';
+  type = 'YulFunctionCall' as const;
   identifier: string | YulEVMBuiltIn;
   expressions: YulExpression[] = [];
   constructor(ctx: YulFunctionCallContext, visitor: SolidityParserVisitor<any>) {

@@ -2,7 +2,7 @@ import { BaseNode } from '../base';
 import { StringLiteralContext, SolidityParserVisitor } from '../../antlr4';
 
 export class StringLiteral extends BaseNode {
-  type = 'StringLiteral';
+  type = 'StringLiteral' as const;
   value: string;
   constructor(ctx: StringLiteralContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);

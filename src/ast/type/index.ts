@@ -13,12 +13,6 @@ export type TypeNode =
   | MetaType
   | TypeName;
 
-export type TypeNodeType =
-  | 'ElementaryTypeName'
-  | 'FunctionTypeName'
-  | 'MappingKeyType'
-  | 'MappingType'
-  | 'MetaType'
-  | 'TypeName';
+export type TypeNodeType = TypeNode['type'];
 
 export { ElementaryTypeName, FunctionTypeName, MappingKeyType, MappingType, MetaType, TypeName };

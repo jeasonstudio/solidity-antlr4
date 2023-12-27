@@ -6,7 +6,7 @@ import { Block } from './block';
 import { CatchClause } from './catch-clause';
 
 export class TryStatement extends BaseNode {
-  type = 'TryStatement';
+  type = 'TryStatement' as const;
   expression: Expression;
   returnParameters: ParameterList | null = null;
   body: Block;

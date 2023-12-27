@@ -3,7 +3,7 @@ import { InlineArrayExpressionContext, SolidityParserVisitor } from '../../antlr
 import { Expression } from './expression';
 
 export class InlineArrayExpression extends BaseNodeList<Expression> {
-  type = 'InlineArrayExpression';
+  type = 'InlineArrayExpression' as const;
   constructor(ctx: InlineArrayExpressionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx.expression(), visitor);
   }

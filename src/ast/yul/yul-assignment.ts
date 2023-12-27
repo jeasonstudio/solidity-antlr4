@@ -5,7 +5,7 @@ import { YulExpression } from './yul-expression';
 import { YulFunctionCall } from './yul-function-call';
 
 export class YulAssignment extends BaseNode {
-  type = 'YulAssignment';
+  type = 'YulAssignment' as const;
   paths: YulPath[] = [];
   expression: YulExpression | YulFunctionCall;
   constructor(ctx: YulAssignmentContext, visitor: SolidityParserVisitor<any>) {

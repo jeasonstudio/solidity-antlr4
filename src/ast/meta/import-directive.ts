@@ -4,7 +4,7 @@ import { SymbolAliases } from './symbol-aliases';
 import { Identifier } from '../expression';
 
 export class ImportDirective extends BaseNode {
-  type = 'ImportDirective';
+  type = 'ImportDirective' as const;
   path: PathContext;
   unitAlias: Identifier | null = null;
   symbolAliases: SymbolAliases[] = [];

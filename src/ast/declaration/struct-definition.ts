@@ -4,7 +4,7 @@ import { Identifier } from '../expression';
 import { StructMember } from './struct-member';
 
 export class StructDefinition extends BaseNode {
-  type = 'StructDefinition';
+  type = 'StructDefinition' as const;
   name: Identifier;
   members: StructMember[];
   constructor(ctx: StructDefinitionContext, visitor: SolidityParserVisitor<any>) {

@@ -3,7 +3,7 @@ import { InheritanceSpecifierListContext, SolidityParserVisitor } from '../../an
 import { InheritanceSpecifier } from './inheritance-specifier';
 
 export class InheritanceSpecifierList extends BaseNodeList<InheritanceSpecifier> {
-  type = 'InheritanceSpecifierList';
+  type = 'InheritanceSpecifierList' as const;
   constructor(ctx: InheritanceSpecifierListContext, visitor: SolidityParserVisitor<any>) {
     super(ctx.inheritanceSpecifier(), visitor);
   }

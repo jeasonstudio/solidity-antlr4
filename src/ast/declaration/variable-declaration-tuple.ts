@@ -3,7 +3,7 @@ import { VariableDeclarationTupleContext, SolidityParserVisitor } from '../../an
 import { VariableDeclaration } from './variable-declaration';
 
 export class VariableDeclarationTuple extends BaseNodeList<VariableDeclaration> {
-  type = 'VariableDeclarationTuple';
+  type = 'VariableDeclarationTuple' as const;
   constructor(ctx: VariableDeclarationTupleContext, visitor: SolidityParserVisitor<any>) {
     super(ctx.variableDeclaration(), visitor);
   }

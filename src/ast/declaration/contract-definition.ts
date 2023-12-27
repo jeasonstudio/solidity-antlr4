@@ -30,7 +30,7 @@ type ContractDefinitionNodes =
   | VariableDeclaration;
 
 export class ContractDefinition extends BaseNode {
-  type = 'ContractDefinition';
+  type = 'ContractDefinition' as const;
   /**
    * The contract name
    */

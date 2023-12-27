@@ -4,7 +4,7 @@ import { VariableDeclaration } from '../declaration';
 import { Expression } from '../expression';
 
 export class VariableDeclarationStatement extends BaseNode {
-  type = 'VariableDeclarationStatement';
+  type = 'VariableDeclarationStatement' as const;
   variables: VariableDeclaration[] = [];
   expression: Expression | null = null;
 

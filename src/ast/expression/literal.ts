@@ -9,7 +9,7 @@ import { UnicodeStringLiteral } from './unicode-string-literal';
 export class Literal extends BaseNodeUnion<
   StringLiteral | NumberLiteral | BooleanLiteral | HexStringLiteral | UnicodeStringLiteral
 > {
-  // type = 'Literal';
+  // type = 'Literal' as const;
   constructor(ctx: LiteralContext, visitor: SolidityParserVisitor<any>) {
     super(
       ctx,

@@ -16,7 +16,7 @@ import { Block } from '../statement';
 
 type FunctionKind = 'function' | 'constructor' | 'receive' | 'fallback';
 
-export class FunctionDefinition extends BaseNode {
+export class BaseFunctionDefinition extends BaseNode {
   type = 'FunctionDefinition';
   name: Identifier | null = null;
   functionKind: FunctionKind = 'function';
@@ -82,8 +82,12 @@ export class FunctionDefinition extends BaseNode {
   }
 }
 
+export class FunctionDefinition extends BaseFunctionDefinition {
+  type = 'FunctionDefinition' as const;
+}
+
 export {
   FunctionDefinition as ConstructorDefinition,
   FunctionDefinition as FallbackFunctionDefinition,
   FunctionDefinition as ReceiveFunctionDefinition,
-}
+};

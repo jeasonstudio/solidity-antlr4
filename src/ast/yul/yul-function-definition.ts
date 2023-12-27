@@ -3,7 +3,7 @@ import { YulFunctionDefinitionContext, SolidityParserVisitor } from '../../antlr
 import { YulBlock } from './yul-block';
 
 export class YulFunctionDefinition extends BaseNode {
-  type = 'YulFunctionDefinition';
+  type = 'YulFunctionDefinition' as const;
   name: string | null = null;
   parameters: (string | null)[] = [];
   returnParameters: (string | null)[] = [];

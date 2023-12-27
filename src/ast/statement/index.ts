@@ -34,22 +34,7 @@ export type StatementNode =
   | VariableDeclarationStatement
   | WhileStatement;
 
-export type StatementNodeType =
-  | 'AssemblyStatement'
-  | 'Block'
-  | 'BreakStatement'
-  | 'CatchClause'
-  | 'ContinueStatement'
-  | 'DoWhileStatement'
-  | 'EmitStatement'
-  | 'ExpressionStatement'
-  | 'ForStatement'
-  | 'IfStatement'
-  | 'ReturnStatement'
-  | 'RevertStatement'
-  | 'TryStatement'
-  | 'VariableDeclarationStatement'
-  | 'WhileStatement';
+export type StatementNodeType = StatementNode['type'];
 
 export {
   AssemblyFlags,

@@ -5,7 +5,7 @@ import { ParameterList } from '../meta';
 import { Block } from './block';
 
 export class CatchClause extends BaseNode {
-  type = 'CatchClause';
+  type = 'CatchClause' as const;
   errorName: Identifier | null = null;
   parameters: ParameterList | null = null;
   body: Block;

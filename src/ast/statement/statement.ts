@@ -29,7 +29,7 @@ export class Statement extends BaseNodeUnion<
   | RevertStatement
   | AssemblyStatement
 > {
-  // type = 'Statement';
+  // type = 'Statement' as const;
   constructor(ctx: StatementContext, visitor: SolidityParserVisitor<any>) {
     super(
       ctx,

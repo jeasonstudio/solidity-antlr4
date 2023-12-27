@@ -6,7 +6,7 @@ import { Statement } from './statement';
 import { SimpleStatement } from './simple-statement';
 
 export class ForStatement extends BaseNode {
-  type = 'ForStatement';
+  type = 'ForStatement' as const;
   initializationExpression: SimpleStatement | null = null;
   conditionExpression: ExpressionStatement | null = null;
   loopExpression: Expression | null = null;

@@ -3,7 +3,7 @@ import { UserDefinedValueTypeDefinitionContext, SolidityParserVisitor } from '..
 import { ElementaryTypeName } from '../type';
 
 export class UserDefinedValueTypeDefinition extends BaseNode {
-  type = 'UserDefinedValueTypeDefinition';
+  type = 'UserDefinedValueTypeDefinition' as const;
   name: string;
   typeName: ElementaryTypeName;
   constructor(ctx: UserDefinedValueTypeDefinitionContext, visitor: SolidityParserVisitor<any>) {

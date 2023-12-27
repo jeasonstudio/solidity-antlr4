@@ -2,7 +2,7 @@ import { BaseNode } from '../base';
 import { PragmaDirectiveContext, SolidityParserVisitor } from '../../antlr4';
 
 export class PragmaDirective extends BaseNode {
-  type = 'PragmaDirective';
+  type = 'PragmaDirective' as const;
   literals: string[] = [];
 
   constructor(ctx: PragmaDirectiveContext, visitor: SolidityParserVisitor<any>) {

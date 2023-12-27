@@ -4,7 +4,7 @@ import { StateMutabilityContext, SolidityParserVisitor, TerminalNode } from '../
 type StateMutabilityKind = 'pure' | 'view' | 'payable';
 
 export class StateMutability extends BaseNodeString {
-  type = 'StateMutability';
+  type = 'StateMutability' as const;
   name: StateMutabilityKind | null = null;
 
   constructor(ctx: StateMutabilityContext, visitor: SolidityParserVisitor<any>) {

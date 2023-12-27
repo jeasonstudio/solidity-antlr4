@@ -3,7 +3,7 @@ import { VariableDeclarationListContext, SolidityParserVisitor } from '../../ant
 import { VariableDeclaration } from './variable-declaration';
 
 export class VariableDeclarationList extends BaseNodeList<VariableDeclaration> {
-  type = 'VariableDeclarationList';
+  type = 'VariableDeclarationList' as const;
   constructor(ctx: VariableDeclarationListContext, visitor: SolidityParserVisitor<any>) {
     super(ctx.variableDeclaration(), visitor);
   }

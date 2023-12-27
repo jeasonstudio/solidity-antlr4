@@ -4,7 +4,7 @@ import { Identifier } from './identifier';
 import { Expression } from './expression';
 
 export class NamedArgument extends BaseNode {
-  type = 'NamedArgument';
+  type = 'NamedArgument' as const;
   name: Identifier;
   expression: Expression;
   constructor(ctx: NamedArgumentContext, visitor: SolidityParserVisitor<any>) {

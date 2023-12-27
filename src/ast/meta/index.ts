@@ -25,17 +25,7 @@ export type MetaNode =
   | SourceUnit
   | UsingDirective;
 
-export type MetaNodeType =
-  | 'DataLocation'
-  | 'IdentifierPath'
-  | 'ImportAliases'
-  | 'ImportDirective'
-  | 'InheritanceSpecifier'
-  | 'ModifierInvocation'
-  | 'Path'
-  | 'PragmaDirective'
-  | 'SourceUnit'
-  | 'UsingDirective';
+export type MetaNodeType = MetaNode['type'];
 
 export {
   DataLocation,

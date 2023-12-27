@@ -2,7 +2,7 @@ import { IndexRangeAccessContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 
 export class IndexRangeAccess extends Expression {
-  type = 'IndexRangeAccess';
+  type = 'IndexRangeAccess' as const;
   baseExpression: Expression;
   startExpression: Expression | null = null;
   endExpression: Expression | null = null;

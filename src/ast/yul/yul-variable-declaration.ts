@@ -3,7 +3,7 @@ import { YulVariableDeclarationContext, SolidityParserVisitor } from '../../antl
 import { YulExpression } from './yul-expression';
 
 export class YulVariableDeclaration extends BaseNode {
-  type = 'YulVariableDeclaration';
+  type = 'YulVariableDeclaration' as const;
   identifiers: string[] = [];
   expression: YulExpression | null = null;
   constructor(ctx: YulVariableDeclarationContext, visitor: SolidityParserVisitor<any>) {

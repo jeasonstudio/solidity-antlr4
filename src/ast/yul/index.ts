@@ -28,20 +28,7 @@ export type YulNode =
   | YulSwitchStatement
   | YulVariableDeclaration;
 
-export type YulNodeType =
-  | 'YulAssignment'
-  | 'YulBlock'
-  | 'YulBoolean'
-  | 'YulForStatement'
-  | 'YulFunctionCall'
-  | 'YulFunctionDefinition'
-  | 'YulIfStatement'
-  | 'YulLiteral'
-  | 'YulPath'
-  | 'YulStatement'
-  | 'YulSwitchCase'
-  | 'YulSwitchStatement'
-  | 'YulVariableDeclaration';
+export type YulNodeType = YulNode['type'];
 
 export {
   YulAssignment,

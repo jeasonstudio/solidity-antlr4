@@ -4,7 +4,7 @@ import { Statement } from './statement';
 import { Expression } from '../expression';
 
 export class WhileStatement extends BaseNode {
-  type = 'WhileStatement';
+  type = 'WhileStatement' as const;
   condition: Expression;
   body: Statement;
   constructor(ctx: WhileStatementContext, visitor: SolidityParserVisitor<any>) {

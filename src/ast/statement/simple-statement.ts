@@ -6,7 +6,7 @@ import { ExpressionStatement } from './expression-statement';
 export class SimpleStatement extends BaseNodeUnion<
   VariableDeclarationStatement | ExpressionStatement
 > {
-  // type = 'SimpleStatement';
+  // type = 'SimpleStatement' as const;
   constructor(ctx: SimpleStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, [ctx.variableDeclarationStatement(), ctx.expressionStatement()], visitor);
   }

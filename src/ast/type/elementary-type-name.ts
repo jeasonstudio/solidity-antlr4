@@ -2,7 +2,7 @@ import { BaseNodeString } from '../base';
 import { ElementaryTypeNameContext, SolidityParserVisitor } from '../../antlr4';
 
 export class ElementaryTypeName extends BaseNodeString {
-  type = 'ElementaryTypeName';
+  type = 'ElementaryTypeName' as const;
   payable: boolean = false;
   constructor(ctx: ElementaryTypeNameContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);

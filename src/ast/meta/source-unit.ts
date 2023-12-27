@@ -26,7 +26,7 @@ type SourceUnitNodes =
   | VariableDeclaration;
 
 export class SourceUnit extends BaseNode {
-  type = 'SourceUnit';
+  type = 'SourceUnit' as const;
   nodes: SourceUnitNodes[] = [];
   constructor(ctx: SourceUnitContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
