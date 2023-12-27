@@ -40,7 +40,7 @@ export class FunctionDefinition extends BaseNode {
   ) {
     super(ctx, visitor);
     if (ctx instanceof FunctionTypeNameContext) {
-      this.type = 'FunctionTypeName';
+      this.functionKind = 'function';
       this.visibility = ctx.visibility(0)?.accept(visitor) ?? null;
       this.stateMutability = ctx.stateMutability(0)?.accept(visitor) ?? null;
       this.parameters = ctx._arguments?.accept(visitor) ?? null;
@@ -50,7 +50,6 @@ export class FunctionDefinition extends BaseNode {
       this.body = ctx.block()?.accept(visitor) ?? null;
 
       if (ctx instanceof ConstructorDefinitionContext) {
-        this.type = 'ConstructorDefinition';
         this.functionKind = 'constructor';
         this.visibility = new Visibility(ctx as any, visitor);
         this.stateMutability = new StateMutability(ctx as any, visitor);
@@ -61,19 +60,16 @@ export class FunctionDefinition extends BaseNode {
         this.override = overrideSpecifier ? overrideSpecifier.accept(visitor) : null;
 
         if (ctx instanceof FallbackFunctionDefinitionContext) {
-          this.type = 'FallbackFunctionDefinition';
           this.functionKind = 'fallback';
           this.visibility = new Visibility(ctx as any, visitor);
           this.stateMutability = ctx.stateMutability(0)?.accept(visitor) ?? this.stateMutability;
           this.parameters = ctx.parameterList(0)?.accept(visitor) ?? null;
           this.returnParameters = ctx.parameterList(1)?.accept(visitor) ?? null;
         } else if (ctx instanceof ReceiveFunctionDefinitionContext) {
-          this.type = 'ReceiveFunctionDefinition';
           this.functionKind = 'receive';
           this.visibility = new Visibility(ctx as any, visitor);
           this.stateMutability = new StateMutability(ctx as any, visitor);
         } else {
-          this.type = 'FunctionDefinition';
           this.functionKind = 'function';
           this.name = ctx.identifier()?.accept(visitor) ?? null;
           this.visibility = ctx.visibility(0)?.accept(visitor) ?? this.visibility;
@@ -86,14 +82,8 @@ export class FunctionDefinition extends BaseNode {
   }
 }
 
-export class ConstructorDefinition extends FunctionDefinition {
-  type = 'ConstructorDefinition';
-}
-
-export class FallbackFunctionDefinition extends FunctionDefinition {
-  type = 'FallbackFunctionDefinition';
-}
-
-export class ReceiveFunctionDefinition extends FunctionDefinition {
-  type = 'ReceiveFunctionDefinition';
+export {
+  FunctionDefinition as ConstructorDefinition,
+  FunctionDefinition as FallbackFunctionDefinition,
+  FunctionDefinition as ReceiveFunctionDefinition,
 }

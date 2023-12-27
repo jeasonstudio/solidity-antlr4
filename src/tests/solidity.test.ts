@@ -23,4 +23,6 @@ contract HelloWorld {
   ).toBe(15);
 
   expect(parse('contract 1fOO {}').errors).toMatchObject([{}]);
+
+  // expect(parse('asdfal;sdkfjasdlfjasdfadsf')).toBe(null);
 });

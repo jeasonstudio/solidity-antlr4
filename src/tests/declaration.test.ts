@@ -49,9 +49,10 @@ test('constantVariableDeclaration', () => {
 
 test('libraryDefinition', () => {
   expect(createParse((p) => p.libraryDefinition())(`library Foo { address name; }`)).toMatchObject({
-    name: 'Foo',
+    type: 'ContractDefinition',
     contractKind: 'library',
-    nodes: [{ type: 'StateVariableDeclaration' }],
+    name: 'Foo',
+    nodes: [{ type: 'VariableDeclaration' }],
   });
 });
 
@@ -59,9 +60,10 @@ test('interfaceDefinition', () => {
   expect(
     createParse((p) => p.interfaceDefinition())(`interface Foo { address name; }`),
   ).toMatchObject({
-    name: 'Foo',
+    type: 'ContractDefinition',
     contractKind: 'interface',
-    nodes: [{ type: 'StateVariableDeclaration' }],
+    name: 'Foo',
+    nodes: [{ type: 'VariableDeclaration' }],
   });
 });
 
@@ -69,17 +71,18 @@ test('contractDefinition', () => {
   const pContract = createParse((p) => p.contractDefinition());
 
   expect(pContract(`contract Foo { address name; }`)).toMatchObject({
-    name: 'Foo',
+    type: 'ContractDefinition',
     contractKind: 'contract',
+    name: 'Foo',
     abstract: false,
-    nodes: [{ type: 'StateVariableDeclaration' }],
+    nodes: [{ type: 'VariableDeclaration' }],
   });
 
   expect(pContract(`contract Foo { address name; }`)).toMatchObject({
     name: 'Foo',
     contractKind: 'contract',
     abstract: false,
-    nodes: [{ type: 'StateVariableDeclaration' }],
+    nodes: [{ type: 'VariableDeclaration' }],
   });
 
   expect(pContract(`abstract contract Bar { }`)).toMatchObject({

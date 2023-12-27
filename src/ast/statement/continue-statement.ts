@@ -5,5 +5,6 @@ export class ContinueStatement extends BaseNodeString {
   type = 'ContinueStatement';
   constructor(ctx: ContinueStatementContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
+    this.name = 'continue';
   }
 }

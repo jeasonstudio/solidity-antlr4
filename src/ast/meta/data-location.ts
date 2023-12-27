@@ -1,11 +1,11 @@
 import { BaseNodeString } from '../base';
 import { DataLocationContext, SolidityParserVisitor } from '../../grammar';
 
-type DataLocationKind = 'storage' | 'memory' | 'calldata';
+type DataLocationName = 'storage' | 'memory' | 'calldata';
 
 export class DataLocation extends BaseNodeString {
   type = 'DataLocation';
-  name: DataLocationKind | null = null;
+  name: DataLocationName | null = null;
   constructor(ctx: DataLocationContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     if (ctx.Storage()) {

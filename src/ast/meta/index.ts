@@ -18,15 +18,11 @@ export type MetaNode =
   | IdentifierPath
   | ImportAliases
   | ImportDirective
-  | InheritanceSpecifierList
   | InheritanceSpecifier
   | ModifierInvocation
-  | OverrideSpecifier
-  | ParameterList
   | Path
   | PragmaDirective
   | SourceUnit
-  | SymbolAliases
   | UsingDirective;
 
 export type MetaNodeType =
@@ -34,15 +30,11 @@ export type MetaNodeType =
   | 'IdentifierPath'
   | 'ImportAliases'
   | 'ImportDirective'
-  | 'InheritanceSpecifierList'
   | 'InheritanceSpecifier'
   | 'ModifierInvocation'
-  | 'OverrideSpecifier'
-  | 'ParameterList'
   | 'Path'
   | 'PragmaDirective'
   | 'SourceUnit'
-  | 'SymbolAliases'
   | 'UsingDirective';
 
 export {

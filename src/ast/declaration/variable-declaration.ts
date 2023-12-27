@@ -44,7 +44,6 @@ export class VariableDeclaration extends BaseNode {
     super(ctx, visitor);
 
     if (ctx instanceof VariableDeclarationContext) {
-      this.type = 'VariableDeclaration';
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
       this.dataLocation = ctx.dataLocation()?.accept(visitor);
@@ -52,12 +51,10 @@ export class VariableDeclaration extends BaseNode {
       this.constant = false;
       this.indexed = false;
     } else if (ctx instanceof ParameterDeclarationContext) {
-      this.type = 'ParameterDeclaration';
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
       this.dataLocation = ctx.dataLocation()?.accept(visitor);
     } else if (ctx instanceof StateVariableDeclarationContext) {
-      this.type = 'StateVariableDeclaration';
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
       this.stateVariable = true;
@@ -69,42 +66,25 @@ export class VariableDeclaration extends BaseNode {
       this.override = ctx.overrideSpecifier(0)?.accept(visitor) ?? null;
       this.expression = ctx.expression()?.accept(visitor) ?? null;
     } else if (ctx instanceof ConstantVariableDeclarationContext) {
-      this.type = 'ConstantVariableDeclaration';
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
       this.constant = true;
       this.expression = ctx.expression().accept(visitor);
     } else if (ctx instanceof ErrorParameterContext) {
-      this.type = 'ErrorParameter';
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
     } else if (ctx instanceof EventParameterContext) {
-      this.type = 'EventParameter';
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
       this.indexed = !!ctx.Indexed();
-    } else {
-      this.type = 'Unknown';
     }
   }
 }
 
-export class ParameterDeclaration extends VariableDeclaration {
-  type = 'ParameterDeclaration';
-}
-
-export class StateVariableDeclaration extends VariableDeclaration {
-  type = 'StateVariableDeclaration';
-}
-
-export class ConstantVariableDeclaration extends VariableDeclaration {
-  type = 'ConstantVariableDeclaration';
-}
-
-export class ErrorParameter extends VariableDeclaration {
-  type = 'ErrorParameter';
-}
-
-export class EventParameter extends VariableDeclaration {
-  type = 'EventParameter';
-}
+export {
+  VariableDeclaration as ParameterDeclaration,
+  VariableDeclaration as StateVariableDeclaration,
+  VariableDeclaration as ConstantVariableDeclaration,
+  VariableDeclaration as ErrorParameter,
+  VariableDeclaration as EventParameter,
+};

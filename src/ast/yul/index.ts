@@ -17,7 +17,6 @@ export type YulNode =
   | YulAssignment
   | YulBlock
   | YulBoolean
-  | YulExpression
   | YulForStatement
   | YulFunctionCall
   | YulFunctionDefinition
@@ -33,7 +32,6 @@ export type YulNodeType =
   | 'YulAssignment'
   | 'YulBlock'
   | 'YulBoolean'
-  | 'YulExpression'
   | 'YulForStatement'
   | 'YulFunctionCall'
   | 'YulFunctionDefinition'
