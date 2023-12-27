@@ -31,6 +31,10 @@
     "./parser": {
       "import": "./dist/parser/index.mjs",
       "types": "./dist/parser/index.d.ts"
+    },
+    "./traverse": {
+      "import": "./dist/traverse/index.mjs",
+      "types": "./dist/traverse/index.d.ts"
     }
   },
   "files": [
@@ -47,8 +51,7 @@
     "*.{ts}": "prettier --loglevel warn --write"
   },
   "dependencies": {
-    "antlr4ng": "^2.0.4",
-    "lodash-es": "^4.17.21"
+    "antlr4ng": "^2.0.4"
   },
   "devDependencies": {
     "@changesets/changelog-git": "^0.2.0",

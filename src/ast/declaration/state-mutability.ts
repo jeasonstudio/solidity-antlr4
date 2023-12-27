@@ -9,10 +9,6 @@ export class StateMutability extends BaseNodeString {
 
   constructor(ctx: StateMutabilityContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
-    this.name = this.getStateMutability(ctx);
-  }
-
-  getStateMutability(ctx: StateMutabilityContext): StateMutabilityKind | null {
     const format = (n: TerminalNode | TerminalNode[] | null) => {
       if (Array.isArray(n) && !!n.length) {
         return true;
@@ -22,13 +18,13 @@ export class StateMutability extends BaseNodeString {
       return false;
     };
     if (format(ctx.Payable?.())) {
-      return 'payable';
+      this.name = 'payable';
     } else if (format(ctx.Pure?.())) {
-      return 'pure';
+      this.name = 'pure';
     } else if (format(ctx.View?.())) {
-      return 'view';
+      this.name = 'view';
     } else {
-      return null;
+      this.name = null;
     }
   }
 }

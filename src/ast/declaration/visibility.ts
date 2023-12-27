@@ -1,17 +1,13 @@
 import { BaseNodeString } from '../base';
 import { VisibilityContext, SolidityParserVisitor, TerminalNode } from '../../grammar';
 
-type VisibilityKind = 'external'| 'internal' | 'public'  | 'private';
+type VisibilityKind = 'external' | 'internal' | 'public' | 'private';
 
 export class Visibility extends BaseNodeString {
   type = 'Visibility';
   name: VisibilityKind | null = null;
   constructor(ctx: VisibilityContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
-    this.name = this.getVisibility(ctx);
-  }
-
-  getVisibility(ctx: VisibilityContext): VisibilityKind | null {
     const format = (n: TerminalNode | TerminalNode[] | null | undefined) => {
       if (Array.isArray(n)) {
         return !!n.length;
@@ -22,15 +18,15 @@ export class Visibility extends BaseNodeString {
     };
 
     if (format(ctx.External?.())) {
-      return 'external';
+      this.name = 'external';
     } else if (format(ctx.Internal?.())) {
-      return 'internal';
+      this.name = 'internal';
     } else if (format(ctx.Private?.())) {
-      return 'private';
+      this.name = 'private';
     } else if (format(ctx.Public?.())) {
-      return 'public';
+      this.name = 'public';
     } else {
-      return null;
+      this.name = null;
     }
   }
 }

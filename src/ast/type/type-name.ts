@@ -22,7 +22,6 @@ export class TypeName extends BaseNode {
       this.type = 'TypeName';
       this.name = ctx.getText() ?? null;
       this.expression = ctx.expression()?.accept(visitor) ?? null;
-      this.serialize = () => this.name as any;
     }
   }
 }

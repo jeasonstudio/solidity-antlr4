@@ -7,8 +7,16 @@ import {
 } from '../grammar';
 import { SyntaxNode } from '../ast';
 import { solidityASTBuilder } from '../ast/builder';
+import { serialize } from '../traverse';
+import { BaseNodeString } from '../ast/base';
 
-export const format = (ast: SyntaxNode) => ast.serialize();
+export const format = (ast: SyntaxNode) =>
+  serialize(ast, (n) => {
+    if (n instanceof BaseNodeString || n?.type === 'TypeName') {
+      return (n as any).name;
+    }
+    return n;
+  });
 
 export const parse = (
   input: string,
@@ -34,8 +42,8 @@ export const createLog = (
 ) => {
   return (input: string) =>
     parse(input, callback, (ast) => {
-      console.log(ast.serialize());
-      return ast.serialize();
+      console.log(serialize(ast));
+      return serialize(ast);
     });
 };
 
