@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.4.0
+
+### Minor Changes
+
+- 45e7e93: changed callback param of traverse enter/exit
+
 ## 2.3.0
 
 ### Minor Changes
