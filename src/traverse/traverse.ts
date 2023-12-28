@@ -1,20 +1,32 @@
 import { SyntaxNode, SyntaxNodeType } from '../ast';
 import { isSyntaxNode, keysInNode } from '../ast/base';
+import { LookUp } from '../ast/utils';
 
-export type TraverseEnter = 'enter' | SyntaxNodeType;
-export type TraverseExit = 'exit' | `exit${SyntaxNodeType}`;
-export type TraverseEvent = TraverseEnter | TraverseExit;
-export type TraverseListener = (currentNode: SyntaxNode, parentNode?: SyntaxNode) => void;
+export type TraversePath<T extends SyntaxNode = SyntaxNode> = {
+  node: T;
+  parent?: SyntaxNode;
+};
 
-export const createTraverse = (handlers: Partial<Record<TraverseEvent, TraverseListener>>) => {
+export type TraverseListener<T extends SyntaxNode = SyntaxNode> = (path: TraversePath<T>) => void;
+
+export type TraverseHandlers = {
+  [K in SyntaxNodeType]?: TraverseListener<LookUp<SyntaxNode, K>>;
+} & {
+  [K in SyntaxNodeType as `exit${K}`]?: TraverseListener<LookUp<SyntaxNode, K>>;
+} & {
+  enter?: TraverseListener<SyntaxNode>;
+  exit?: TraverseListener<SyntaxNode>;
+};
+
+export const createTraverse = (handlers: TraverseHandlers) => {
   const walker = (currentNode: SyntaxNode, parentNode?: SyntaxNode) => {
     if (!isSyntaxNode(currentNode)) return; // end of recursion
 
     const nodeType = currentNode.type as SyntaxNodeType;
 
     // enter executes before all enterXxx
-    if (handlers.enter) handlers.enter!(currentNode, parentNode);
-    if (handlers[nodeType]) handlers[nodeType]!(currentNode, parentNode);
+    handlers.enter?.({ node: currentNode, parent: parentNode });
+    handlers[nodeType]?.({ node: currentNode as never, parent: parentNode });
 
     const keys = keysInNode(currentNode);
     for (let index = 0; index < keys.length; index += 1) {
@@ -27,14 +39,14 @@ export const createTraverse = (handlers: Partial<Record<TraverseEvent, TraverseL
       // else should be ignored
     }
 
-    if (handlers[`exit${nodeType}`]) handlers[`exit${nodeType}`]!(currentNode, parentNode);
-    if (handlers.exit) handlers.exit!(currentNode, parentNode);
+    handlers[`exit${nodeType}`]?.({ node: currentNode as never, parent: parentNode });
+    handlers.exit?.({ node: currentNode, parent: parentNode });
   };
   return walker;
 };
 
 export const traverse = (
   currentNode: SyntaxNode,
-  handlers: Partial<Record<TraverseEvent, TraverseListener>>,
+  handlers: TraverseHandlers,
   parentNode?: SyntaxNode,
 ) => createTraverse(handlers)(currentNode, parentNode);

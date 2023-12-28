@@ -15,12 +15,13 @@ export class Position {
 }
 
 export class Location {
-  static create(start: Position, end: Position): Location {
-    return new Location(start, end);
+  static create(start: Position, end: Position, source?: `${number}:${number}`): Location {
+    return new Location(start, end, source);
   }
   constructor(
     public start: Position,
     public end: Position,
+    public source?: `${number}:${number}`, // `{start}:{length}`
   ) {}
 }
 
@@ -46,7 +47,6 @@ export const keysInNode = <T extends BaseNode>(node: T): string[] => {
 
 export abstract class BaseNode {
   type: SyntaxNodeType;
-  src: `${number}:${number}`; // `{start}:{length}`
   range: [number, number];
   location: Location;
 
@@ -54,19 +54,18 @@ export abstract class BaseNode {
     const start = ctx.start?.start ?? 0;
     const end = ctx.stop?.stop ?? start;
     this.range = [start, end];
-    this.src = `${start}:${end - start}`;
 
     const startPosition = Position.create(ctx.start?.line ?? 1, ctx.start?.column ?? 0);
     const endPosition = Position.create(
       ctx.stop?.line ?? startPosition.line,
       ctx.stop?.column ?? startPosition.column,
     );
-    this.location = Location.create(startPosition, endPosition);
-    this.context = ctx;
+    this.location = Location.create(startPosition, endPosition, `${start}:${end - start}`);
+    // this.context = ctx;
   }
 
   /** @ignore */
-  context: ParserRuleContext;
+  // context: ParserRuleContext;
 }
 
 export abstract class BaseNodeList<T extends any = BaseNode> extends Array<T> {

@@ -14,12 +14,12 @@ contract HelloWorld {
   const exitNames: string[] = [];
 
   createTraverse({
-    enter: (node) => {
+    enter: ({ node }) => {
       if (node.type === 'ContractDefinition') {
         enterNames.push(node.name.name);
       }
     },
-    exit: (node) => {
+    exit: ({ node }) => {
       if (node.type === 'ContractDefinition') {
         exitNames.push(node.name.name);
       }

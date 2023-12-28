@@ -1,59 +1,24 @@
-import { AssemblyFlags } from './assembly-flags';
-import { AssemblyStatement } from './assembly-statement';
-import { Block, UncheckedBlock } from './block';
-import { BreakStatement } from './break-statement';
-import { CatchClause } from './catch-clause';
-import { ContinueStatement } from './continue-statement';
-import { DoWhileStatement } from './do-while-statement';
-import { EmitStatement } from './emit-statement';
-import { ExpressionStatement } from './expression-statement';
-import { ForStatement } from './for-statement';
-import { IfStatement } from './if-statement';
-import { ReturnStatement } from './return-statement';
-import { RevertStatement } from './revert-statement';
-import { SimpleStatement } from './simple-statement';
-import { Statement } from './statement';
-import { TryStatement } from './try-statement';
-import { VariableDeclarationStatement } from './variable-declaration-statement';
-import { WhileStatement } from './while-statement';
+import * as nodeMap from './index.node';
+import { UnionSyntaxNode, UnionSyntaxNodeType } from '../utils';
 
-export type StatementNode =
-  | AssemblyStatement
-  | Block
-  | BreakStatement
-  | CatchClause
-  | ContinueStatement
-  | DoWhileStatement
-  | EmitStatement
-  | ExpressionStatement
-  | ForStatement
-  | IfStatement
-  | ReturnStatement
-  | RevertStatement
-  | TryStatement
-  | VariableDeclarationStatement
-  | WhileStatement;
+export type StatementNode = UnionSyntaxNode<typeof nodeMap>;
+export type StatementNodeType = UnionSyntaxNodeType<typeof nodeMap>;
 
-export type StatementNodeType = StatementNode['type'];
-
-export {
-  AssemblyFlags,
-  AssemblyStatement,
-  Block,
-  BreakStatement,
-  CatchClause,
-  ContinueStatement,
-  DoWhileStatement,
-  EmitStatement,
-  ExpressionStatement,
-  ForStatement,
-  IfStatement,
-  ReturnStatement,
-  RevertStatement,
-  SimpleStatement,
-  Statement,
-  TryStatement,
-  UncheckedBlock,
-  VariableDeclarationStatement,
-  WhileStatement,
-};
+export * from './assembly-flags';
+export * from './assembly-statement';
+export * from './block';
+export * from './break-statement';
+export * from './catch-clause';
+export * from './continue-statement';
+export * from './do-while-statement';
+export * from './emit-statement';
+export * from './expression-statement';
+export * from './for-statement';
+export * from './if-statement';
+export * from './return-statement';
+export * from './revert-statement';
+export * from './simple-statement';
+export * from './statement';
+export * from './try-statement';
+export * from './variable-declaration-statement';
+export * from './while-statement';

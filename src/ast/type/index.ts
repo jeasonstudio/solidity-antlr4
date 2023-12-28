@@ -1,18 +1,12 @@
-import { ElementaryTypeName } from './elementary-type-name';
-import { FunctionTypeName } from './function-type-name';
-import { MappingKeyType } from './mapping-key-type';
-import { MappingType } from './mapping-type';
-import { MetaType } from './meta-type';
-import { TypeName } from './type-name';
+import * as nodeMap from './index.node';
+import { UnionSyntaxNode, UnionSyntaxNodeType } from '../utils';
 
-export type TypeNode =
-  | ElementaryTypeName
-  | FunctionTypeName
-  | MappingKeyType
-  | MappingType
-  | MetaType
-  | TypeName;
+export type TypeNode = UnionSyntaxNode<typeof nodeMap>;
+export type TypeNodeType = UnionSyntaxNodeType<typeof nodeMap>;
 
-export type TypeNodeType = TypeNode['type'];
-
-export { ElementaryTypeName, FunctionTypeName, MappingKeyType, MappingType, MetaType, TypeName };
+export * from './elementary-type-name';
+export * from './function-type-name';
+export * from './mapping-key-type';
+export * from './mapping-type';
+export * from './meta-type';
+export * from './type-name';

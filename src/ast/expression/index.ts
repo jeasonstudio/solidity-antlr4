@@ -1,107 +1,34 @@
-import { AssignOp } from './assign-op';
-import { Assignment } from './assignment';
-import {
-  AndOperation,
-  AddSubOperation,
-  BitAndOperation,
-  BitOrOperation,
-  BitXorOperation,
-  EqualityComparison,
-  ExpOperation,
-  MulDivModOperation,
-  ShiftOperation,
-  OrderComparison,
-  OrOperation,
-} from './binary-operation';
-import { BooleanLiteral } from './boolean-literal';
-import { CallArgumentList } from './call-argument-list';
-import { Conditional } from './conditional';
-import { Expression } from './expression';
-import { FunctionCallOptions } from './function-call-options';
-import { FunctionCall } from './function-call';
-import { HexStringLiteral } from './hex-string-literal';
-import { Identifier } from './identifier';
-import { IndexAccess } from './index-access';
-import { IndexRangeAccess } from './index-range-access';
-import { InlineArrayExpression } from './inline-array-expression';
-import { InlineArray } from './inline-array';
-import { Literal } from './literal';
-import { MemberAccess } from './member-access';
-import { NamedArgument } from './named-argument';
-import { NewExpr } from './new-expr';
-import { NumberLiteral, LiteralWithSubDenomination } from './number-literal';
-import { PayableConversion } from './payable-conversion';
-import { PrimaryExpression } from './primary-expression';
-import { StringLiteral } from './string-literal';
-import { TupleExpression } from './tuple-expression';
-import { Tuple } from './tuple';
-import { UnaryOperation, UnaryPrefixOperation, UnarySuffixOperation } from './unary-operation';
-import { UnicodeStringLiteral } from './unicode-string-literal';
-import { UserDefinableOperator } from './user-definable-operator';
+import * as nodeMap from './index.node';
+import { UnionSyntaxNode, UnionSyntaxNodeType } from '../utils';
 
-export type ExpressionNode =
-  | AssignOp
-  | Assignment
-  | BooleanLiteral
-  | Conditional
-  | FunctionCallOptions
-  | FunctionCall
-  | HexStringLiteral
-  | Identifier
-  | IndexAccess
-  | IndexRangeAccess
-  | MemberAccess
-  | NamedArgument
-  | NewExpr
-  | NumberLiteral
-  | PayableConversion
-  | StringLiteral
-  | UnaryOperation
-  | UnicodeStringLiteral
-  | UserDefinableOperator;
+export type ExpressionNode = UnionSyntaxNode<typeof nodeMap>;
+export type ExpressionNodeType = UnionSyntaxNodeType<typeof nodeMap>;
 
-export type ExpressionNodeType = ExpressionNode['type'];
-
-export {
-  AssignOp,
-  Assignment,
-  AndOperation,
-  AddSubOperation,
-  BitAndOperation,
-  BitOrOperation,
-  BitXorOperation,
-  EqualityComparison,
-  ExpOperation,
-  MulDivModOperation,
-  ShiftOperation,
-  OrderComparison,
-  OrOperation,
-  BooleanLiteral,
-  CallArgumentList,
-  Conditional,
-  Expression,
-  FunctionCallOptions,
-  FunctionCall,
-  HexStringLiteral,
-  Identifier,
-  IndexAccess,
-  IndexRangeAccess,
-  InlineArrayExpression,
-  InlineArray,
-  Literal,
-  MemberAccess,
-  NamedArgument,
-  NewExpr,
-  NumberLiteral,
-  LiteralWithSubDenomination,
-  PayableConversion,
-  PrimaryExpression,
-  StringLiteral,
-  TupleExpression,
-  Tuple,
-  UnaryOperation,
-  UnaryPrefixOperation,
-  UnarySuffixOperation,
-  UnicodeStringLiteral,
-  UserDefinableOperator,
-};
+export * from './assign-op';
+export * from './assignment';
+export * from './binary-operation';
+export * from './boolean-literal';
+export * from './call-argument-list';
+export * from './conditional';
+export * from './expression';
+export * from './function-call-options';
+export * from './function-call';
+export * from './hex-string-literal';
+export * from './identifier';
+export * from './index-access';
+export * from './index-range-access';
+export * from './inline-array-expression';
+export * from './inline-array';
+export * from './literal';
+export * from './member-access';
+export * from './named-argument';
+export * from './new-expr';
+export * from './number-literal';
+export * from './payable-conversion';
+export * from './primary-expression';
+export * from './string-literal';
+export * from './tuple-expression';
+export * from './tuple';
+export * from './unary-operation';
+export * from './unicode-string-literal';
+export * from './user-definable-operator';

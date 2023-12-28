@@ -1,9 +1,9 @@
-import { DeclarationNode, DeclarationNodeType } from './declaration';
-import { ExpressionNode, ExpressionNodeType } from './expression';
-import { MetaNode, MetaNodeType } from './meta';
-import { StatementNode, StatementNodeType } from './statement';
-import { TypeNode, TypeNodeType } from './type';
-import { YulNode, YulNodeType } from './yul';
+import { DeclarationNode } from './declaration';
+import { ExpressionNode } from './expression';
+import { MetaNode } from './meta';
+import { StatementNode } from './statement';
+import { TypeNode } from './type';
+import { YulNode } from './yul';
 
 export type SyntaxNode =
   | DeclarationNode
@@ -13,13 +13,7 @@ export type SyntaxNode =
   | TypeNode
   | YulNode;
 
-export type SyntaxNodeType =
-  | DeclarationNodeType
-  | ExpressionNodeType
-  | MetaNodeType
-  | StatementNodeType
-  | TypeNodeType
-  | YulNodeType;
+export type SyntaxNodeType = SyntaxNode['type'];
 
 export * from './declaration';
 export * from './expression';

@@ -98,16 +98,6 @@ const ast = parse(code, { tolerant: true, selector: (p) => p.sourceUnit() });
 // }
 ```
 
-If you want to get a plain AST json object, you can use the following methods:
-
-```js
-// serialize.mjs
-import { parse, serialize } from 'solidity-antlr4';
-
-const astJSONObject = serialize(parse(code));
-// { type: 'SourceUnit', ... }
-```
-
 ### Tokenizer
 
 * `tokenizer(code, [options])`: `tokenizer()` parses the provided code as tokens.
@@ -145,14 +135,14 @@ import { parse, traverse } from 'solidity-antlr4';
 const ast = parse(code);
 
 traverse(ast, {
-  enter: (node) => {
-    console.log(node.type); // print node type
+  enter: ({ node, parent }) => {
+    console.log(node.type, parent?.type); // print node type
   },
   exit: () => {}, // will call when exit node
-  Identifier: (identifierNode) => {
+  Identifier: ({ node: identifierNode }) => {
     console.log(identifierNode.name); // print identifier name
   },
-  exitContractDefinition: (contractDefinitionNode) => {
+  exitContractDefinition: ({ node: contractDefinitionNode }) => {
     // will call when exit ContractDefinition node
   }
 });
