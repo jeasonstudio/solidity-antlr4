@@ -1,6 +1,4 @@
-import { createTraverse } from '../traverse';
 import { parse, tokenizer } from '../parser';
-import { BaseNodeString } from '../ast/base';
 
 test('parser', () => {
   const ast = parse(`// SPDX-License-Identifier: MIT
@@ -24,22 +22,8 @@ contract HelloWorld {
 
   expect(() => parse('contract 1fOO {}')).toThrow();
   expect(() => parse('asdfalsdkfjasdlfjasdfadsf')).toThrow();
-  expect(() => parse('asdfalsdkfjasdlfjasdfadsf', { tolerant: true })).not.toThrow();
+  expect(() => parse('contract HelloW', { tolerant: false })).toThrow();
 
   expect(() => tokenizer('contract 1fOO {}')).not.toThrow();
   expect(() => tokenizer('asdfalsdkfjasdlfjasdfadsf', { tolerant: true })).not.toThrow();
-
-  createTraverse({
-    Identifier: ({ node }) => {},
-    ContractDefinition: ({ node }) => {},
-    enter: ({ node }) => {},
-    exit: ({ node }) => {},
-    exitAssemblyStatement: ({ node }) => {},
-    exitIdentifier: ({ node }) => {
-      // eslint-disable-next-line no-param-reassign
-      node = node.name;
-    },
-  })(ast);
-
-  console.log(JSON.stringify(ast, null, 2));
 });

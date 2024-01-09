@@ -1,10 +1,12 @@
 import { SyntaxNode, SyntaxNodeType } from '../ast';
 import { isSyntaxNode, keysInNode } from '../ast/base';
 import { LookUp } from '../ast/utils';
+import lodashMatches from 'lodash-es/matches';
 
-export type TraversePath<T extends SyntaxNode = SyntaxNode> = {
+export type TraversePath<T extends SyntaxNode = SyntaxNode, FT extends SyntaxNode = SyntaxNode> = {
   node: T;
-  parent?: SyntaxNode;
+  parent?: FT;
+  matches: (filter: Partial<T>, parentFilter?: Partial<FT>) => boolean;
 };
 
 export type TraverseListener<T extends SyntaxNode = SyntaxNode> = (path: TraversePath<T>) => void;
@@ -23,10 +25,20 @@ export const createTraverse = (handlers: TraverseHandlers) => {
     if (!isSyntaxNode(currentNode)) return; // end of recursion
 
     const nodeType = currentNode.type as SyntaxNodeType;
+    const path: TraversePath = {
+      node: currentNode,
+      parent: parentNode,
+      matches: (filter, parentFilter) => {
+        if (!parentFilter || !parentNode) {
+          return lodashMatches(filter)(currentNode);
+        }
+        return lodashMatches(filter)(currentNode) && lodashMatches(parentFilter)(parentNode);
+      },
+    };
 
     // enter executes before all enterXxx
-    handlers.enter?.({ node: currentNode, parent: parentNode });
-    handlers[nodeType]?.({ node: currentNode as never, parent: parentNode });
+    handlers.enter?.(path);
+    handlers[nodeType]?.(path as any);
 
     const keys = keysInNode(currentNode);
     for (let index = 0; index < keys.length; index += 1) {
@@ -39,14 +51,11 @@ export const createTraverse = (handlers: TraverseHandlers) => {
       // else should be ignored
     }
 
-    handlers[`exit${nodeType}`]?.({ node: currentNode as never, parent: parentNode });
-    handlers.exit?.({ node: currentNode, parent: parentNode });
+    handlers[`exit${nodeType}`]?.(path as any);
+    handlers.exit?.(path);
   };
   return walker;
 };
 
-export const traverse = (
-  currentNode: SyntaxNode,
-  handlers: TraverseHandlers,
-  parentNode?: SyntaxNode,
-) => createTraverse(handlers)(currentNode, parentNode);
+export const traverse = (currentNode: SyntaxNode, handlers: TraverseHandlers) =>
+  createTraverse(handlers)(currentNode);
