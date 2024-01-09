@@ -1,13 +1,15 @@
 import { SyntaxNode, SyntaxNodeType } from '../ast';
 import { isSyntaxNode, keysInNode } from '../ast/base';
 import { LookUp } from '../ast/utils';
-import lodashMatches from 'lodash-es/matches';
+import { matches as lodashMatches } from 'lodash-es';
 import { PartialDeep } from 'type-fest';
+
+export type TraverseFilter<T extends SyntaxNode = SyntaxNode> = PartialDeep<T>;
 
 export type TraversePath<T extends SyntaxNode = SyntaxNode, FT extends SyntaxNode = SyntaxNode> = {
   node: T;
   parent?: FT;
-  matches: (filter: PartialDeep<T>, parentFilter?: PartialDeep<FT>) => boolean;
+  matches: (filter: TraverseFilter<T>, parentFilter?: TraverseFilter<FT>) => boolean;
 };
 
 export type TraverseListener<T extends SyntaxNode = SyntaxNode> = (path: TraversePath<T>) => void;
