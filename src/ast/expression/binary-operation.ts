@@ -1,7 +1,8 @@
+import { BaseNode } from '../base';
 import { ExpressionContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 
-export class BinaryOperation<T extends ExpressionContext = ExpressionContext> extends Expression {
+export class BinaryOperation<T extends ExpressionContext = ExpressionContext> extends BaseNode {
   type = 'BinaryOperation' as const;
   operator: string | null = null;
   left: Expression | null = null;

@@ -1,5 +1,6 @@
 import { AssignOp } from './assign-op';
 import { Assignment } from './assignment';
+import { BinaryOperation } from './binary-operation';
 import { BooleanLiteral } from './boolean-literal';
 import { Conditional } from './conditional';
 import { FunctionCallOptions } from './function-call-options';
@@ -21,6 +22,7 @@ import { UserDefinableOperator } from './user-definable-operator';
 export {
   AssignOp,
   Assignment,
+  BinaryOperation,
   BooleanLiteral,
   Conditional,
   FunctionCallOptions,

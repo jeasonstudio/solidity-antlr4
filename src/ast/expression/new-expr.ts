@@ -1,8 +1,8 @@
 import { NewExprContext, SolidityParserVisitor } from '../../antlr4';
+import { BaseNode } from '../base';
 import { TypeName } from '../type';
-import { Expression } from './expression';
 
-export class NewExpr extends Expression {
+export class NewExpr extends BaseNode {
   type = 'NewExpr' as const;
   typeName: TypeName;
   constructor(ctx: NewExprContext, visitor: SolidityParserVisitor<any>) {

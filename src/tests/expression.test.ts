@@ -8,6 +8,7 @@ test('named-argument', () => {
       type: 'NamedArgument',
       name: 'value',
       expression: {
+        type: 'MemberAccess',
         expression: 'msg',
         memberName: 'value',
       },

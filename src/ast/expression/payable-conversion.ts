@@ -1,8 +1,8 @@
 import { PayableConversionContext, SolidityParserVisitor } from '../../antlr4';
+import { BaseNode } from '../base';
 import { CallArgumentList } from './call-argument-list';
-import { Expression } from './expression';
 
-export class PayableConversion extends Expression {
+export class PayableConversion extends BaseNode {
   type = 'PayableConversion' as const;
   arguments: CallArgumentList | null = null;
   constructor(ctx: PayableConversionContext, visitor: SolidityParserVisitor<any>) {

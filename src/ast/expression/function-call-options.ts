@@ -1,8 +1,9 @@
 import { FunctionCallOptionsContext, SolidityParserVisitor } from '../../antlr4';
+import { BaseNode } from '../base';
 import { Expression } from './expression';
 import { NamedArgument } from './named-argument';
 
-export class FunctionCallOptions extends Expression {
+export class FunctionCallOptions extends BaseNode {
   type = 'FunctionCallOptions' as const;
   expression: Expression;
   arguments: NamedArgument[] = [];

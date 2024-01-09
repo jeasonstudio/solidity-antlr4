@@ -1,7 +1,8 @@
 import { MemberAccessContext, SolidityParserVisitor } from '../../antlr4';
+import { BaseNode } from '../base';
 import { Expression } from './expression';
 
-export class MemberAccess extends Expression {
+export class MemberAccess extends BaseNode {
   type = 'MemberAccess' as const;
   expression: Expression;
   memberName: string | null = null;

@@ -3,9 +3,10 @@ import {
   SolidityParserVisitor,
   UnarySuffixOperationContext,
 } from '../../antlr4';
+import { BaseNode } from '../base';
 import { Expression } from './expression';
 
-export class UnaryOperation extends Expression {
+export class UnaryOperation extends BaseNode {
   type = 'UnaryOperation' as const;
   operator: string | null = null;
   left: Expression | null = null;

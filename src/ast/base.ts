@@ -91,11 +91,11 @@ export abstract class BaseNodeUnion<
 > extends BaseNode {
   constructor(
     _ctx: ParserRuleContext,
-    list: (ParserRuleContext | null)[],
+    list: (ParseTree | null)[] | null,
     visitor: SolidityParserVisitor<any>,
   ) {
     super(_ctx, visitor);
-    const target = list.find(Boolean);
+    const target = (list ?? []).find(Boolean);
     if (target) {
       // @ts-expect-error
       return target.accept(visitor) as T;

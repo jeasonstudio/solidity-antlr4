@@ -1,7 +1,8 @@
 import { IndexAccessContext, SolidityParserVisitor } from '../../antlr4';
+import { BaseNode } from '../base';
 import { Expression } from './expression';
 
-export class IndexAccess extends Expression {
+export class IndexAccess extends BaseNode {
   type = 'IndexAccess' as const;
   baseExpression: Expression;
   indexExpression: Expression | null = null;

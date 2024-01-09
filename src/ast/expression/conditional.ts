@@ -1,7 +1,8 @@
 import { ConditionalContext, SolidityParserVisitor } from '../../antlr4';
+import { BaseNode } from '../base';
 import { Expression } from './expression';
 
-export class Conditional extends Expression {
+export class Conditional extends BaseNode {
   type = 'Conditional' as const;
   condition: Expression;
   trueExpression: Expression;
