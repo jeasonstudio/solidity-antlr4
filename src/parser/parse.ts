@@ -1,5 +1,5 @@
 import { SolidityASTBuilder } from '../ast/builder';
-import { SyntaxNode } from '../ast';
+import { SourceUnit, SyntaxNode } from '../ast';
 import { SolidityParser, ParseTree, SolidityLexer, CommonTokenStream, CharStream } from '../antlr4';
 import { ParseError, SolidityErrorListener } from './error-listener';
 
@@ -13,8 +13,11 @@ export const defaultParseOption: ParseOptions = {
   selector: (p) => p.sourceUnit(),
 };
 
-export const parse = (source: string, _options?: ParseOptions): SyntaxNode => {
-  let syntaxTree: SyntaxNode;
+export const parse = <T extends SyntaxNode = SourceUnit>(
+  source: string,
+  _options?: ParseOptions,
+): T => {
+  let syntaxTree: T;
   const options: ParseOptions = Object.assign({}, defaultParseOption, _options);
   const listener = new SolidityErrorListener();
 
@@ -28,7 +31,7 @@ export const parse = (source: string, _options?: ParseOptions): SyntaxNode => {
 
     const visitor = new SolidityASTBuilder();
     const parseTree = options.selector!(parser);
-    syntaxTree = parseTree.accept(visitor)! as SyntaxNode;
+    syntaxTree = parseTree.accept(visitor)! as T;
   } catch (error) {
     if (error instanceof ParseError) {
     } else {

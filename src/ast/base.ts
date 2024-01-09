@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { SyntaxNodeType } from './index';
 import { ParseTree, ParserRuleContext, SolidityParserVisitor } from '../antlr4';
+import type { AstPath, ParserOptions, Doc } from 'prettier';
+
+export type SyntaxPrint<T extends BaseNode> = (params: {
+  path: AstPath<T>;
+  options: ParserOptions<T>;
+  print: (path: AstPath<T>) => Doc;
+  args?: unknown;
+}) => Doc;
 
 export class Position {
   static create(line: number, column: number): Position {
@@ -34,7 +42,7 @@ export const isSyntaxNode = <T extends any>(node: T): boolean => {
 };
 
 export const keysInNode = <T extends BaseNode>(node: T): string[] => {
-  const forbiddenKeys = ['context', 'serialize'];
+  const forbiddenKeys = ['context', 'serialize', 'print'];
   const keys: string[] = [];
 
   for (const key in node) {
@@ -66,6 +74,9 @@ export abstract class BaseNode {
 
   /** @ignore */
   // context: ParserRuleContext;
+
+  /** @ignore */
+  // print?: SyntaxPrint<typeof this>;
 }
 
 export abstract class BaseNodeList<T extends any = BaseNode> extends Array<T> {
