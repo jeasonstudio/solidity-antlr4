@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.4.1
+
+### Patch Changes
+
+- 0bbaf07: support matches when traverse
+
 ## 2.4.0
 
 ### Minor Changes
