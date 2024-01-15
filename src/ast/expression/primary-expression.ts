@@ -5,15 +5,13 @@ import { Literal } from './literal';
 import { ElementaryTypeName } from '../type';
 import { Identifier } from './identifier';
 
-// @ts-expect-error
 export type PrimaryExpression =
   | LiteralWithSubDenomination
   | Literal
   | ElementaryTypeName
   | Identifier;
 
-// @ts-expect-error
-export class PrimaryExpression extends BaseNodeUnion<
+export const PrimaryExpression = class extends BaseNodeUnion<
   LiteralWithSubDenomination | Literal | ElementaryTypeName | Identifier
 > {
   // type = 'PrimaryExpression' as const;
@@ -24,4 +22,4 @@ export class PrimaryExpression extends BaseNodeUnion<
       visitor,
     );
   }
-}
+};

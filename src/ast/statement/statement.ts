@@ -14,7 +14,6 @@ import { EmitStatement } from './emit-statement';
 import { RevertStatement } from './revert-statement';
 import { AssemblyStatement } from './assembly-statement';
 
-// @ts-expect-error
 export type Statement =
   | Block
   | SimpleStatement
@@ -30,8 +29,7 @@ export type Statement =
   | RevertStatement
   | AssemblyStatement;
 
-// @ts-expect-error
-export class Statement extends BaseNodeUnion<
+export const Statement = class extends BaseNodeUnion<
   | Block
   | SimpleStatement
   | IfStatement
@@ -68,4 +66,4 @@ export class Statement extends BaseNodeUnion<
       visitor,
     );
   }
-}
+};
