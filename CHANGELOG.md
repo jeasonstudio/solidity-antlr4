@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.4.3
+
+### Patch Changes
+
+- c993dee: re define union types
+
 ## 2.4.2
 
 ### Patch Changes

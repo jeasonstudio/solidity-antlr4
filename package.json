@@ -1,7 +1,7 @@
 {
   "name": "solidity-antlr4",
   "description": "Solidity Lang Lexer and Parser by official ANTLR4 grammar",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "keywords": [
     "solidity",
     "sol",
