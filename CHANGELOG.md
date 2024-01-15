@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.4.2
+
+### Patch Changes
+
+- e343fc8: fix some issue in event and error definition
+
 ## 2.4.1
 
 ### Patch Changes
