@@ -6,6 +6,7 @@ module.exports = {
     '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/consistent-type-imports': 0,
     '@typescript-eslint/no-useless-constructor': 0,
+    '@typescript-eslint/no-redeclare': 0,
     'import/no-extraneous-dependencies': 0,
     'no-console': 0,
   },

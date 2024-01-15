@@ -15,6 +15,20 @@ import { EventDefinition } from './event-definition';
 import { ErrorDefinition } from './error-definition';
 import { UsingDirective } from '../meta';
 
+export type ContractBodyElementNode =
+  | ConstructorDefinition
+  | FunctionDefinition
+  | ModifierDefinition
+  | FallbackFunctionDefinition
+  | ReceiveFunctionDefinition
+  | StructDefinition
+  | EnumDefinition
+  | UserDefinedValueTypeDefinition
+  | StateVariableDeclaration
+  | EventDefinition
+  | ErrorDefinition
+  | UsingDirective;
+
 export class ContractBodyElement extends BaseNodeUnion<
   | ConstructorDefinition
   | FunctionDefinition

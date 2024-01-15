@@ -6,6 +6,15 @@ import { BooleanLiteral } from './boolean-literal';
 import { HexStringLiteral } from './hex-string-literal';
 import { UnicodeStringLiteral } from './unicode-string-literal';
 
+// @ts-expect-error
+export type Literal =
+  | StringLiteral
+  | NumberLiteral
+  | BooleanLiteral
+  | HexStringLiteral
+  | UnicodeStringLiteral;
+
+// @ts-expect-error
 export class Literal extends BaseNodeUnion<
   StringLiteral | NumberLiteral | BooleanLiteral | HexStringLiteral | UnicodeStringLiteral
 > {

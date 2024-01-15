@@ -3,6 +3,10 @@ import { SimpleStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { VariableDeclarationStatement } from './variable-declaration-statement';
 import { ExpressionStatement } from './expression-statement';
 
+// @ts-expect-error
+export type SimpleStatement = VariableDeclarationStatement | ExpressionStatement;
+
+// @ts-expect-error
 export class SimpleStatement extends BaseNodeUnion<
   VariableDeclarationStatement | ExpressionStatement
 > {

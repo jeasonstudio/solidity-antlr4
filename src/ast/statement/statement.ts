@@ -14,6 +14,23 @@ import { EmitStatement } from './emit-statement';
 import { RevertStatement } from './revert-statement';
 import { AssemblyStatement } from './assembly-statement';
 
+// @ts-expect-error
+export type Statement =
+  | Block
+  | SimpleStatement
+  | IfStatement
+  | ForStatement
+  | WhileStatement
+  | DoWhileStatement
+  | ContinueStatement
+  | BreakStatement
+  | TryStatement
+  | ReturnStatement
+  | EmitStatement
+  | RevertStatement
+  | AssemblyStatement;
+
+// @ts-expect-error
 export class Statement extends BaseNodeUnion<
   | Block
   | SimpleStatement
