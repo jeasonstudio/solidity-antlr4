@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.5.0
+
+### Minor Changes
+
+- ab1681a: refact ast traverse utils, make it easy to use
+
 ## 2.4.3
 
 ### Patch Changes
