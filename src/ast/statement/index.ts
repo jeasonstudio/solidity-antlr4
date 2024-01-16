@@ -1,5 +1,5 @@
 import * as nodeMap from './index.node';
-import { UnionSyntaxNode, UnionSyntaxNodeType } from '../utils';
+import { UnionSyntaxNode, UnionSyntaxNodeType } from '../base';
 
 export type StatementNode = UnionSyntaxNode<typeof nodeMap>;
 export type StatementNodeType = UnionSyntaxNodeType<typeof nodeMap>;

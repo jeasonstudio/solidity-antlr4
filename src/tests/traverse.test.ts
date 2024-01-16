@@ -1,5 +1,5 @@
 import { parse } from '../parser';
-import { createTraverse, serialize, traverse } from '../traverse';
+import { serialize, traverse, visit } from '../traverse';
 
 test('traverse', () => {
   const ast = parse(`// SPDX-License-Identifier: MIT
@@ -13,7 +13,7 @@ contract HelloWorld {
   const enterNames: string[] = [];
   const exitNames: string[] = [];
 
-  createTraverse({
+  visit(ast, {
     enter: ({ node }) => {
       if (node.type === 'ContractDefinition') {
         enterNames.push(node.name.name);
@@ -24,26 +24,24 @@ contract HelloWorld {
         exitNames.push(node.name.name);
       }
     },
-  })(ast);
+  });
 
   expect(enterNames).toEqual(['HelloWorld']);
   expect(exitNames).toEqual(['HelloWorld']);
 
-  expect(serialize(ast, (node) => ({ ...node, _flag: true }))._flag).toEqual(true);
+  // @ts-expect-error
+  expect(serialize(ast, (p) => ({ ...p.node, _flag: true }))._flag).toEqual(true);
 
-  traverse(ast, {
-    enter: (path) => {
-      if (path.matches({ name: 'greet' })) {
-        expect(path.node.type).toBe('Identifier');
-      }
-    },
+  traverse(ast, (p) => {
+    if (p.matches({ name: 'greet' })) {
+      expect(p.node.type).toBe('Identifier');
+    }
   });
 
-  traverse(ast, {
-    enter: (path) => {
-      if (path.matches({ type: 'ContractDefinition' }, { type: 'SourceUnit' })) {
-        expect(path.node.type).toBe('ContractDefinition');
-      }
-    },
+  traverse(ast, (p) => {
+    if (p.node.type === 'ContractDefinition') {
+      expect(p.getFlattenParents().length).toBe(1);
+      expect(p.getFlattenParents(1).length).toBe(1);
+    }
   });
 });

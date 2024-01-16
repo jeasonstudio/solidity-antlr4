@@ -11,11 +11,10 @@ import { serialize } from '../traverse';
 import { BaseNodeString } from '../ast/base';
 
 export const format = (ast: SyntaxNode) =>
-  serialize(ast, (n) => {
-    if (n instanceof BaseNodeString || n?.type === 'TypeName') {
-      return (n as any).name;
-    }
-    return n;
+  serialize(ast, (p) => {
+    if (p.node.type === 'TypeName') return p.node.name;
+    if (p.node instanceof BaseNodeString) return p.node.name;
+    return p.node;
   });
 
 export const parse = (
@@ -42,8 +41,14 @@ export const createLog = (
 ) => {
   return (input: string) =>
     parse(input, callback, (ast) => {
-      console.log(serialize(ast));
-      return serialize(ast);
+      const newAST = serialize(ast, (p) => {
+        if (p.node instanceof BaseNodeString) {
+          return p.node.name;
+        }
+        return p.node;
+      });
+      console.log(newAST);
+      return newAST;
     });
 };
 

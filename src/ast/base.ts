@@ -1,14 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { SyntaxNodeType } from './index';
 import { ParseTree, ParserRuleContext, SolidityParserVisitor } from '../antlr4';
-import type { AstPath, ParserOptions, Doc } from 'prettier';
-
-export type SyntaxPrint<T extends BaseNode> = (params: {
-  path: AstPath<T>;
-  options: ParserOptions<T>;
-  print: (path: AstPath<T>) => Doc;
-  args?: unknown;
-}) => Doc;
 
 export class Position {
   static create(line: number, column: number): Position {
@@ -33,12 +25,29 @@ export class Location {
   ) {}
 }
 
+export type UnionSyntaxNode<T extends Record<string, typeof BaseNode>> = InstanceType<T[keyof T]>;
+export type UnionSyntaxNodeType<T extends Record<string, typeof BaseNode>> = keyof T;
+export type LookUp<U extends { type: any }, T> = U extends infer P
+  ? P extends { type: any }
+    ? T extends P['type']
+      ? P
+      : never
+    : never
+  : never;
+
 export const formatString = (str: string) => {
   return str.substring(1, str.length - 1);
 };
 
 export const isSyntaxNode = <T extends any>(node: T): boolean => {
-  return node instanceof BaseNode && !!node.type;
+  return (
+    (node instanceof BaseNode || node instanceof BaseNodeString || node instanceof BaseNodeUnion) &&
+    !!node.type
+  );
+};
+
+export const isSyntaxNodeList = <T extends BaseNodeList>(node: any): node is T => {
+  return node instanceof BaseNodeList || (Array.isArray(node) && node.every(isSyntaxNode));
 };
 
 export const keysInNode = <T extends BaseNode>(node: T): string[] => {
@@ -83,7 +92,7 @@ export abstract class BaseNodeList<T extends any = BaseNode> extends Array<T> {
   constructor(
     ctxList: ParseTree[],
     visitor: SolidityParserVisitor<any>,
-    formatter: (item: ParseTree) => T = (ctx) => ctx.accept(visitor),
+    formatter: (item: ParseTree) => T = (ctx) => ctx.accept(visitor!),
   ) {
     super(...ctxList.map(formatter));
   }
