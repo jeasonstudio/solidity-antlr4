@@ -1,7 +1,7 @@
 {
   "name": "solidity-antlr4",
   "description": "Solidity Lang Lexer and Parser by official ANTLR4 grammar",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "keywords": [
     "solidity",
     "sol",
@@ -85,6 +85,7 @@
     "build:esm": "unbuild --clean",
     "build:cjs": "esbuild ./src/index.ts --bundle --outfile=dist/index.cjs --format=cjs --sourcemap --tsconfig=./tsconfig.json",
     "typedoc": "typedoc --tsconfig ./tsconfig.json --skipErrorChecking src/typedoc.ts",
+    "prepublishOnly": "npm run build",
     "changeset": "changeset",
     "release": "changeset version && changeset publish",
     "test": "jest",
