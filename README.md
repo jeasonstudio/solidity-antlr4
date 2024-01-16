@@ -129,12 +129,13 @@ const tokens = tokenizer(code, { tolerant: true });
 We can use it alongside the parser to traverse nodes.
 
 ```js
-// traverse.mjs
-import { parse, traverse } from 'solidity-antlr4';
+// visit.mjs
+import { parse, visit, serialize } from 'solidity-antlr4';
 
 const ast = parse(code);
 
-traverse(ast, {
+// Use `visit` to traverse ast by enter/exit node type.
+visit(ast, {
   enter: ({ node, parent }) => {
     console.log(node.type, parent?.type); // print node type
   },
@@ -146,14 +147,34 @@ traverse(ast, {
     // will call when exit ContractDefinition node
   }
 });
+
+// Use `serialize` to modify ast.
+const newAST = serialize(ast, ({ node }) => {
+  // do something
+  if (node.type === 'Identifier') {
+    return node.name;
+  }
+  return node;
+})
 ```
 
-You can also create a traverse by `createTraverse`:
-
 ```js
-import { createTraverse } from 'solidity-antlr4';
+// traverse.mjs
+import { parse, traverse } from 'solidity-antlr4';
 
-export const traverse = createTraverse({ enter: () => {} });
+const ast = parse(code);
+
+const newAST = traverse(ast, (path) => {
+  // path.path => `SourceUnit.ContractDefinition.FunctionDefinition` ...
+  // path.node => current node
+  // path.parentPath => parent node path
+  // path.depth => current node depth
+  // path.index => current node index if in a list
+  // path.stop(); => stop traverse
+  // path.rewrite({...}); => rewrite current node
+  // path.matches({ type: 'xxx' }); => check if current node matches the given filter
+  // return () => {}; => will call when exit node
+});
 ```
 
 ### Low-level API
@@ -161,7 +182,7 @@ export const traverse = createTraverse({ enter: () => {} });
 > Not recommended, but you can use it if you want.
 
 ```ts
-import { SolidityLexer, SolidityParser, CharStreams, CommonTokenStream } from 'solididty-antlr4';
+import { SolidityLexer, SolidityParser, CharStreams, CommonTokenStream } from 'solidity-antlr4';
 
 const code = `...`; // code here
 
