@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.5.2
+
+### Patch Changes
+
+- 1284c64: remove `index` in traverse path
+
 ## 2.5.0
 
 ### Minor Changes
