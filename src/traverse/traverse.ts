@@ -15,10 +15,6 @@ export interface TraversePath<N extends SyntaxNode = SyntaxNode> {
    */
   depth: number;
   /**
-   * If the node is in a list, the index of the node in the list
-   */
-  index: number | null;
-  /**
    * Syntax Node form AST
    */
   node: N;
@@ -65,7 +61,6 @@ export const traverse = <T extends SyntaxNode>(
   const traverseInner = <U extends SyntaxNode>(
     tree: U | U[],
     parentPath: TraversePath | null,
-    _index: number | null,
   ): U | U[] => {
     const depth = parentPath?.depth !== undefined ? parentPath.depth + 1 : 0;
     if (isSyntaxNodeList(tree)) {
@@ -73,7 +68,7 @@ export const traverse = <T extends SyntaxNode>(
       const nodeList: U[] = [];
       for (let index = 0; index < tree.length; index += 1) {
         if (shouldStop) break;
-        nodeList.push(traverseInner(tree[index] as any, parentPath, index));
+        nodeList.push(traverseInner(tree[index] as any, parentPath));
       }
       return nodeList;
     } else if (isSyntaxNode(tree)) {
@@ -98,9 +93,8 @@ export const traverse = <T extends SyntaxNode>(
       };
 
       const path: TraversePath = {
-        path: parentPath?.path ? `${parentPath.path}.${node.type}` : node.type,
+        path: [parentPath?.path, node.type].filter((t) => t !== undefined && t !== null).join('.'),
         depth,
-        index: _index,
         node,
         parentPath,
         stop,
@@ -118,7 +112,7 @@ export const traverse = <T extends SyntaxNode>(
       for (let index = 0; index < keys.length; index += 1) {
         const valueInKey = node[keys[index]];
         if (isSyntaxNode(valueInKey) || isSyntaxNodeList(valueInKey)) {
-          node[keys[index]] = traverseInner(valueInKey, path, null);
+          node[keys[index]] = traverseInner(valueInKey, path);
         } else {
           node[keys[index]] = valueInKey;
         }
@@ -130,5 +124,5 @@ export const traverse = <T extends SyntaxNode>(
     }
     return tree;
   };
-  return traverseInner(ast, null, null) as T;
+  return traverseInner(ast, null) as T;
 };

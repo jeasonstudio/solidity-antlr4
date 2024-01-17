@@ -169,7 +169,6 @@ const newAST = traverse(ast, (path) => {
   // path.node => current node
   // path.parentPath => parent node path
   // path.depth => current node depth
-  // path.index => current node index if in a list
   // path.stop(); => stop traverse
   // path.rewrite({...}); => rewrite current node
   // path.matches({ type: 'xxx' }); => check if current node matches the given filter

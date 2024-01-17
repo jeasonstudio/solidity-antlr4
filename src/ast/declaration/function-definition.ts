@@ -17,7 +17,7 @@ import { Block } from '../statement';
 type FunctionKind = 'function' | 'constructor' | 'receive' | 'fallback';
 
 export class BaseFunctionDefinition extends BaseNode {
-  type = 'FunctionDefinition';
+  type = 'FunctionDefinition' as any;
   name: Identifier | null = null;
   functionKind: FunctionKind = 'function';
   override: OverrideSpecifier | null = null;

@@ -43,5 +43,6 @@ contract HelloWorld {
       expect(p.getFlattenParents().length).toBe(1);
       expect(p.getFlattenParents(1).length).toBe(1);
     }
+    console.log(p.path);
   });
 });
