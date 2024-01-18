@@ -1,5 +1,16 @@
 # solidity-antlr4
 
+## 2.6.0
+
+### Minor Changes
+
+- 680d17c: support css like ast selector
+
+### Patch Changes
+
+- 054ba06: alias expression statement as expression
+- 4aa05d2: correct symbol alias types
+
 ## 2.5.2
 
 ### Patch Changes
