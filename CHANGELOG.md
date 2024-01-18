@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.6.1
+
+### Patch Changes
+
+- c752710: support offset filter when query selector
+
 ## 2.6.0
 
 ### Minor Changes
