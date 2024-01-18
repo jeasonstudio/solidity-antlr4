@@ -79,4 +79,9 @@ contract HelloWorld {
     querySelectorAll(ast, [createSelector('ContractDefinition'), createSelector('PragmaDirective')])
       .length,
   ).toBe(2);
+
+  expect(querySelector(ast, createSelector('ContractDefinition', 1))).toBe(null);
+  expect(querySelector(ast, createSelector('ContractDefinition', 139))).toMatchObject({
+    type: 'ContractDefinition',
+  });
 });

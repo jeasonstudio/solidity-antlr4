@@ -37,6 +37,12 @@ export interface TraversePath<N extends SyntaxNode = SyntaxNode> {
    */
   matches: (filter: PartialDeep<N>) => boolean;
   /**
+   * Check if the current node contains the offset
+   * @param offset
+   * @returns
+   */
+  checkOffset: (offset?: number) => boolean;
+  /**
    * Get the flatten node list
    */
   getFlattenParents: (maxDepth?: number) => N[];
@@ -90,6 +96,10 @@ export const traverse = <T extends SyntaxNode>(ast: T, callback: TraverseCallbac
         recursion(path);
         return nodes;
       };
+      const checkOffset: TraversePath['checkOffset'] = (offset) => {
+        if (offset === undefined) return true;
+        return node.range[0] <= offset && offset <= node.range[1];
+      };
 
       const path: TraversePath = {
         path: [parentPath?.path, node.type].filter((t) => t !== undefined && t !== null).join('.'),
@@ -100,6 +110,7 @@ export const traverse = <T extends SyntaxNode>(ast: T, callback: TraverseCallbac
         rewrite,
         getFlattenParents,
         matches,
+        checkOffset,
       };
 
       const exitCallback = callback(path);

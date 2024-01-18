@@ -18,7 +18,7 @@ const getPathKey = (path: TraversePath<SyntaxNode>) => `${path.path}#${JSON.stri
 export type SelectorFilter = '*' | SyntaxNodeType | PartialDeep<SyntaxNode>;
 
 export class Selector {
-  public static create = (filter: SelectorFilter): Selector => {
+  public static create = (filter: SelectorFilter, _offset?: number): Selector => {
     let target: PartialDeep<SyntaxNode> = {};
     if (typeof filter !== 'string') {
       target = filter;
@@ -27,13 +27,15 @@ export class Selector {
     } else {
       target = { type: filter as any };
     }
-    return new Selector(target);
+    return new Selector(target, _offset);
   };
 
-  protected constructor(
+  public next?: Selector;
+  public combinator?: SelectorCombinator;
+
+  private constructor(
     public filter: PartialDeep<SyntaxNode>,
-    public next?: Selector,
-    public combinator?: SelectorCombinator,
+    public _offset?: number,
   ) {}
 
   public _prev?: Selector;
@@ -41,22 +43,27 @@ export class Selector {
     return this._prev ? this._prev._getStartSelector() : this;
   };
 
-  private chain = (combinator: SelectorCombinator, f: SelectorFilter): Selector => {
+  private chain = (
+    combinator: SelectorCombinator,
+    f: SelectorFilter,
+    _offset?: number,
+  ): Selector => {
     this.combinator = combinator;
-    const next = Selector.create(f);
+    const next = Selector.create(f, _offset || this._offset);
     next._prev = this;
     this.next = next;
     return next;
   };
 
-  public child = (f: SelectorFilter): Selector => {
-    return this.chain(SelectorCombinator.Child, f);
+  public child = (f: SelectorFilter, _offset?: number): Selector => {
+    return this.chain(SelectorCombinator.Child, f, _offset);
   };
 
-  public inside = (f: SelectorFilter): Selector => {
-    return this.chain(SelectorCombinator.Inside, f);
+  public inside = (f: SelectorFilter, _offset?: number): Selector => {
+    return this.chain(SelectorCombinator.Inside, f, _offset);
   };
 
+  /** @inner */
   public query = <T extends SyntaxNode = SyntaxNode>(
     node: SyntaxNode | null,
     options: QueryOptions = {},
@@ -64,18 +71,22 @@ export class Selector {
     if (!node) return {};
     const result: Record<string, TraversePath<T>> = {};
     traverse(node, (path) => {
-      if (path.matches(this.filter)) Object.assign(result, this.recursion<T>(path, options));
+      if (path.matches(this.filter) && path.checkOffset(this._offset)) {
+        Object.assign(result, this.recursion<T>(path, options)); // entry
+      }
     });
     return result;
   };
 
+  /** @inner */
   public recursion = <T extends SyntaxNode = SyntaxNode>(
     path: TraversePath<SyntaxNode>,
     options: QueryOptions = {},
   ): Record<string, TraversePath<T>> => {
-    if (!path.matches(this.filter)) return {}; // should not happen
-    const result: Record<string, TraversePath<T>> = {};
+    if (!path.matches(this.filter)) return {};
+    if (!path.checkOffset(this._offset)) return {};
 
+    const result: Record<string, TraversePath<T>> = {};
     if (!this.next) {
       result[getPathKey(path)] = path as any;
       return result;
