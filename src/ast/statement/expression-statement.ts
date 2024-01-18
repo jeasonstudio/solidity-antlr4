@@ -1,12 +1,12 @@
-import { BaseNode } from '../base';
+import { BaseNodeUnion } from '../base';
 import { ExpressionStatementContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from '../expression';
 
-export class ExpressionStatement extends BaseNode {
-  type = 'ExpressionStatement' as const;
-  expression: Expression;
+export type ExpressionStatement = Expression;
+
+export const ExpressionStatement = class extends BaseNodeUnion<Expression> {
+  // type = 'ExpressionStatement' as const;
   constructor(ctx: ExpressionStatementContext, visitor: SolidityParserVisitor<any>) {
-    super(ctx, visitor);
-    this.expression = ctx.expression().accept(visitor);
+    super(ctx, [ctx.expression()], visitor);
   }
-}
+};
