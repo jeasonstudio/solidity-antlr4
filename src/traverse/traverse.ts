@@ -42,16 +42,15 @@ export interface TraversePath<N extends SyntaxNode = SyntaxNode> {
   getFlattenParents: (maxDepth?: number) => N[];
 }
 
+export type TraverseCallback = (path: TraversePath) => void | (() => void);
+
 /**
  * Traverse
  * @param ast SyntaxNode Tree
  * @param callback like Array.map, but it will traverse the tree
  * @returns The new AST, the original AST will not be modified
  */
-export const traverse = <T extends SyntaxNode>(
-  ast: T,
-  callback: (path: TraversePath) => void | (() => void),
-): T => {
+export const traverse = <T extends SyntaxNode>(ast: T, callback: TraverseCallback): T => {
   let shouldStop: boolean = false;
   const stop = () => {
     shouldStop = true;
