@@ -1,14 +1,14 @@
 import { BaseNode } from '../base';
 import { ImportDirectiveContext, SolidityParserVisitor } from '../../antlr4';
-import { SymbolAliases } from './symbol-aliases';
 import { Identifier } from '../expression';
 import { Path } from './path';
+import { ImportAliases } from './import-aliases';
 
 export class ImportDirective extends BaseNode {
   type = 'ImportDirective' as const;
   path: Path;
   unitAlias: Identifier | null = null;
-  symbolAliases: SymbolAliases[] = [];
+  symbolAliases: ImportAliases[] = [];
   constructor(ctx: ImportDirectiveContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.path = ctx.path()!.accept(visitor);
