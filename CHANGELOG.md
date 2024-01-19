@@ -1,5 +1,11 @@
 # solidity-antlr4
 
+## 2.6.2
+
+### Patch Changes
+
+- 89467d8: support order when query selector
+
 ## 2.6.1
 
 ### Patch Changes
