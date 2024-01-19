@@ -11,29 +11,33 @@
     "antlr4"
   ],
   "type": "module",
+  "module": "./dist/index.js",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
+      "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
     },
     "./ast": {
-      "import": "./dist/ast/index.mjs",
+      "import": "./dist/ast/index.js",
+      "require": "./dist/ast/index.cjs",
       "types": "./dist/ast/index.d.ts"
     },
     "./antlr4": {
-      "import": "./dist/antlr4/index.mjs",
+      "import": "./dist/antlr4/index.js",
+      "require": "./dist/antlr4/index.cjs",
       "types": "./dist/antlr4/index.d.ts"
     },
     "./parser": {
-      "import": "./dist/parser/index.mjs",
+      "import": "./dist/parser/index.js",
+      "require": "./dist/parser/index.cjs",
       "types": "./dist/parser/index.d.ts"
     },
     "./traverse": {
-      "import": "./dist/traverse/index.mjs",
+      "import": "./dist/traverse/index.js",
+      "require": "./dist/traverse/index.cjs",
       "types": "./dist/traverse/index.d.ts"
     }
   },
@@ -51,7 +55,7 @@
     "*.{ts}": "prettier --loglevel warn --write"
   },
   "dependencies": {
-    "antlr4ng": "^2.0.4",
+    "antlr4ng": "^2.0.6",
     "lodash-es": "^4.17.21",
     "type-fest": "^4.9.0"
   },
@@ -64,7 +68,6 @@
     "@umijs/fabric": "^4.0.1",
     "antlr4ng-cli": "^1.0.7",
     "changeset": "^0.2.6",
-    "esbuild": "^0.19.10",
     "eslint": "^8.56.0",
     "husky": "^8.0.3",
     "jest": "^29.7.0",
@@ -81,9 +84,7 @@
   "scripts": {
     "grammar": "antlr4ng -Dlanguage=TypeScript -o src/antlr4/ -message-format vs2005 -visitor -listener -long-messages -Xexact-output-dir grammar/SolidityLexer.g4 grammar/SolidityParser.g4",
     "dev": "unbuild --stub",
-    "build": "pnpm run build:esm && pnpm run build:cjs",
-    "build:esm": "unbuild --clean",
-    "build:cjs": "esbuild ./src/index.ts --bundle --outfile=dist/index.cjs --format=cjs --sourcemap --tsconfig=./tsconfig.json",
+    "build": "unbuild --clean",
     "typedoc": "typedoc --tsconfig ./tsconfig.json --skipErrorChecking src/typedoc.ts",
     "prepublishOnly": "npm run build",
     "changeset": "changeset",

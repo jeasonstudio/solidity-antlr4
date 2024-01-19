@@ -1,6 +1,6 @@
 import { SolidityASTBuilder } from '../ast/builder';
 import { SourceUnit, SyntaxNode } from '../ast';
-import { SolidityParser, ParseTree, SolidityLexer, CommonTokenStream, CharStream } from '../antlr4';
+import { SolidityParser, ParseTree, SolidityLexer, CommonTokenStream, CharStreams } from '../antlr4';
 import { ParseError, SolidityErrorListener } from './error-listener';
 
 export interface ParseOptions {
@@ -22,7 +22,7 @@ export const parse = <T extends SyntaxNode = SourceUnit>(
   const listener = new SolidityErrorListener();
 
   try {
-    const input = new CharStream(source);
+    const input = CharStreams.fromString(source);
     const lexer = new SolidityLexer(input);
     const token = new CommonTokenStream(lexer);
     const parser = new SolidityParser(token);

@@ -1,5 +1,5 @@
 import { Position } from '../ast/base';
-import { SolidityLexer, CharStream } from '../antlr4';
+import { SolidityLexer, CharStreams } from '../antlr4';
 import { ParseError, SolidityErrorListener } from './error-listener';
 
 export type SyntaxTokenType = (typeof SolidityLexer.symbolicNames)[number];
@@ -25,7 +25,7 @@ export const tokenizer = (source: string, _options: TokenizerOptions = {}): Synt
   const listener = new SolidityErrorListener();
 
   try {
-    const input = new CharStream(source);
+    const input = CharStreams.fromString(source);
     const lexer = new SolidityLexer(input);
     lexer.removeErrorListeners();
     lexer.addErrorListener(listener);

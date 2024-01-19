@@ -3,7 +3,7 @@ import {
   SolidityParser,
   SolidityLexer,
   CommonTokenStream,
-  CharStream,
+  CharStreams,
   ParserRuleContext,
 } from '../antlr4';
 
@@ -18,7 +18,7 @@ export const languages: SupportLanguage[] = [
 ];
 
 const getParseTree = (source: string) => {
-  const input = new CharStream(source);
+  const input = CharStreams.fromString(source);
   const lexer = new SolidityLexer(input);
   const token = new CommonTokenStream(lexer);
   const parser = new SolidityParser(token);
