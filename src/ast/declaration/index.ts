@@ -4,6 +4,7 @@ import { UnionSyntaxNode, UnionSyntaxNodeType } from '../base';
 export type DeclarationNode = UnionSyntaxNode<typeof nodeMap>;
 export type DeclarationNodeType = UnionSyntaxNodeType<typeof nodeMap>;
 
+export const declarationNodeTypes = Object.keys(nodeMap) as DeclarationNodeType[];
 export * from './contract-body-element';
 export * from './contract-definition';
 export * from './enum-definition';

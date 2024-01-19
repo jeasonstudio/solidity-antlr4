@@ -4,6 +4,7 @@ import { UnionSyntaxNode, UnionSyntaxNodeType } from '../base';
 export type StatementNode = UnionSyntaxNode<typeof nodeMap>;
 export type StatementNodeType = UnionSyntaxNodeType<typeof nodeMap>;
 
+export const statementNodeTypes = Object.keys(nodeMap) as StatementNodeType[];
 export * from './assembly-flags';
 export * from './assembly-statement';
 export * from './block';

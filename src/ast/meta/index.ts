@@ -4,6 +4,7 @@ import { UnionSyntaxNode, UnionSyntaxNodeType } from '../base';
 export type MetaNode = UnionSyntaxNode<typeof nodeMap>;
 export type MetaNodeType = UnionSyntaxNodeType<typeof nodeMap>;
 
+export const metaNodeTypes = Object.keys(nodeMap) as MetaNodeType[];
 export * from './data-location';
 export * from './identifier-path';
 export * from './import-aliases';

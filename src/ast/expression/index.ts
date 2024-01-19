@@ -4,6 +4,7 @@ import { UnionSyntaxNode, UnionSyntaxNodeType } from '../base';
 export type ExpressionNode = UnionSyntaxNode<typeof nodeMap>;
 export type ExpressionNodeType = UnionSyntaxNodeType<typeof nodeMap>;
 
+export const expressionNodeTypes = Object.keys(nodeMap) as ExpressionNodeType[];
 export * from './assign-op';
 export * from './assignment';
 export * from './binary-operation';

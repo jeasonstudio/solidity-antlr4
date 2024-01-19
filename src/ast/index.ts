@@ -1,3 +1,4 @@
+import * as nodeMap from './index.node';
 import { DeclarationNode } from './declaration';
 import { ExpressionNode } from './expression';
 import { MetaNode } from './meta';
@@ -14,6 +15,8 @@ export type SyntaxNode =
   | YulNode;
 
 export type SyntaxNodeType = SyntaxNode['type'];
+
+export const syntaxNodeTypes = Object.keys(nodeMap) as SyntaxNodeType[];
 
 export * from './declaration';
 export * from './expression';

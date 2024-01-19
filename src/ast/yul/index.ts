@@ -4,6 +4,7 @@ import { UnionSyntaxNode, UnionSyntaxNodeType } from '../base';
 export type YulNode = UnionSyntaxNode<typeof nodeMap>;
 export type YulNodeType = UnionSyntaxNodeType<typeof nodeMap>;
 
+export const yulNodeTypes = Object.keys(nodeMap) as YulNodeType[];
 export * from './yul-assignment';
 export * from './yul-block';
 export * from './yul-boolean';
