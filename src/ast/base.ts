@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { SyntaxNodeType } from './index';
+import { SyntaxNode, SyntaxNodeType } from './index';
 import { ParseTree, ParserRuleContext, SolidityParserVisitor } from '../antlr4';
 
 export class Position {
@@ -39,7 +39,7 @@ export const formatString = (str: string) => {
   return str.substring(1, str.length - 1);
 };
 
-export const isSyntaxNode = <T extends any>(node: T): boolean => {
+export const isSyntaxNode = <T extends SyntaxNode>(node: any): node is T => {
   return (
     (node instanceof BaseNode || node instanceof BaseNodeString || node instanceof BaseNodeUnion) &&
     !!node.type

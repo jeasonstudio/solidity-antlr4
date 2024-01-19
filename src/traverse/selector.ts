@@ -98,22 +98,14 @@ export class Selector {
     }
 
     if (this.combinator === SelectorCombinator.Child) {
-      traverse(
-        path.node,
-        (p) => {
-          if (p.depth - path.depth > 1) p.stop();
-          Object.assign(result, this.next!.recursion<T>(p, options));
-        },
-        path,
-      );
+      traverse(path, (p) => {
+        if (p.depth - path.depth > 1) p.stop();
+        Object.assign(result, this.next!.recursion<T>(p, options));
+      });
     } else if (this.combinator === SelectorCombinator.Inside) {
-      traverse(
-        path.node,
-        (p) => {
-          Object.assign(result, this.next!.recursion<T>(p, options));
-        },
-        path,
-      );
+      traverse(path, (p) => {
+        Object.assign(result, this.next!.recursion<T>(p, options));
+      });
     }
 
     return result;

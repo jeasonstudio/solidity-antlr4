@@ -56,11 +56,20 @@ export type TraverseCallback = (path: TraversePath) => void | (() => void);
  * @param callback like Array.map, but it will traverse the tree
  * @returns The new AST, the original AST will not be modified
  */
-export const traverse = <T extends SyntaxNode>(
-  ast: T,
+export function traverse<T extends SyntaxNode>(
+  ast: T | TraversePath<T>,
   callback: TraverseCallback,
-  _parentPath: TraversePath<SyntaxNode> | null = null,
-): T => {
+): T;
+export function traverse<T extends SyntaxNode>(astOrPath: any, callback: TraverseCallback): T {
+  let ast: T;
+  let globalParentPath: TraversePath<any> | null = null;
+  if (astOrPath.type && !astOrPath.matches) {
+    ast = astOrPath;
+  } else {
+    ast = astOrPath.node;
+    globalParentPath = astOrPath;
+  }
+
   let shouldStop: boolean = false;
   const stop = () => {
     shouldStop = true;
@@ -69,7 +78,7 @@ export const traverse = <T extends SyntaxNode>(
   // inner recursion function
   const traverseInner = <U extends SyntaxNode>(
     tree: U | U[],
-    parentPath: TraversePath | null,
+    parentPath: TraversePath<any> | null,
   ): U | U[] => {
     const depth = parentPath?.depth !== undefined ? parentPath.depth + 1 : 0;
     if (isSyntaxNodeList(tree)) {
@@ -126,7 +135,7 @@ export const traverse = <T extends SyntaxNode>(
       for (let index = 0; index < keys.length; index += 1) {
         const valueInKey = node[keys[index]];
         if (isSyntaxNode(valueInKey) || isSyntaxNodeList(valueInKey)) {
-          node[keys[index]] = traverseInner(valueInKey, path);
+          node[keys[index]] = traverseInner(valueInKey as any, path);
         } else {
           node[keys[index]] = valueInKey;
         }
@@ -138,5 +147,5 @@ export const traverse = <T extends SyntaxNode>(
     }
     return tree;
   };
-  return traverseInner(ast, _parentPath) as T;
-};
+  return traverseInner(ast, globalParentPath) as T;
+}
