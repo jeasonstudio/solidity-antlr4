@@ -4,6 +4,8 @@ import { SyntaxNode } from '../ast';
 import { isSyntaxNode, isSyntaxNodeList, keysInNode } from '../ast/base';
 import { PartialDeep } from 'type-fest';
 
+export type TraverseMatchFilter<N extends SyntaxNode = SyntaxNode> = PartialDeep<N>;
+
 export interface TraversePath<N extends SyntaxNode = SyntaxNode> {
   /**
    * The key of the node
@@ -35,7 +37,7 @@ export interface TraversePath<N extends SyntaxNode = SyntaxNode> {
    * Is the current node matches the filter
    * @param filter The filter to match
    */
-  matches: (filter: PartialDeep<N>) => boolean;
+  matches: (filter: TraverseMatchFilter<N>) => boolean;
   /**
    * Check if the current node contains the offset
    * @param offset
