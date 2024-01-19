@@ -22,3 +22,16 @@ export const visit = <T extends SyntaxNode>(ast: T, handlers: VisitHandlers): vo
     handlers.exit?.(p);
   });
 };
+
+export const visitNodes = <T extends SyntaxNode = SyntaxNode>(
+  ast: SyntaxNode,
+  callback: (p: TraversePath) => boolean,
+): T[] => {
+  const nodes: T[] = [];
+  visit(ast, {
+    enter(path) {
+      if (callback(path)) nodes.push(path.node as any);
+    },
+  });
+  return nodes;
+};

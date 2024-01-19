@@ -7,6 +7,7 @@ import {
   serialize,
   traverse,
   visit,
+  visitNodes,
 } from '../traverse';
 
 test('traverse', () => {
@@ -52,6 +53,8 @@ contract HelloWorld {
       expect(p.getFlattenParents(1).length).toBe(1);
     }
   });
+
+  expect(visitNodes(ast, (p) => p.depth === 1).length).toBe(2);
 });
 
 test('selector', () => {
