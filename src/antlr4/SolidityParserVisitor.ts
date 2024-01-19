@@ -41,6 +41,7 @@ import { ErrorParameterContext } from "./SolidityParser.js";
 import { ErrorDefinitionContext } from "./SolidityParser.js";
 import { UserDefinableOperatorContext } from "./SolidityParser.js";
 import { UsingDirectiveContext } from "./SolidityParser.js";
+import { UsingAliasesContext } from "./SolidityParser.js";
 import { TypeNameContext } from "./SolidityParser.js";
 import { ElementaryTypeNameContext } from "./SolidityParser.js";
 import { FunctionTypeNameContext } from "./SolidityParser.js";
@@ -358,6 +359,12 @@ export class SolidityParserVisitor<Result> extends AbstractParseTreeVisitor<Resu
      * @return the visitor result
      */
     visitUsingDirective?: (ctx: UsingDirectiveContext) => Result;
+    /**
+     * Visit a parse tree produced by `SolidityParser.usingAliases`.
+     * @param ctx the parse tree
+     * @return the visitor result
+     */
+    visitUsingAliases?: (ctx: UsingAliasesContext) => Result;
     /**
      * Visit a parse tree produced by `SolidityParser.typeName`.
      * @param ctx the parse tree

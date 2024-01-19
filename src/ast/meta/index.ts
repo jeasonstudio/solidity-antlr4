@@ -18,4 +18,5 @@ export * from './path';
 export * from './pragma-directive';
 export * from './source-unit';
 export * from './symbol-aliases';
+export * from './using-aliases';
 export * from './using-directive';
