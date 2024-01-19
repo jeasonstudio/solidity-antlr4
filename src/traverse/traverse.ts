@@ -56,7 +56,11 @@ export type TraverseCallback = (path: TraversePath) => void | (() => void);
  * @param callback like Array.map, but it will traverse the tree
  * @returns The new AST, the original AST will not be modified
  */
-export const traverse = <T extends SyntaxNode>(ast: T, callback: TraverseCallback): T => {
+export const traverse = <T extends SyntaxNode>(
+  ast: T,
+  callback: TraverseCallback,
+  _parentPath: TraversePath<SyntaxNode> | null = null,
+): T => {
   let shouldStop: boolean = false;
   const stop = () => {
     shouldStop = true;
@@ -134,5 +138,5 @@ export const traverse = <T extends SyntaxNode>(ast: T, callback: TraverseCallbac
     }
     return tree;
   };
-  return traverseInner(ast, null) as T;
+  return traverseInner(ast, _parentPath) as T;
 };

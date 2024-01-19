@@ -1,6 +1,7 @@
 import { parse } from '../parser';
 import {
   createSelector,
+  query,
   querySelector,
   querySelectorAll,
   serialize,
@@ -62,17 +63,26 @@ contract HelloWorld {
     string public greet = "Hello World!";
 }`);
 
-  expect(querySelector(ast, createSelector('*'))).toMatchObject({ type: 'SourceUnit' });
+  expect(querySelector(ast, createSelector('*'))!.node).toMatchObject({ type: 'SourceUnit' });
   expect(querySelectorAll(ast, createSelector('*')).length).toBe(8);
 
   expect(
     querySelectorAll(ast, createSelector('ContractDefinition').child('Identifier')),
-  ).toMatchObject([{ type: 'Identifier', name: 'HelloWorld' }]);
+  ).toMatchObject([{ node: { type: 'Identifier', name: 'HelloWorld' } }]);
   expect(
     querySelectorAll(ast, createSelector('ContractDefinition').inside('Identifier')),
   ).toMatchObject([
-    { type: 'Identifier', name: 'HelloWorld' },
-    { type: 'Identifier', name: 'greet' },
+    { node: { type: 'Identifier', name: 'HelloWorld' } },
+    { node: { type: 'Identifier', name: 'greet' } },
+  ]);
+  expect(
+    query(ast, createSelector('ContractDefinition').inside('Identifier'), {
+      queryAll: true,
+      order: 'desc',
+    }),
+  ).toMatchObject([
+    { node: { type: 'Identifier', name: 'greet' } },
+    { node: { type: 'Identifier', name: 'HelloWorld' } },
   ]);
 
   expect(
@@ -82,6 +92,8 @@ contract HelloWorld {
 
   expect(querySelector(ast, createSelector('ContractDefinition', 1))).toBe(null);
   expect(querySelector(ast, createSelector('ContractDefinition', 139))).toMatchObject({
-    type: 'ContractDefinition',
+    node: {
+      type: 'ContractDefinition',
+    },
   });
 });

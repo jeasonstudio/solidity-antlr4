@@ -3,7 +3,12 @@ import { SyntaxNode, SyntaxNodeType } from '../ast';
 import { TraversePath, traverse } from './traverse';
 
 export interface QueryOptions {
+  // return all matched nodes when `true`
   queryAll?: boolean;
+  // asc: ascending, depth from 0 to n
+  // desc: descending, depth from n to 0
+  // default: asc
+  order?: 'asc' | 'desc';
 }
 
 export enum SelectorCombinator {
@@ -93,13 +98,22 @@ export class Selector {
     }
 
     if (this.combinator === SelectorCombinator.Child) {
-      traverse(path.node, (p) => {
-        if (p.depth === 1 && this.next) Object.assign(result, this.next!.recursion<T>(p, options));
-      });
+      traverse(
+        path.node,
+        (p) => {
+          if (p.depth - path.depth > 1) p.stop();
+          Object.assign(result, this.next!.recursion<T>(p, options));
+        },
+        path,
+      );
     } else if (this.combinator === SelectorCombinator.Inside) {
-      traverse(path.node, (p) => {
-        if (this.next) Object.assign(result, this.next!.recursion<T>(p, options));
-      });
+      traverse(
+        path.node,
+        (p) => {
+          Object.assign(result, this.next!.recursion<T>(p, options));
+        },
+        path,
+      );
     }
 
     return result;
@@ -108,11 +122,11 @@ export class Selector {
 
 export const createSelector = Selector.create;
 
-const querySelectorInner = <T extends SyntaxNode = SyntaxNode>(
+export const query = <T extends SyntaxNode = SyntaxNode>(
   ast: SyntaxNode | null,
   selector: Selector | Selector[],
   options: QueryOptions = {},
-): T[] => {
+): TraversePath<T>[] => {
   if (!ast) return [];
 
   const result: Record<string, TraversePath<T>> = {};
@@ -123,20 +137,24 @@ const querySelectorInner = <T extends SyntaxNode = SyntaxNode>(
     const startSelector = current._getStartSelector();
     Object.assign(result, startSelector.query<T>(ast, options));
   }
-
-  return Object.values(result).map((p) => p.node);
+  return Object.values(result).sort((current, next) => {
+    if (options.order === 'desc') {
+      return next.depth - current.depth;
+    }
+    return current.depth - next.depth;
+  });
 };
 
 export const querySelector = <T extends SyntaxNode = SyntaxNode>(
   ast: SyntaxNode | null,
   selector: Selector | Selector[],
-): T | null => {
-  return querySelectorInner<T>(ast, selector, { queryAll: false })?.[0] ?? null;
+): TraversePath<T> | null => {
+  return query<T>(ast, selector, { queryAll: false })?.[0] ?? null;
 };
 
 export const querySelectorAll = <T extends SyntaxNode = SyntaxNode>(
   ast: SyntaxNode | null,
   selector: Selector | Selector[],
-): T[] => {
-  return querySelectorInner<T>(ast, selector, { queryAll: true });
+): TraversePath<T>[] => {
+  return query<T>(ast, selector, { queryAll: true });
 };
