@@ -61,6 +61,7 @@ export class ContractDefinition extends BaseNode {
 
     if (ctx instanceof InterfaceDefinitionContext) {
       this.contractKind = 'interface';
+      this.baseContracts = ctx.inheritanceSpecifierList()?.accept(visitor) ?? [];
     } else if (ctx instanceof LibraryDefinitionContext) {
       this.contractKind = 'library';
     } else {
