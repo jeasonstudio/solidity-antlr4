@@ -59,6 +59,7 @@ export class SolidityASTBuilder extends parser.SolidityParserVisitor<ast.SyntaxN
   visitErrorDefinition = (ctx: parser.ErrorDefinitionContext) => new ast.ErrorDefinition(ctx, this);
   visitUserDefinableOperator = (ctx: parser.UserDefinableOperatorContext) =>
     new ast.UserDefinableOperator(ctx, this);
+  visitUsingAliases = (ctx: parser.UsingAliasesContext) => new ast.UsingAliases(ctx, this);
   visitUsingDirective = (ctx: parser.UsingDirectiveContext) => new ast.UsingDirective(ctx, this);
   visitTypeName = (ctx: parser.TypeNameContext) => new ast.TypeName(ctx, this);
   visitElementaryTypeName = (ctx: parser.ElementaryTypeNameContext) =>

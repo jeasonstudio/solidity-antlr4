@@ -41,6 +41,7 @@ import { ErrorParameterContext } from "./SolidityParser.js";
 import { ErrorDefinitionContext } from "./SolidityParser.js";
 import { UserDefinableOperatorContext } from "./SolidityParser.js";
 import { UsingDirectiveContext } from "./SolidityParser.js";
+import { UsingAliasesContext } from "./SolidityParser.js";
 import { TypeNameContext } from "./SolidityParser.js";
 import { ElementaryTypeNameContext } from "./SolidityParser.js";
 import { FunctionTypeNameContext } from "./SolidityParser.js";
@@ -507,6 +508,16 @@ export class SolidityParserListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitUsingDirective?: (ctx: UsingDirectiveContext) => void;
+    /**
+     * Enter a parse tree produced by `SolidityParser.usingAliases`.
+     * @param ctx the parse tree
+     */
+    enterUsingAliases?: (ctx: UsingAliasesContext) => void;
+    /**
+     * Exit a parse tree produced by `SolidityParser.usingAliases`.
+     * @param ctx the parse tree
+     */
+    exitUsingAliases?: (ctx: UsingAliasesContext) => void;
     /**
      * Enter a parse tree produced by `SolidityParser.typeName`.
      * @param ctx the parse tree

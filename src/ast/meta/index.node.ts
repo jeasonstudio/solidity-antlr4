@@ -7,6 +7,7 @@ import { ModifierInvocation } from './modifier-invocation';
 import { Path } from './path';
 import { PragmaDirective } from './pragma-directive';
 import { SourceUnit } from './source-unit';
+import { UsingAliases } from './using-aliases';
 import { UsingDirective } from './using-directive';
 
 export {
@@ -19,5 +20,6 @@ export {
   Path,
   PragmaDirective,
   SourceUnit,
+  UsingAliases,
   UsingDirective,
 };
