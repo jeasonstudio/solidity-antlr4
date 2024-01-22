@@ -9,10 +9,10 @@ import { SyntaxNode } from '../ast';
 import { solidityASTBuilder } from '../ast/builder';
 import { serialize } from '../traverse';
 import { BaseNodeString } from '../ast/base';
+import { test } from 'vitest';
 
 export const format = (ast: SyntaxNode) =>
   serialize(ast, (p) => {
-    if (p.node.type === 'TypeName') return p.node.name;
     if (p.node instanceof BaseNodeString) return p.node.name;
     return p.node;
   });

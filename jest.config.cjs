@@ -7,6 +7,7 @@ module.exports = {
   transformIgnorePatterns: ['/node_modules/(?!)'],
   modulePathIgnorePatterns: [],
   setupFiles: [],
+  // extensionsToTreatAsEsm: ['.ts'],
   transform: {
     '^.+\\.m?(t|j)s$': [
       require.resolve('@swc/jest'),

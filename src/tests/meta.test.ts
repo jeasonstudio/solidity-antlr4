@@ -1,4 +1,5 @@
 import { createParse } from './utils.test';
+import { test, expect } from 'vitest';
 
 test('sourceUnit', () => {
   expect(createParse((p) => p.sourceUnit())(`// SPDX-License-Identifier: MIT`)).toMatchObject({

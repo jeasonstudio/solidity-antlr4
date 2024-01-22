@@ -1,4 +1,5 @@
 import { createParse } from './utils.test';
+import { test, expect } from 'vitest';
 
 test('assemblyStatement', () => {
   expect(createParse((p) => p.assemblyStatement())(`assembly { let x := 123 }`)).toMatchObject({

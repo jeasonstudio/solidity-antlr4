@@ -1,11 +1,7 @@
 import type { SupportLanguage, Parser, Printer, Plugin } from 'prettier';
-import {
-  SolidityParser,
-  SolidityLexer,
-  CommonTokenStream,
-  CharStreams,
-  ParserRuleContext,
-} from '../antlr4';
+import { PrettierParser } from './parser';
+import { SyntaxNode } from '../ast';
+import { PrettierPrinter } from './printer';
 
 export const languages: SupportLanguage[] = [
   {
@@ -17,55 +13,12 @@ export const languages: SupportLanguage[] = [
   },
 ];
 
-const getParseTree = (source: string) => {
-  const input = CharStreams.fromString(source);
-  const lexer = new SolidityLexer(input);
-  const token = new CommonTokenStream(lexer);
-  const parser = new SolidityParser(token);
-  return parser;
+export const parsers: Record<string, Parser<SyntaxNode>> = {
+  [PrettierParser.name]: new PrettierParser(),
 };
 
-const parse: Parser<ParserRuleContext>['parse'] = (source, _options) => {
-  const parser = getParseTree(source);
-  return parser.sourceUnit();
-};
-
-const hasPragma: Parser<ParserRuleContext>['hasPragma'] = (source) => {
-  const parser = getParseTree(source);
-  return parser.sourceUnit().pragmaDirective().length > 0;
-};
-
-export const parsers: Record<string, Parser<ParserRuleContext>> = {
-  'solidity-antlr4': {
-    astFormat: 'solidity-antlr4-ast',
-    parse,
-    locStart: (ctx) => ctx.start?.start ?? 0,
-    locEnd: (ctx) => ctx.stop?.stop ?? ctx.start?.start ?? 0,
-    hasPragma,
-    // preprocess,
-  },
-};
-
-export const printers: Record<string, Printer<ParserRuleContext>> = {
-  'solidity-antlr4-ast': {
-    print: (path, options, print, args) => {
-      return path.node.getText();
-    },
-    // print,
-    // embed,
-    // preprocess,
-    // getVisitorKeys,
-    // insertPragma,
-    // canAttachComment,
-    // isBlockComment,
-    // printComment,
-    // getCommentChildNodes,
-    // handleComments: {
-    //   ownLine,
-    //   endOfLine,
-    //   remaining,
-    // },
-  },
+export const printers: Record<string, Printer<SyntaxNode>> = {
+  [PrettierPrinter.name]: new PrettierPrinter(),
 };
 
 export const defaultOptions = {

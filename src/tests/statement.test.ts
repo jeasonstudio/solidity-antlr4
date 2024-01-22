@@ -1,4 +1,5 @@
 import { createParse } from './utils.test';
+import { test, expect } from 'vitest';
 
 test('ifStatement', () => {
   expect(createParse((p) => p.ifStatement())(`if (foo) {} else if (bar) {} else {}`)).toMatchObject(

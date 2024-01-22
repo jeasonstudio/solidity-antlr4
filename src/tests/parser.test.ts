@@ -1,4 +1,5 @@
 import { parse, tokenizer } from '../parser';
+import { test, expect } from 'vitest';
 
 test('parser', () => {
   const ast = parse(`// SPDX-License-Identifier: MIT
