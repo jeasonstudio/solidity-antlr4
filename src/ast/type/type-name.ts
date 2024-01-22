@@ -8,7 +8,7 @@ import { IdentifierPath } from '../meta';
 
 class TypeNameWithArray extends BaseNodeString {
   type = 'TypeName' as const;
-  baseType: ElementaryTypeName | FunctionTypeName | MappingType | IdentifierPath | null = null;
+  baseType: ElementaryTypeName | FunctionTypeName | MappingType | IdentifierPath;
   expression: Expression | null;
 
   constructor(ctx: TypeNameContext, visitor: SolidityParserVisitor<any>) {
@@ -19,14 +19,15 @@ class TypeNameWithArray extends BaseNodeString {
       ctx.functionTypeName(),
       ctx.mappingType(),
       ctx.identifierPath(),
+      ctx.typeName(),
     ].find(Boolean);
 
-    if (!ctx.LBrack() && !ctx.RBrack()) {
-      return target?.accept(visitor) ?? null;
+    if (!ctx.LBrack()) {
+      return target!.accept(visitor);
     }
 
     this.name = ctx.getText();
-    this.baseType = target?.accept(visitor) ?? null;
+    this.baseType = target!.accept(visitor);
     this.expression = ctx.expression()?.accept(visitor) ?? null;
   }
 }

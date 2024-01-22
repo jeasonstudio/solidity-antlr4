@@ -5,7 +5,7 @@ export type PrintFunc<T extends ast.SyntaxNode = ast.SyntaxNode> = (arg: {
   node: T;
   path: AstPath<T>;
   options: ParserOptions<T>;
-  print: (path: AstPath<ast.SyntaxNode>) => Doc;
+  print: (path: AstPath<ast.SyntaxNode | null>) => Doc;
   args?: any;
 }) => Doc;
 

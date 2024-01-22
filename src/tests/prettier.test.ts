@@ -8,7 +8,7 @@ test('prettier', async () => {
 pragma solidity ^0.8.20;
 
 contract HelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorldHelloWorld is FOo("foo"), bar.Y {
-    string public greet = "Hello World!";
+    string[] public greet = ["Hello World!"];
 }`;
 
   const result = await prettier.format(code, {
