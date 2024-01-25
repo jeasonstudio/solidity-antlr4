@@ -49,10 +49,12 @@ test('importDirective', () => {
   expect(
     createParse((p) => p.importDirective())(`import * as Foo from "./Foo.sol";`),
   ).toMatchObject({
+    importAll: true,
     unitAlias: 'Foo',
     symbolAliases: [],
   });
   expect(createParse((p) => p.importDirective())(`import "./Foo.sol" as Foo;`)).toMatchObject({
+    importAll: false,
     unitAlias: 'Foo',
     symbolAliases: [],
   });

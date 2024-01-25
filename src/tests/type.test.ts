@@ -19,6 +19,4 @@ test('typeName', () => {
 
   expect(createParse((p) => p.elementaryTypeName(true))(`address payable`)).toBe('address');
   expect(createParse((p) => p.typeName())(`uint128[]`)).toBe('uint128[]');
-
-  console.log(createParse((p) => p.typeName())(`uint128[]`));
 });
