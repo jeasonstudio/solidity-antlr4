@@ -1,20 +1,19 @@
 import { Parser, ParserOptions } from 'prettier';
 import { SyntaxNode } from '../ast';
 import { PrettierPrinter } from './printer';
-import { parse } from '../parser';
+import { parse, tokenizer } from '../parser';
 
 export class PrettierParser implements Parser<SyntaxNode> {
-  static name = 'solidity-antlr4';
-  astFormat = PrettierPrinter.name;
-
-  parse = (text: string, _options: ParserOptions<SyntaxNode>) => {
-    return parse(text, { tolerant: true });
+  public static name = 'solidity-antlr4';
+  public astFormat = PrettierPrinter.name;
+  public locStart = (node: SyntaxNode) => node.range[0];
+  public locEnd = (node: SyntaxNode) => node.range[1];
+  public parse = (text: string, _options: ParserOptions<SyntaxNode>) => {
+    const ast = parse(text, { tolerant: true });
+    const tokens = tokenizer(text, { tolerant: true });
+    if (ast) {
+      (<any>ast).comments = tokens.filter((token) => token.type?.includes('COMMENT'));
+    }
+    return ast;
   };
-  hasPragma = (text: string) => {
-    const tree = parse(text, { tolerant: true });
-    return !!tree.nodes.find((node) => node.type === 'PragmaDirective');
-  };
-  locStart = (node: SyntaxNode) => node.range[0];
-  locEnd = (node: SyntaxNode) => node.range[1];
-  // preprocess?: ((text: string, options: ParserOptions<SyntaxNode>) => string) | undefined;
 }

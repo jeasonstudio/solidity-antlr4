@@ -1,5 +1,8 @@
 import { AstPath, Doc, ParserOptions, doc, util } from 'prettier';
 import * as ast from '../../ast';
+import { SyntaxTokenType } from '../../parser';
+
+export { Doc };
 
 export type PrintFunc<T extends ast.SyntaxNode = ast.SyntaxNode> = (arg: {
   node: T;
@@ -9,38 +12,69 @@ export type PrintFunc<T extends ast.SyntaxNode = ast.SyntaxNode> = (arg: {
   args?: any;
 }) => Doc;
 
-const innerHelper = {
-  singleQuote: `'`,
-  quote: `"`,
-  dot: '.',
-  comma: ';',
-  separator: ' ',
-  paramSeparator: ', ',
-  join2: (sep: Doc, list: (Doc | null)[]) =>
-    doc.builders.join(sep, list.filter((item) => item !== null) as any),
-  printArray: (inline: Doc[]) => {
-    if (!inline.length) return '[]';
-    return doc.builders.group([
-      '[',
-      doc.builders.indent([doc.builders.line, doc.builders.join([',', doc.builders.line], inline)]),
-      doc.builders.line,
-      ']',
-    ]);
-  },
-};
+export const lineComments: SyntaxTokenType[] = [
+  'LINE_COMMENT',
+  'AssemblyBlockLINE_COMMENT',
+  'YulLINE_COMMENT',
+  'PragmaLINE_COMMENT',
+];
+export const blockComments: SyntaxTokenType[] = [
+  'COMMENT',
+  'AssemblyBlockCOMMENT',
+  'YulCOMMENT',
+  'PragmaCOMMENT',
+];
+export const comments: SyntaxTokenType[] = [...lineComments, ...blockComments];
 
-export type PrinterHelper = typeof doc.builders &
-  typeof doc.printer &
-  typeof doc.utils &
-  typeof util &
-  typeof innerHelper;
+export class BasePrinter {
+  readonly space = ' ';
+  readonly dot = '.';
+  readonly comma = ',';
+  readonly semi = ';';
+  readonly quote = `"`;
+  readonly singleQuote = `'`;
+  readonly builders = doc.builders;
 
-export const helper: PrinterHelper = Object.assign(
-  {},
-  doc.builders,
-  doc.printer,
-  doc.utils,
-  util,
-  innerHelper,
-);
-export const h = helper;
+  constructor(
+    public readonly options: ParserOptions<ast.SyntaxNode>,
+    public readonly print: (path: AstPath<any>) => Doc,
+  ) {}
+
+  // value => "value"
+  literal = (value: Doc) => {
+    return this.options.singleQuote
+      ? [this.singleQuote, value, this.singleQuote]
+      : [this.quote, value, this.quote];
+  };
+  // value = { value }
+  block = (value: Doc, empty: boolean = false) => {
+    if (empty) return ['{', '}'];
+    const groupId = Symbol('block');
+    const line = this.options.bracketSpacing ? this.builders.line : this.builders.softline;
+    const beforeLine = this.builders.indentIfBreak(line, { groupId });
+    const content = this.builders.indentIfBreak(value, { groupId });
+    return this.builders.group(['{', beforeLine, content, line, '}'], { id: groupId });
+  };
+  // value[] => value1, value2, value3
+  paramater = (value: Doc[], sep: Doc = [this.comma, this.builders.line]) => {
+    return this.builders.join(sep, value);
+  };
+  // value => (value)
+  tuple = (value: Doc, groupId: symbol = Symbol('tuple')) => {
+    const content = this.builders.indentIfBreak(value, { groupId });
+    const line = this.builders.softline;
+    return this.builders.group(
+      ['(', this.builders.indentIfBreak(line, { groupId }), content, line, ')'],
+      { id: groupId },
+    );
+  };
+  // value => [value]
+  list = (value: Doc, groupId: symbol = Symbol('list')) => {
+    const content = this.builders.indentIfBreak(value, { groupId });
+    const line = this.builders.softline;
+    return this.builders.group(
+      ['[', this.builders.indentIfBreak(line, { groupId }), content, line, ']'],
+      { id: groupId },
+    );
+  };
+}

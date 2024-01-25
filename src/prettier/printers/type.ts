@@ -1,19 +1,34 @@
 import * as ast from '../../ast';
-import { PrintFunc, h } from './base';
+import { BasePrinter, Doc, PrintFunc } from './base';
 
-export class PrinterType implements Record<`print${ast.TypeNodeType}`, PrintFunc<any>> {
+export class PrinterType
+  extends BasePrinter
+  implements Record<`print${ast.TypeNodeType}`, PrintFunc<any>>
+{
   printElementaryTypeName: PrintFunc<ast.ElementaryTypeName> = ({ node }) => {
-    return h.join2(h.separator, [node.name, node.payable ? 'payable' : null]);
+    const parts: Doc[] = [node.name];
+    if (node.payable) parts.push(this.space, 'payable');
+    return parts;
   };
-  printFunctionTypeName: PrintFunc<ast.FunctionTypeName>;
-  printMappingKeyType: PrintFunc<ast.MappingKeyType>;
-  printMappingType: PrintFunc<ast.MappingType>;
-  printMetaType: PrintFunc<ast.MetaType>;
+  printFunctionTypeName: PrintFunc<ast.FunctionTypeName>; // TODO: implement in declaration.ts
+  printMappingKeyType: PrintFunc<ast.MappingKeyType> = ({ node }) => node.name;
+  printMappingType: PrintFunc<ast.MappingType> = ({ path, print }) => {
+    return [
+      'mapping',
+      this.tuple([
+        path.call(print, 'keyType'),
+        this.space,
+        '=>',
+        this.space,
+        path.call(print, 'valueType'),
+      ]),
+    ];
+  };
   printTypeName: PrintFunc<ast.TypeName> = (args) => {
     const { node, path, print } = args;
     if (node.type === 'TypeName') {
-      return [path.call(print, 'baseType'), '[', path.call(print, 'expression'), ']'];
+      return [path.call(print, 'baseType'), this.list(path.call(print, 'expression'))];
     }
-    throw new Error('Unknown node type: ' + node.type);
+    throw new Error('Unknown node type: ' + node.type); // unreachable
   };
 }

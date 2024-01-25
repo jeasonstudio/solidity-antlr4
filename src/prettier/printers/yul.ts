@@ -1,7 +1,10 @@
 import * as ast from '../../ast';
-import { PrintFunc } from './base';
+import { BasePrinter, PrintFunc } from './base';
 
-export class PrinterYul implements Record<`print${ast.YulNodeType}`, PrintFunc<any>> {
+export class PrinterYul
+  extends BasePrinter
+  implements Record<`print${ast.YulNodeType}`, PrintFunc<any>>
+{
   printYulAssignment: PrintFunc<ast.YulAssignment>;
   printYulBlock: PrintFunc<ast.YulBlock>;
   printYulBoolean: PrintFunc<ast.YulBoolean>;

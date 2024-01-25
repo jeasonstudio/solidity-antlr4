@@ -1,0 +1,53 @@
+pragma solidity solidity ^0.8.20;
+pragma solidity solidity soliditysoliditysoliditysoliditysoliditysoliditysoliditysoliditysoliditysolidity ^0.8.20;
+
+import "./Foo.sol";
+import * as Foo from "./Foo.sol";
+import "./Foo.sol" as Foo;
+import { Foo, Bar as Me } from "./Foo.sol";
+import { Foo, Bar as Me, Bar as Me, Bar as Me, Bar as Me, Bar as Me, Bar as Me } from "./Foo.sol";
+
+enum Status {
+  Pending
+}
+enum Status {
+  Pending,
+  Shipped,
+  Accepted,
+  Rejected,
+  Pending,
+  Shipped,
+  Canceled
+}
+
+error NotOwnerError();
+error AlreadyQueuedError(bytes32 txId);
+error TimestampNotInRangeError(uint blockTimestamp, uint timestamp);
+error TimestampExpiredError(uint blockTimestamp, uint expiresAt, uint expiresAt, uint expiresAt, uint expiresAt, uint expiresAt, uint expiresAt);
+
+event ChallengeExit(address indexed sender, uint);
+event Withdraw(address indexed to, uint amount, address indexed to, uint amount, address indexed, uint);
+
+using A for *;
+using A for B.C;
+using A for unit[] global;
+using { A, C.D } for B;
+using { B, add as + } for B;
+
+struct MyStruct {
+}
+struct MyStruct {
+  string name;
+  uint[2] nums;
+}
+
+type Foo is address;
+string constant boo = 'aaa';
+
+contract TimestampNotInRangeErrorTimestampNotInRangeErrorTimestampNotInRangeError is FOo("foo"), X.Y {
+  bool public boo = true;
+}
+
+contract h is FOo("foo"), X.Y, TimestampNotInRangeErrorTimestampNotInRangeErrorTimestampNotInRangeError {
+  bool public boo = true;
+}
