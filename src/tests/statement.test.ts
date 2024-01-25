@@ -79,7 +79,7 @@ test('whileStatement', () => {
 test('forStatement', () => {
   expect(createParse((p) => p.forStatement())(`for (uint i = 0; i < 10; i++) {}`)).toMatchObject({
     initializationExpression: { type: 'VariableDeclarationStatement' },
-    conditionExpression: { operator: '<', left: 'i', right: { value: '10' } },
+    conditionExpression: { expression: { operator: '<', left: 'i', right: { value: '10' } } },
     loopExpression: { operator: '++', left: 'i' },
   });
 });
