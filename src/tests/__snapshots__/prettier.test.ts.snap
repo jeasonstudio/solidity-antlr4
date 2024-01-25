@@ -346,7 +346,7 @@ contract AbiEncode {
           _salt
         )
       }
-      function pos(length) -> pos {
+      function allocate(length) -> pos {
         pos := mload(0x40)
       }
     }

@@ -3,45 +3,51 @@ import { test, expect } from 'vitest';
 
 test('assemblyStatement', () => {
   expect(createParse((p) => p.assemblyStatement())(`assembly { let x := 123 }`)).toMatchObject({
-    yulStatements: [{ type: 'YulVariableDeclaration', identifiers: ['x'] }],
+    yulStatements: [{ expression: { type: 'YulVariableDeclaration', identifiers: ['x'] } }],
   });
   expect(
     createParse((p) => p.assemblyStatement())(`assembly { f.b, foo, bar := mul(x, y) }`),
   ).toMatchObject({
-    yulStatements: [{ type: 'YulAssignment', paths: ['f.b', 'foo', 'bar'] }],
+    yulStatements: [{ expression: { type: 'YulAssignment', paths: ['f.b', 'foo', 'bar'] } }],
   });
   expect(createParse((p) => p.assemblyStatement())(`assembly { mul(x, y) }`)).toMatchObject({
-    yulStatements: [{ type: 'YulFunctionCall', identifier: 'mul', expressions: ['x', 'y'] }],
+    yulStatements: [
+      { expression: { type: 'YulFunctionCall', identifier: 'mul', expressions: ['x', 'y'] } },
+    ],
   });
   expect(createParse((p) => p.assemblyStatement())(`assembly { if foo {} }`)).toMatchObject({
-    yulStatements: [{ type: 'YulIfStatement', condition: 'foo', body: {} }],
+    yulStatements: [{ expression: { type: 'YulIfStatement', condition: 'foo', body: {} } }],
   });
   expect(createParse((p) => p.assemblyStatement())(`assembly { for {} bar {} {} }`)).toMatchObject({
     yulStatements: [
       {
-        type: 'YulForStatement',
-        initializationBlock: {},
-        conditionExpression: 'bar',
-        loopBlock: {},
-        body: {},
+        expression: {
+          type: 'YulForStatement',
+          initializationBlock: {},
+          conditionExpression: 'bar',
+          loopBlock: {},
+          body: {},
+        },
       },
     ],
   });
   expect(
     createParse((p) => p.assemblyStatement())(`assembly { leave break continue }`),
   ).toMatchObject({
-    yulStatements: ['leave', 'break', 'continue'],
+    yulStatements: [{ expression: 'leave' }, { expression: 'break' }, { expression: 'continue' }],
   });
   expect(
     createParse((p) => p.assemblyStatement())(`assembly { switch x case 0 {} default {} }`),
   ).toMatchObject({
     yulStatements: [
       {
-        type: 'YulSwitchStatement',
-        expression: 'x',
-        switchCases: [{ case: '0' }],
-        default: true,
-        body: {},
+        expression: {
+          type: 'YulSwitchStatement',
+          expression: 'x',
+          switchCases: [{ case: '0' }],
+          default: true,
+          body: {},
+        },
       },
     ],
   });
@@ -50,11 +56,13 @@ test('assemblyStatement', () => {
   ).toMatchObject({
     yulStatements: [
       {
-        type: 'YulFunctionDefinition',
-        name: 'foo',
-        parameters: ['x', 'y'],
-        returnParameters: ['a', 'b'],
-        body: {},
+        expression: {
+          type: 'YulFunctionDefinition',
+          name: 'foo',
+          parameters: ['x', 'y'],
+          returnParameters: ['a', 'b'],
+          body: {},
+        },
       },
     ],
   });

@@ -10,7 +10,7 @@ export class YulFunctionDefinition extends BaseNode {
   body: YulBlock | null = null;
   constructor(ctx: YulFunctionDefinitionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
-    this.name = ctx._YulIdentifier!.text!;
+    this.name = ctx.YulIdentifier(0)!.getText();
     this.parameters = ctx._arguments.map((arg) => arg.text!);
     this.returnParameters = ctx._returnParameters.map((arg) => arg.text!);
     this.body = ctx._body?.accept(visitor) ?? null;
