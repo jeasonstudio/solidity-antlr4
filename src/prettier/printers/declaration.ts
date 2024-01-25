@@ -5,7 +5,7 @@ export class PrinterDeclaration
   extends BasePrinter
   implements Record<`print${ast.DeclarationNodeType}`, PrintFunc<any>>
 {
-  printContractDefinition: PrintFunc<ast.ContractDefinition> = ({ node, print, path }) => {
+  printContractDefinition: PrintFunc<ast.ContractDefinition> = ({ node, print, path, options }) => {
     const groupId = Symbol(node.type);
     const parts: Doc[] = [];
     if (node.abstract && node.contractKind === 'contract') {
@@ -25,14 +25,13 @@ export class PrinterDeclaration
       parts.push(this.builders.indentIfBreak(bases, { groupId }));
     }
 
+    const nodes = path.map((p) => [print(p), this.pangu(p)], 'nodes');
+
     return [
       this.builders.group(parts, { id: groupId }),
       this.builders.ifBreak(this.builders.line, this.space, { groupId }),
       this.block(
-        [
-          this.builders.breakParent,
-          this.builders.join(this.builders.line, path.map(print, 'nodes')),
-        ],
+        [this.builders.breakParent, this.builders.join(this.builders.hardline, nodes)],
         !node.nodes.length,
       ),
     ];

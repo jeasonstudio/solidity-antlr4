@@ -116,7 +116,6 @@ contract AbiEncode {
       (bool ok, , string msg, ) = _contract.call(data);
       require(ok, "call failed");
   }
-
   function encodeWithSignature(
       address to,
       uint amount
@@ -212,7 +211,6 @@ contract AbiEncode {
           mload(bytecode),
           _salt
       )
-
       if iszero(extcodesize(addr)) {
           revert(0, 0)
       }
@@ -246,7 +244,6 @@ contract AbiEncode {
                   _salt
                 )
             }
-
         function allocate(length) -> pos {
           pos := mload(0x40)
         }
@@ -265,7 +262,7 @@ contract AbiEncode {
   expect(await format('pragma solidity ^0.8.20;')).toMatchSnapshot();
 
   // console.log('-------------------------');
-  console.log(result);
+  // console.log(result);
   expect(result).toMatchSnapshot();
 
   // expect(1).toBe(1);

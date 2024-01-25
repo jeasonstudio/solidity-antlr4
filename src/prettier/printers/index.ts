@@ -1,4 +1,4 @@
-import { Printer } from 'prettier';
+import type { Printer } from 'prettier';
 import * as ast from '../../ast';
 import { PrintFunc } from './base';
 
@@ -30,16 +30,7 @@ export const print: Printer<any>['print'] = (path, options, _print) => {
     new PrinterYul(options, _print),
   );
   const printer = mixin[printerName];
-
-  // check type
-  if (!printer) {
-    console.warn('---> Unknown node type: ' + node.type);
-    return node.type;
-  }
-
-  if (node.comments?.length) {
-    console.log(node.type, node.comments.length);
-  }
+  if (!printer) throw new Error(`missing printer for node type "${node.type}"`);
 
   // print
   const document = printer({ path, options, print: _print, node });

@@ -67,7 +67,12 @@ export class PrinterMeta
     path.map((nodePath) => {
       contents.push(nodePath.call(print));
       contents.push(this.builders.hardline);
-      if (nodePath.node?.type !== nodePath.next?.type) contents.push(this.builders.hardline);
+      if (
+        nodePath.node?.type !== nodePath.next?.type ||
+        nodePath.next?.type === 'ContractDefinition'
+      ) {
+        contents.push(this.builders.hardline);
+      }
     }, 'nodes');
     return contents;
   };

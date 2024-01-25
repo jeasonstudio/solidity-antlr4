@@ -15,8 +15,9 @@ export class PrinterYul
     ];
   };
   printYulBlock: PrintFunc<ast.YulBlock> = ({ node, path, print }) => {
+    const statements = path.map((p) => [print(p), this.pangu(p)], 'statements');
     return this.block(
-      this.builders.join(this.builders.line, path.map(print, 'statements')),
+      this.builders.join(this.builders.line, statements),
       !node.statements.length,
     );
   };

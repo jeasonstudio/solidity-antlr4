@@ -40,6 +40,13 @@ export class BasePrinter {
     public readonly print: (path: AstPath<any>) => Doc,
   ) {}
 
+  // The pangu space
+  pangu = (path: AstPath<any>) => {
+    return util.isNextLineEmpty(this.options.originalText, this.options.locEnd(path.node) + 1)
+      ? this.builders.hardline
+      : '';
+  };
+
   // value => "value"
   literal = (value: Doc) => {
     return this.options.singleQuote

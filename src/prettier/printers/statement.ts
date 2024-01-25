@@ -16,21 +16,21 @@ export class PrinterStatement
         this.tuple(this.paramater((node.flags ?? []).map((f) => [this.quote, f, this.quote]))),
       );
     }
+
+    const statements = path.map((p) => [print(p), this.pangu(p)], 'yulStatements');
     parts.push(
       this.space,
       this.block(
-        this.builders.join(this.builders.hardline, path.map(print, 'yulStatements')),
+        this.builders.join(this.builders.hardline, statements),
         !node.yulStatements.length,
       ),
     );
     return this.builders.group(parts);
   };
   printBlock: PrintFunc<ast.Block> = ({ node, path, print }) => {
+    const statements = path.map((p) => [print(p), this.pangu(p)], 'statements');
     return this.block(
-      [
-        this.builders.join(this.builders.line, path.map(print, 'statements')),
-        this.builders.breakParent,
-      ],
+      [this.builders.join(this.builders.line, statements), this.builders.breakParent],
       !node.statements.length,
     );
   };
