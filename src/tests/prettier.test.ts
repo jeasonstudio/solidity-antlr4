@@ -204,6 +204,55 @@ contract AbiEncode {
     (bool sent, ) = msg.sender.call{value: amount}("");
 
     assembly "evmasm" ("foo","bar") {}
+
+    assembly {
+      addr := create2(
+          callvalue(),
+          add(bytecode, 0x20),
+          mload(bytecode),
+          _salt
+      )
+
+      if iszero(extcodesize(addr)) {
+          revert(0, 0)
+      }
+
+      switch x case 0 {
+        addr := create2(
+          callvalue(),
+          add(bytecode, 0x20),
+          mload(bytecode),
+          _salt
+      )
+      } default {
+        addr := create2(
+          callvalue(),
+          add(bytecode, 0x20),
+          mload(bytecode),
+          _salt
+      )
+      }
+
+      for
+                { let end := add(dataElementLocation, mul(len, 0x20)) }
+                lt(dataElementLocation, end)
+                { dataElementLocation := add(dataElementLocation, 0x20) }
+            {
+                sum := add(sum, mload(dataElementLocation))
+                addr := create2(
+                  callvalue(),
+                  add(bytecode, 0x20),
+                  mload(bytecode),
+                  _salt
+                )
+            }
+
+        function allocate(length) -> pos {
+          pos := mload(0x40)
+        }
+    }
+
+
   }
 }
 
@@ -215,8 +264,9 @@ contract AbiEncode {
 
   expect(await format('pragma solidity ^0.8.20;')).toMatchSnapshot();
 
-  console.log('-------------------------');
+  // console.log('-------------------------');
   console.log(result);
+  expect(result).toMatchSnapshot();
 
   // expect(1).toBe(1);
 });

@@ -18,7 +18,10 @@ export class PrinterStatement
     }
     parts.push(
       this.space,
-      this.block(path.map(print, 'yulStatements'), !node.yulStatements.length),
+      this.block(
+        this.builders.join(this.builders.hardline, path.map(print, 'yulStatements')),
+        !node.yulStatements.length,
+      ),
     );
     return this.builders.group(parts);
   };

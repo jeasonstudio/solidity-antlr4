@@ -4,15 +4,15 @@ import { YulBlock } from './yul-block';
 
 export class YulFunctionDefinition extends BaseNode {
   type = 'YulFunctionDefinition' as const;
-  name: string | null = null;
-  parameters: (string | null)[] = [];
-  returnParameters: (string | null)[] = [];
+  name: string;
+  parameters: string[] = [];
+  returnParameters: string[] = [];
   body: YulBlock | null = null;
   constructor(ctx: YulFunctionDefinitionContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
-    this.name = ctx.YulIdentifier(0)?.getText() ?? null;
-    this.parameters = ctx._arguments.map((arg) => arg.text);
-    this.returnParameters = ctx._returnParameters.map((arg) => arg.text);
+    this.name = ctx._YulIdentifier!.text!;
+    this.parameters = ctx._arguments.map((arg) => arg.text!);
+    this.returnParameters = ctx._returnParameters.map((arg) => arg.text!);
     this.body = ctx._body?.accept(visitor) ?? null;
   }
 }

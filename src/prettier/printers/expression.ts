@@ -34,7 +34,7 @@ export class PrinterExpression
       { id: groupId },
     );
   };
-  printFunctionCallOptions: PrintFunc<ast.FunctionCallOptions> = ({ path, print, node }) => {
+  printFunctionCallOptions: PrintFunc<ast.FunctionCallOptions> = ({ path, print }) => {
     return [
       path.call(print, 'expression'),
       this.block(this.paramater(path.map(print, 'arguments'))),
