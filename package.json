@@ -39,6 +39,16 @@
       "import": "./dist/traverse/index.js",
       "require": "./dist/traverse/index.cjs",
       "types": "./dist/traverse/index.d.ts"
+    },
+    "./prettier": {
+      "import": "./dist/prettier/index.js",
+      "require": "./dist/prettier/index.cjs",
+      "types": "./dist/prettier/index.d.ts"
+    },
+    "./generator": {
+      "import": "./dist/generator/index.js",
+      "require": "./dist/generator/index.cjs",
+      "types": "./dist/generator/index.d.ts"
     }
   },
   "files": [

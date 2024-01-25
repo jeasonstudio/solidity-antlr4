@@ -1,7 +1,12 @@
 import { Parser, ParserOptions } from 'prettier';
 import { SyntaxNode } from '../ast';
 import { PrettierPrinter } from './printer';
-import { parse, tokenizer } from '../parser';
+import { SyntaxToken, parse, tokenizer } from '../parser';
+import { comments } from './printers/base';
+
+export const getCommentTokens = (tokens: SyntaxToken[]) => {
+  return tokens.filter((token) => comments.includes(token.type));
+};
 
 export class PrettierParser implements Parser<SyntaxNode> {
   public static name = 'solidity-antlr4';
@@ -11,9 +16,7 @@ export class PrettierParser implements Parser<SyntaxNode> {
   public parse = (text: string, _options: ParserOptions<SyntaxNode>) => {
     const ast = parse(text, { tolerant: true });
     const tokens = tokenizer(text, { tolerant: true });
-    if (ast) {
-      (<any>ast).comments = tokens.filter((token) => token.type?.includes('COMMENT'));
-    }
+    if (ast) (<any>ast).comments = getCommentTokens(tokens);
     return ast;
   };
 }
