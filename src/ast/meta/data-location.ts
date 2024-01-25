@@ -5,7 +5,7 @@ type DataLocationName = 'storage' | 'memory' | 'calldata';
 
 export class DataLocation extends BaseNodeString {
   type = 'DataLocation' as const;
-  name: DataLocationName | null = null;
+  name: DataLocationName;
   constructor(ctx: DataLocationContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     if (ctx.Storage()) {
@@ -14,6 +14,8 @@ export class DataLocation extends BaseNodeString {
       this.name = 'memory';
     } else if (ctx.Calldata()) {
       this.name = 'calldata';
+    } else {
+      throw new Error('unknown data location');
     }
   }
 }

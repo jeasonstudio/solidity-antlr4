@@ -24,7 +24,7 @@ export class BaseFunctionDefinition extends BaseNode {
   virtual: boolean = false;
   visibility: Visibility | null = null;
   stateMutability: StateMutability | null = null;
-  modifiers: ModifierInvocation[] = [];
+  modifiers: ModifierInvocation[] | null = null;
   parameters: ParameterList | null = null;
   returnParameters: ParameterList | null = null;
   body: Block | null = null;

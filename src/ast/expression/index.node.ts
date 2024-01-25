@@ -10,6 +10,7 @@ import { Identifier } from './identifier';
 import { IndexAccess } from './index-access';
 import { IndexRangeAccess } from './index-range-access';
 import { MemberAccess } from './member-access';
+import { MetaType } from './meta-type';
 import { NamedArgument } from './named-argument';
 import { NewExpr } from './new-expr';
 import { NumberLiteral } from './number-literal';
@@ -32,6 +33,7 @@ export {
   IndexAccess,
   IndexRangeAccess,
   MemberAccess,
+  MetaType,
   NamedArgument,
   NewExpr,
   NumberLiteral,

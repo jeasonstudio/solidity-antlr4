@@ -90,7 +90,7 @@ export abstract class BaseNode {
 
 export abstract class BaseNodeList<T extends any = BaseNode> extends Array<T> {
   constructor(
-    ctxList: ParseTree[],
+    ctxList: (ParseTree | any)[],
     visitor: SolidityParserVisitor<any>,
     formatter: (item: ParseTree) => T = (ctx) => ctx.accept(visitor!),
   ) {

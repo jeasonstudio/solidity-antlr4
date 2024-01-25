@@ -6,10 +6,10 @@ import { Expression } from '../expression';
 export class InheritanceSpecifier extends BaseNode {
   type = 'InheritanceSpecifier' as const;
   baseName: IdentifierPath;
-  arguments: Expression[] = [];
+  arguments: Expression[] | null = null;
   constructor(ctx: InheritanceSpecifierContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.baseName = ctx.identifierPath().accept(visitor);
-    this.arguments = ctx.callArgumentList()?.accept(visitor) ?? [];
+    this.arguments = ctx.callArgumentList()?.accept(visitor) ?? null;
   }
 }

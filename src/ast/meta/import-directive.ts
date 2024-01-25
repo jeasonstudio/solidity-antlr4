@@ -7,6 +7,7 @@ import { ImportAliases } from './import-aliases';
 export class ImportDirective extends BaseNode {
   type = 'ImportDirective' as const;
   path: Path;
+  importAll: boolean = false; // import * as Foo from 'foo';
   unitAlias: Identifier | null = null;
   symbolAliases: ImportAliases[] = [];
   constructor(ctx: ImportDirectiveContext, visitor: SolidityParserVisitor<any>) {
@@ -14,6 +15,7 @@ export class ImportDirective extends BaseNode {
     this.path = ctx.path()!.accept(visitor);
     if (!!ctx.As() && ctx.identifier()) {
       this.unitAlias = ctx.identifier()!.accept(visitor);
+      this.importAll = !!ctx.Mul();
     }
     this.symbolAliases = ctx.symbolAliases()?.accept(visitor) || [];
   }

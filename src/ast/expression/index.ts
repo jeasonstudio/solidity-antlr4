@@ -22,6 +22,7 @@ export * from './inline-array-expression';
 export * from './inline-array';
 export * from './literal';
 export * from './member-access';
+export * from './meta-type';
 export * from './named-argument';
 export * from './new-expr';
 export * from './number-literal';

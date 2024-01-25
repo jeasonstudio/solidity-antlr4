@@ -21,6 +21,8 @@ export class VariableDeclaration extends BaseNode {
   dataLocation: DataLocation | null = null;
 
   stateVariable: boolean = false;
+  parameter: boolean = false;
+
   public: boolean = false;
   private: boolean = false;
   internal: boolean = false;
@@ -44,20 +46,22 @@ export class VariableDeclaration extends BaseNode {
     super(ctx, visitor);
 
     if (ctx instanceof VariableDeclarationContext) {
+      this.parameter = true; // from the grammar
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
-      this.dataLocation = ctx.dataLocation()?.accept(visitor);
+      this.dataLocation = ctx.dataLocation()?.accept(visitor) ?? null;
       this.stateVariable = false;
       this.constant = false;
       this.indexed = false;
     } else if (ctx instanceof ParameterDeclarationContext) {
+      this.parameter = true;
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
-      this.dataLocation = ctx.dataLocation()?.accept(visitor);
+      this.dataLocation = ctx.dataLocation()?.accept(visitor) ?? null;
     } else if (ctx instanceof StateVariableDeclarationContext) {
+      this.stateVariable = true;
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
-      this.stateVariable = true;
       this.public = !!ctx.Public().length;
       this.private = !!ctx.Private().length;
       this.internal = !!ctx.Internal().length;
@@ -71,9 +75,11 @@ export class VariableDeclaration extends BaseNode {
       this.constant = true;
       this.expression = ctx.expression().accept(visitor);
     } else if (ctx instanceof ErrorParameterContext) {
+      this.parameter = true;
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
     } else if (ctx instanceof EventParameterContext) {
+      this.parameter = true;
       this.name = ctx.identifier()?.accept(visitor) ?? null;
       this.typeName = ctx.typeName().accept(visitor);
       this.indexed = !!ctx.Indexed();

@@ -6,6 +6,8 @@ export type AssemblyFlags = string[];
 export const AssemblyFlags = class extends BaseNodeList<any> {
   type = 'AssemblyFlags' as const;
   constructor(ctx: AssemblyFlagsContext, _visitor: SolidityParserVisitor<any>) {
-    super(ctx.AssemblyFlagString(), _visitor, (flag) => formatString(flag.getText()));
+    super([], _visitor);
+    // @ts-expect-error
+    return ctx.AssemblyFlagString().map((x) => formatString(x.getText()));
   }
 };

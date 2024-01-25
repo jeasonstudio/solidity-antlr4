@@ -9,5 +9,4 @@ export * from './elementary-type-name';
 export * from './function-type-name';
 export * from './mapping-key-type';
 export * from './mapping-type';
-export * from './meta-type';
 export * from './type-name';

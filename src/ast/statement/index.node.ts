@@ -5,6 +5,7 @@ import { CatchClause } from './catch-clause';
 import { ContinueStatement } from './continue-statement';
 import { DoWhileStatement } from './do-while-statement';
 import { EmitStatement } from './emit-statement';
+import { ExpressionStatement } from './expression-statement';
 import { ForStatement } from './for-statement';
 import { IfStatement } from './if-statement';
 import { ReturnStatement } from './return-statement';
@@ -21,6 +22,7 @@ export {
   ContinueStatement,
   DoWhileStatement,
   EmitStatement,
+  ExpressionStatement,
   ForStatement,
   IfStatement,
   ReturnStatement,

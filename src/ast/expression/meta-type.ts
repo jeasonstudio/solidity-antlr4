@@ -1,7 +1,8 @@
 import { BaseNode } from '../base';
 import { MetaTypeContext, SolidityParserVisitor } from '../../antlr4';
-import { TypeName } from './type-name';
+import { TypeName } from '../type';
 
+// `type(TypeName)` such as type(address)
 export class MetaType extends BaseNode {
   type = 'MetaType' as const;
   typeName: TypeName;
