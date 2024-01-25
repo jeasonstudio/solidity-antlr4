@@ -43,7 +43,7 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Run jest
+      - name: Run test
         run: pnpm run test:ci
 
       - name: Upload coverage reports to Codecov
