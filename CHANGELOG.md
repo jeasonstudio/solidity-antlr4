@@ -1,5 +1,16 @@
 # solidity-antlr4
 
+## 2.7.0
+
+### Minor Changes
+
+- ee62da8: change ast node type
+- cbf7675: support prettier plugin
+
+### Patch Changes
+
+- 34a30da: add codegen based on prettier
+
 ## 2.6.2
 
 ### Patch Changes
