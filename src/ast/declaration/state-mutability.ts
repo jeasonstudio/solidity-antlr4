@@ -1,10 +1,10 @@
 import { BaseNodeString } from '../base';
 import { StateMutabilityContext, SolidityParserVisitor, TerminalNode } from '../../antlr4';
 
-type StateMutabilityKind = 'pure' | 'view' | 'payable';
+export type StateMutabilityKind = 'pure' | 'view' | 'payable';
 
 export class StateMutability extends BaseNodeString {
-  type = 'StateMutability' as const;
+  // type = 'StateMutability' as const;
   name: StateMutabilityKind | null = null;
 
   constructor(ctx: StateMutabilityContext, visitor: SolidityParserVisitor<any>) {

@@ -1,10 +1,10 @@
 import { BaseNodeString } from '../base';
 import { VisibilityContext, SolidityParserVisitor, TerminalNode } from '../../antlr4';
 
-type VisibilityKind = 'external' | 'internal' | 'public' | 'private';
+export type VisibilityKind = 'external' | 'internal' | 'public' | 'private';
 
 export class Visibility extends BaseNodeString {
-  type = 'Visibility' as const;
+  // type = 'Visibility' as const;
   name: VisibilityKind | null = null;
   constructor(ctx: VisibilityContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);

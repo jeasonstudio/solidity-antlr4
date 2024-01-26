@@ -7,7 +7,7 @@ export class PrinterType
 {
   printElementaryTypeName: PrintFunc<ast.ElementaryTypeName> = ({ node }) => {
     const parts: Doc[] = [node.name];
-    if (node.payable) parts.push(this.space, 'payable');
+    if (node.name === 'address' && node.payable) parts.push(this.space, 'payable');
     return parts;
   };
   printFunctionTypeName: PrintFunc<ast.FunctionTypeName>; // TODO: implement in declaration.ts

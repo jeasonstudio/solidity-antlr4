@@ -13,7 +13,13 @@ export class PrinterExpression
     if (node.right !== null) parts.push(this.builders.line, path.call(print, 'right'));
     return this.builders.group(parts);
   };
-  printAssignment: PrintFunc<ast.Assignment> = this.printBinaryOperation as any;
+  printAssignment: PrintFunc<ast.Assignment> = ({ node, path, print }) => {
+    const parts: Doc[] = [];
+    if (node.left !== null) parts.push(path.call(print, 'left'));
+    if (node.operator !== null) parts.push(this.space, node.operator);
+    if (node.right !== null) parts.push(this.builders.line, path.call(print, 'right'));
+    return this.builders.group(parts);
+  };
   printBooleanLiteral: PrintFunc<ast.BooleanLiteral> = ({ node }) =>
     node.value === true ? 'true' : 'false';
   printConditional: PrintFunc<ast.Conditional> = ({ path, print }) => {
@@ -61,6 +67,9 @@ export class PrinterExpression
     const inner = [path.call(print, 'startExpression'), ':', path.call(print, 'endExpression')];
     return [path.call(print, 'baseExpression'), this.list(inner)];
   };
+  printInlineArray: PrintFunc<ast.InlineArray> = ({ path, print }) => {
+    return this.list(this.paramater(path.map(print, 'expressions')));
+  };
   printMemberAccess: PrintFunc<ast.MemberAccess> = ({ node, path, print }) => {
     return [path.call(print, 'expression'), this.dot, node.memberName!];
   };
@@ -83,12 +92,16 @@ export class PrinterExpression
     return ['payable', this.tuple(this.paramater(path.map(print, 'arguments')))];
   };
   printStringLiteral: PrintFunc<ast.StringLiteral> = ({ node }) => this.literal(node.value);
+  printTupleExpression: PrintFunc<ast.TupleExpression> = ({ path, print }) => {
+    return this.tuple(this.paramater(path.map(print, 'expressions')));
+  };
   printUnaryOperation: PrintFunc<ast.UnaryOperation> = ({ node, path, print }) => {
     const parts: Doc[] = [];
     if (node.left !== null) parts.push(path.call(print, 'left'));
     if (node.operator !== null) parts.push(node.operator);
+    if (node.operator === 'delete') parts.push(this.space); // shit this
     if (node.right !== null) parts.push(path.call(print, 'right'));
-    return parts;
+    return this.space, parts;
   };
   printUnicodeStringLiteral: PrintFunc<ast.UnicodeStringLiteral> = ({ node }) => [
     'unicode',

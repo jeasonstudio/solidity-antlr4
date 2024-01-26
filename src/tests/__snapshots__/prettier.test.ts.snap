@@ -20,13 +20,13 @@ contract Tree {
 
   /// @notice Returns the amount of leaves the tree has.
   /// @dev Returns only a fixed number.
-  function leaves(uint256) external pure virtual {
+  function leaves() external pure virtual returns (uint256) {
     return 2;
   }
 }
 
 contract Plant {
-  function leaves(uint256) external pure virtual {
+  function leaves() external pure virtual returns (uint256) {
     return 3;
   }
 }
@@ -52,7 +52,7 @@ contract KumquatTree is Tree, Plant /* test */ {
 
   /// Return the amount of leaves that this specific kind of tree has
   /// @inheritdoc Tree
-  function leaves(uint256) external pure override(Tree, Plant) {
+  function leaves() external pure override(Tree, Plant) returns (uint256) {
     return 3;
   }
 }
@@ -316,7 +316,7 @@ contract AbiEncode {
     address to,
     uint amount
   ) external pure override(C, B) returns (bytes memory, string) {
-    return abi.encodeCall(IERC20.transfer, toamount);
+    return abi.encodeCall(IERC20.transfer, (to, amount));
   }
 
   function isApprovedForAll(

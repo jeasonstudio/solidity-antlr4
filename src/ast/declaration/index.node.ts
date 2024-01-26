@@ -4,12 +4,12 @@ import { ErrorDefinition } from './error-definition';
 import { EventDefinition } from './event-definition';
 import { FunctionDefinition } from './function-definition';
 import { ModifierDefinition } from './modifier-definition';
-import { StateMutability } from './state-mutability';
+// import { StateMutability } from './state-mutability';
 import { StructDefinition } from './struct-definition';
 import { StructMember } from './struct-member';
 import { UserDefinedValueTypeDefinition } from './user-defined-value-type-definition';
 import { VariableDeclaration } from './variable-declaration';
-import { Visibility } from './visibility';
+// import { Visibility } from './visibility';
 
 export {
   ContractDefinition,
@@ -18,10 +18,10 @@ export {
   EventDefinition,
   FunctionDefinition,
   ModifierDefinition,
-  StateMutability,
+  // StateMutability,
   StructDefinition,
   StructMember,
   UserDefinedValueTypeDefinition,
   VariableDeclaration,
-  Visibility,
+  // Visibility,
 };

@@ -9,8 +9,8 @@ import {
   SolidityParserVisitor,
 } from '../../antlr4';
 import { Identifier } from '../expression';
-import { StateMutability } from './state-mutability';
-import { Visibility } from './visibility';
+import { StateMutabilityKind } from './state-mutability';
+import { VisibilityKind } from './visibility';
 import { ModifierInvocation, OverrideSpecifier, ParameterList } from '../meta';
 import { Block } from '../statement';
 
@@ -22,8 +22,8 @@ export class BaseFunctionDefinition extends BaseNode {
   functionKind: FunctionKind = 'function';
   override: OverrideSpecifier | null = null;
   virtual: boolean = false;
-  visibility: Visibility | null = null;
-  stateMutability: StateMutability | null = null;
+  visibility: VisibilityKind | null = null;
+  stateMutability: StateMutabilityKind | null = null;
   modifiers: ModifierInvocation[] | null = null;
   parameters: ParameterList | null = null;
   returnParameters: ParameterList | null = null;
@@ -41,8 +41,8 @@ export class BaseFunctionDefinition extends BaseNode {
     super(ctx, visitor);
     if (ctx instanceof FunctionTypeNameContext) {
       this.functionKind = 'function';
-      this.visibility = ctx.visibility(0)?.accept(visitor) ?? null;
-      this.stateMutability = ctx.stateMutability(0)?.accept(visitor) ?? null;
+      this.visibility = (ctx.visibility(0)?.getText() as VisibilityKind) ?? null; // ctx.visibility(0)?.accept(visitor) ?? null;
+      this.stateMutability = (ctx.stateMutability(0)?.getText() as StateMutabilityKind) ?? null; // ctx.stateMutability(0)?.accept(visitor) ?? null;
       this.parameters = ctx._arguments?.accept(visitor) ?? null;
       this.returnParameters = ctx._returnParameters?.accept(visitor) ?? null;
     } else {
@@ -51,9 +51,10 @@ export class BaseFunctionDefinition extends BaseNode {
 
       if (ctx instanceof ConstructorDefinitionContext) {
         this.functionKind = 'constructor';
-        this.visibility = new Visibility(ctx as any, visitor);
-        this.stateMutability = new StateMutability(ctx as any, visitor);
-        this.parameters = ctx.parameterList()?.accept(visitor) ?? null;
+        this.visibility = ctx.Internal(0) ? 'internal' : ctx.Public(0) ? 'public' : null; // new Visibility(ctx as any, visitor);
+        this.stateMutability = ctx.Payable(0) ? 'payable' : null; // new StateMutability(ctx as any, visitor);
+        this.parameters = ctx._arguments?.accept(visitor) ?? null;
+        this.returnParameters = null;
       } else {
         this.virtual = !!ctx.Virtual().length;
         const overrideSpecifier = ctx.overrideSpecifier(0) as OverrideSpecifierContext | null;
@@ -61,21 +62,23 @@ export class BaseFunctionDefinition extends BaseNode {
 
         if (ctx instanceof FallbackFunctionDefinitionContext) {
           this.functionKind = 'fallback';
-          this.visibility = new Visibility(ctx as any, visitor);
-          this.stateMutability = ctx.stateMutability(0)?.accept(visitor) ?? this.stateMutability;
-          this.parameters = ctx.parameterList(0)?.accept(visitor) ?? null;
-          this.returnParameters = ctx.parameterList(1)?.accept(visitor) ?? null;
+          this.visibility = ctx.External(0) ? 'external' : null; // new Visibility(ctx as any, visitor);
+          this.stateMutability = (ctx.stateMutability(0)?.getText() as StateMutabilityKind) ?? null;
+          this.parameters = ctx
+            .parameterList()
+            .map((parameterList) => parameterList.accept(visitor));
+          this.returnParameters = ctx._returnParameters?.accept(visitor) ?? null;
         } else if (ctx instanceof ReceiveFunctionDefinitionContext) {
           this.functionKind = 'receive';
-          this.visibility = new Visibility(ctx as any, visitor);
-          this.stateMutability = new StateMutability(ctx as any, visitor);
+          this.visibility = ctx.External() ? 'external' : null; // new Visibility(ctx as any, visitor);
+          this.stateMutability = ctx.Payable() ? 'payable' : null; // new StateMutability(ctx as any, visitor);
         } else {
           this.functionKind = 'function';
           this.name = ctx.identifier()?.accept(visitor) ?? null;
-          this.visibility = ctx.visibility(0)?.accept(visitor) ?? this.visibility;
-          this.stateMutability = ctx.stateMutability(0)?.accept(visitor) ?? this.stateMutability;
-          this.parameters = ctx.parameterList(0)?.accept(visitor) ?? null;
-          this.returnParameters = ctx.parameterList(1)?.accept(visitor) ?? null;
+          this.visibility = (ctx.visibility(0)?.getText() as VisibilityKind) ?? null;
+          this.stateMutability = (ctx.stateMutability(0)?.getText() as StateMutabilityKind) ?? null;
+          this.parameters = ctx._arguments?.accept(visitor) ?? null;
+          this.returnParameters = ctx._returnParameters?.accept(visitor) ?? null;
         }
       }
     }

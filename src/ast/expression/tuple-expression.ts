@@ -1,12 +1,12 @@
-import { BaseNodeList } from '../base';
+import { BaseNode } from '../base';
 import { TupleExpressionContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 
-export type TupleExpression = Expression[];
-
-export const TupleExpression = class extends BaseNodeList<Expression> {
+export class TupleExpression extends BaseNode {
   type = 'TupleExpression' as const;
+  expressions: Expression[] = [];
   constructor(ctx: TupleExpressionContext, visitor: SolidityParserVisitor<any>) {
-    super(ctx.expression(), visitor);
+    super(ctx, visitor);
+    this.expressions = ctx.expression().map((exp) => exp.accept(visitor));
   }
-};
+}

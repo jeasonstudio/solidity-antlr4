@@ -10,7 +10,7 @@ export const canAttachComment: Printer<CommentToken>['canAttachComment'] = (node
   !!node?.type && !comments.includes(node.type);
 
 // TODO: needs a comment parser
-export const printComment: Printer<CommentToken>['printComment'] = (path, options) => {
+export const printComment: Printer<CommentToken>['printComment'] = (path, _options) => {
   const comment = path.node;
   if (!comment.text) return '';
 

@@ -5,7 +5,7 @@ export class PrinterDeclaration
   extends BasePrinter
   implements Record<`print${ast.DeclarationNodeType}`, PrintFunc<any>>
 {
-  printContractDefinition: PrintFunc<ast.ContractDefinition> = ({ node, print, path, options }) => {
+  printContractDefinition: PrintFunc<ast.ContractDefinition> = ({ node, print, path }) => {
     const groupId = Symbol(node.type);
     const parts: Doc[] = [];
     if (node.abstract && node.contractKind === 'contract') {
@@ -62,36 +62,32 @@ export class PrinterDeclaration
     const groupId = Symbol(node.type);
 
     const functionMeta: Doc[] = [];
-    if (node.functionKind === 'constructor') {
-      functionMeta.push('constructor');
-    } else {
-      functionMeta.push(
-        'function',
-        this.space,
-        node.name !== null ? path.call(print, 'name') : node.functionKind,
-      );
+    switch (node.functionKind) {
+      case 'constructor':
+      case 'fallback':
+      case 'receive':
+        functionMeta.push(node.functionKind);
+        break;
+      case 'function':
+      default:
+        functionMeta.push('function', this.space, path.call(print, 'name'));
+        break;
     }
-    functionMeta.push(
-      this.tuple(
-        this.paramater(
-          path.map(print, 'parameters'),
-          this.builders.ifBreak(
-            [this.comma, this.builders.hardline],
-            [this.comma, this.builders.line],
-            { groupId },
-          ),
-        ),
-        groupId,
-      ),
+    const parameters = node.parameters?.length ? path.map(print, 'parameters') : [];
+    const parameterSeparator = this.builders.ifBreak(
+      [this.comma, this.builders.hardline],
+      [this.comma, this.builders.line],
+      { groupId },
     );
+    functionMeta.push(this.tuple(this.paramater(parameters, parameterSeparator), groupId));
 
     const functionInfo: Doc[] = [];
-    if (node.visibility !== null) functionInfo.push(path.call(print, 'visibility'));
-    if (node.stateMutability !== null) functionInfo.push(path.call(print, 'stateMutability'));
-    if (node.modifiers !== null) {
+    if (node.visibility !== null) functionInfo.push(node.visibility);
+    if (node.stateMutability !== null) functionInfo.push(node.stateMutability);
+    if (node.modifiers !== null && node.modifiers.length) {
       path.map((modifierPath) => functionInfo.push(print(modifierPath)), 'modifiers');
     }
-    if (node.virtual) functionInfo.push('virtual');
+    if (node.virtual === true) functionInfo.push('virtual');
     if (node.override !== null) {
       functionInfo.push(
         node.override.length
@@ -113,9 +109,12 @@ export class PrinterDeclaration
     });
 
     const parts: Doc[] = [
-      this.builders.group([functionMeta, this.space, functionInfoGroup], {
-        id: groupId,
-      }),
+      this.builders.group(
+        functionInfo.length ? [functionMeta, this.space, functionInfoGroup] : [functionMeta],
+        {
+          id: groupId,
+        },
+      ),
     ];
     if (node.body !== null) {
       parts.push(this.space, path.call(print, 'body'));
@@ -134,7 +133,7 @@ export class PrinterDeclaration
       path.call(print, 'body'),
     ];
   };
-  printStateMutability: PrintFunc<ast.StateMutability> = ({ node }) => node.name ?? '';
+  // printStateMutability: PrintFunc<ast.StateMutability> = ({ node }) => node.name || '';
   printStructDefinition: PrintFunc<ast.StructDefinition> = ({ node, path, print }) => {
     const structMember: Doc[] = [];
     if (node.members.length) {
@@ -190,7 +189,7 @@ export class PrinterDeclaration
     if (!node.parameter) parts.push(this.semi);
     return this.builders.group(parts);
   };
-  printVisibility: PrintFunc<ast.Visibility> = ({ node }) => node.name!;
+  // printVisibility: PrintFunc<ast.Visibility> = ({ node }) => node.name || '';
 
   // TODO: Implement for type
   printFunctionTypeName: PrintFunc<ast.FunctionTypeName> = this.printFunctionDefinition as any;
