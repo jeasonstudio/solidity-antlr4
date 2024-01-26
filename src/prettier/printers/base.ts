@@ -1,14 +1,26 @@
-import { AstPath, Doc, ParserOptions, doc, util } from 'prettier';
 import * as ast from '../../ast';
-import { SyntaxTokenType } from '../../parser';
+import { type AstPath, type Doc, type ParserOptions, doc, util } from 'prettier';
+import { SyntaxTokenType, SyntaxToken } from '../../parser';
 
 export { Doc };
 
+export type CommentToken = SyntaxToken & {
+  placement: 'remaining' | 'ownLine' | 'endOfLine';
+  leading: boolean;
+  trailing: boolean;
+  printed: boolean;
+  nodeDescription: string;
+};
+
+export type WithComments<T extends ast.SyntaxNode = ast.SyntaxNode> = T & {
+  comments?: CommentToken[];
+};
+
 export type PrintFunc<T extends ast.SyntaxNode = ast.SyntaxNode> = (arg: {
-  node: T;
-  path: AstPath<T>;
-  options: ParserOptions<T>;
-  print: (path: AstPath<ast.SyntaxNode | null>) => Doc;
+  node: WithComments<T>;
+  path: AstPath<WithComments<T>>;
+  options: ParserOptions<WithComments<T>>;
+  print: (path: AstPath<WithComments | null>) => Doc;
   args?: any;
 }) => Doc;
 
@@ -36,13 +48,13 @@ export class BasePrinter {
   readonly builders = doc.builders;
 
   constructor(
-    public readonly options: ParserOptions<ast.SyntaxNode>,
+    public readonly options: ParserOptions<WithComments>,
     public readonly print: (path: AstPath<any>) => Doc,
   ) {}
 
   // The pangu space
   pangu = (path: AstPath<any>) => {
-    return util.isNextLineEmpty(this.options.originalText, this.options.locEnd(path.node) + 1)
+    return util.isNextLineEmpty(this.options.originalText, this.options.locEnd(path.node))
       ? this.builders.hardline
       : '';
   };

@@ -259,15 +259,16 @@ contract AbiEncode {
     plugins: [plugin],
   });
 
-  expect(await format('pragma solidity ^0.8.20;')).toMatchSnapshot();
-
   // console.log('-------------------------');
   // console.log(result);
   expect(result).toMatchSnapshot();
-
-  // expect(1).toBe(1);
 });
 
 test('meta', async () => {
   expect(await format(load('meta'))).toMatchSnapshot();
+});
+
+test('comment', async () => {
+  // console.log(await format(load('comment')));
+  expect(await format(load('comment'))).toMatchSnapshot();
 });

@@ -34,5 +34,6 @@ export const print: Printer<any>['print'] = (path, options, _print) => {
 
   // print
   const document = printer({ path, options, print: _print, node });
+  // console.log(JSON.stringify(document));
   return document;
 };

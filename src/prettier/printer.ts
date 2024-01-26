@@ -1,6 +1,13 @@
-import { AstPath, Doc, ParserOptions, Printer } from 'prettier';
 import * as ast from '../ast';
-import { printComment, isBlockComment, canAttachComment, print } from './printers';
+import { AstPath, Doc, ParserOptions, Printer } from 'prettier';
+import {
+  printComment,
+  isBlockComment,
+  canAttachComment,
+  print,
+  massageAstNode,
+  handleComments,
+} from './printers';
 
 export type PrintFunc<T extends ast.SyntaxNode = ast.SyntaxNode> = (arg: {
   path: AstPath<T>;
@@ -16,6 +23,8 @@ export class PrettierPrinter implements Printer<any> {
   public printComment = printComment;
   public isBlockComment = isBlockComment;
   public canAttachComment = canAttachComment;
+  public massageAstNode = massageAstNode;
+  public handleComments = handleComments;
 
   // handleComments = {
   //   ownLine: this.ownLine,
