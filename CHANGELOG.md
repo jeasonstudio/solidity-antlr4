@@ -1,5 +1,12 @@
 # solidity-antlr4
 
+## 2.7.1
+
+### Patch Changes
+
+- 763036c: change function declaration node
+- 70b9568: prettier plugin support comment
+
 ## 2.7.0
 
 ### Minor Changes
