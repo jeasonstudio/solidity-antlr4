@@ -20,19 +20,22 @@ export class PrinterStatement
     const statements = path.map((p) => [print(p), this.pangu(p)], 'yulStatements');
     parts.push(
       this.space,
-      this.block(
-        this.builders.join(this.builders.hardline, statements),
-        !node.yulStatements.length,
-      ),
+      this.block(this.builders.join(this.builders.hardline, statements), {
+        empty: !node.yulStatements.length,
+      }),
     );
     return this.builders.group(parts);
   };
   printBlock: PrintFunc<ast.Block> = ({ node, path, print }) => {
     const statements = path.map((p) => [print(p), this.pangu(p)], 'statements');
-    return this.block(
-      [this.builders.join(this.builders.line, statements), this.builders.breakParent],
-      !node.statements.length,
-    );
+    const parts = this.block(this.builders.join(this.builders.line, statements), {
+      empty: !node.statements.length,
+      shouldBreak: true,
+    });
+    if (node.unchecked) {
+      return ['unchecked', this.space, parts];
+    }
+    return parts;
   };
   printBreakStatement: PrintFunc<ast.BreakStatement> = ({ node }) => [node.name, this.semi];
   printCatchClause: PrintFunc<ast.CatchClause> = ({ node, path, print }) => {
@@ -41,7 +44,7 @@ export class PrinterStatement
     if (node.errorName !== null || node.parameters !== null) parts.push(this.space);
     if (node.errorName !== null) parts.push(path.call(print, 'errorName'));
     if (node.parameters !== null) {
-      parts.push(this.tuple(this.paramater(path.map(print, 'parameters')), groupId));
+      parts.push(this.tuple(this.paramater(path.map(print, 'parameters')), { groupId }));
     }
     return [this.builders.group(parts, { id: groupId }), this.space, path.call(print, 'body')];
   };
@@ -55,7 +58,7 @@ export class PrinterStatement
       'emit',
       this.space,
       path.call(print, 'expression'),
-      this.tuple(path.call(print, 'arguments')),
+      path.call(print, 'arguments'),
       this.semi,
     ]);
   };
@@ -102,7 +105,7 @@ export class PrinterStatement
       'revert',
       this.space,
       path.call(print, 'expression'),
-      this.tuple(path.call(print, 'arguments')),
+      path.call(print, 'arguments'),
       this.semi,
     ]);
   };
@@ -117,7 +120,6 @@ export class PrinterStatement
     }
     parts.push(this.space, path.call(print, 'body'));
     parts.push(this.space, this.builders.join(this.space, path.map(print, 'catchClauses')));
-    parts.push(this.semi);
     return this.builders.group(parts);
   };
   printVariableDeclarationStatement: PrintFunc<ast.VariableDeclarationStatement> = ({

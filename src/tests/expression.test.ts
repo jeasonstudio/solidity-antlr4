@@ -113,11 +113,6 @@ test('memberAccess', () => {
 });
 
 test('expression', () => {
-  console.log(
-    createParse((p) => p.tupleExpression())(
-      `(call{foo: bar}, obj({foo: bar}), payable({foo: bar}), type(address), new Foo)`,
-    ),
-  );
   expect(
     createParse((p) => p.tupleExpression())(
       `(call{foo: bar}, obj({foo: bar}), payable({foo: bar}), type(address), new Foo)`,
@@ -126,7 +121,7 @@ test('expression', () => {
     expressions: [
       {
         expression: 'call',
-        arguments: [
+        namedArguments: [
           {
             name: 'foo',
             expression: 'bar',

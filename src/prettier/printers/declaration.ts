@@ -30,10 +30,10 @@ export class PrinterDeclaration
     return [
       this.builders.group(parts, { id: groupId }),
       this.builders.ifBreak(this.builders.line, this.space, { groupId }),
-      this.block(
-        [this.builders.breakParent, this.builders.join(this.builders.hardline, nodes)],
-        !node.nodes.length,
-      ),
+      this.block(this.builders.join(this.builders.hardline, nodes), {
+        empty: !node.nodes.length,
+        shouldBreak: true,
+      }),
     ];
   };
   printEnumDefinition: PrintFunc<ast.EnumDefinition> = ({ print, path, node }) => {
@@ -43,7 +43,7 @@ export class PrinterDeclaration
       this.space,
       path.call(print, 'name'),
       this.space,
-      this.block([enumMember, this.builders.breakParent], !node.members.length),
+      this.block(enumMember, { empty: !node.members.length, shouldBreak: true }),
     ];
   };
   printErrorDefinition: PrintFunc<ast.ErrorDefinition> = ({ path, print }) => {
@@ -85,7 +85,7 @@ export class PrinterDeclaration
       [this.comma, this.builders.line],
       { groupId },
     );
-    functionMeta.push(this.tuple(this.paramater(parameters, parameterSeparator), groupId));
+    functionMeta.push(this.tuple(this.paramater(parameters, parameterSeparator), { groupId }));
 
     const functionInfo: Doc[] = [];
     if (node.visibility !== null) functionInfo.push(node.visibility);
@@ -129,12 +129,12 @@ export class PrinterDeclaration
     }
     return parts;
   };
-  printModifierDefinition: PrintFunc<ast.ModifierDefinition> = ({ path, print, node }) => {
+  printModifierDefinition: PrintFunc<ast.ModifierDefinition> = ({ path, print }) => {
     return [
       'modifier',
       this.space,
       path.call(print, 'name'),
-      this.tuple(node.parameters !== null ? this.paramater(path.map(print, 'parameters')) : ''),
+      this.tuple(this.paramater(path.map(print, 'parameters'))),
       this.space,
       path.call(print, 'body'),
     ];
@@ -144,14 +144,14 @@ export class PrinterDeclaration
     const structMember: Doc[] = [];
     if (node.members.length) {
       const content = this.builders.join(this.builders.line, path.map(print, 'members'));
-      structMember.push(this.builders.breakParent, content);
+      structMember.push(content);
     }
     return [
       'struct',
       this.space,
       path.call(print, 'name'),
       this.space,
-      this.block(structMember, !structMember.length),
+      this.block(structMember, { empty: !structMember.length, shouldBreak: !!structMember.length }),
     ];
   };
   printStructMember: PrintFunc<ast.StructMember> = ({ path, print }) => {

@@ -54,6 +54,12 @@ contract A is B /*comment for B*/,C/*comment for C*/{}
 
 contract Comment {
   function test() pure {
-revert InsufficientBalance({balance: bal, withdrawAmount: _withdrawAmount});
+revert Transaction({
+                    to: _to,
+                    value: _value,
+                    data: _data,
+                    executed: false,
+                    numConfirmations: 0
+                });
   }
 }

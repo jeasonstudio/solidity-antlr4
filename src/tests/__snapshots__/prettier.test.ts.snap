@@ -86,7 +86,6 @@ contract h
 {
   bool public boo = true;
 }
-
 "
 `;
 
@@ -306,7 +305,7 @@ contract AbiEncode {
       emit Log(result);
     } catch {
       emit Log("external call failed");
-    };
+    }
 
     try new Foo(_owner) returns (Foo foo) {
       emit Log("Foo created");
@@ -314,7 +313,7 @@ contract AbiEncode {
       emit Log(reason);
     } catch (bytes memory reason) {
       emit LogBytes(reason);
-    };
+    }
 
     revert DelegatecallFailed();
     revert TimestampNotPassedError(block.timestamp, _timestamp);
@@ -383,6 +382,5 @@ contract AbiEncode {
 
   }
 }
-
 "
 `;

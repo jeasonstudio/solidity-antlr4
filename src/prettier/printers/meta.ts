@@ -45,14 +45,14 @@ export class PrinterMeta
   printInheritanceSpecifier: PrintFunc<ast.InheritanceSpecifier> = ({ node, path, print }) => {
     const parts: Doc[] = [path.call(print, 'baseName')];
     if (node.arguments !== null) {
-      parts.push(this.tuple(path.call(print, 'arguments')));
+      parts.push(path.call(print, 'arguments'));
     }
     return parts;
   };
   printModifierInvocation: PrintFunc<ast.ModifierInvocation> = ({ node, path, print }) => {
     const name = path.call(print, 'name');
     if (node.arguments === null) return name;
-    return this.builders.group([name, this.tuple(path.call(print, 'arguments'))]);
+    return this.builders.group([name, path.call(print, 'arguments')]);
   };
   printPath: PrintFunc<ast.Path> = ({ node }) => this.literal(node.name);
   printPragmaDirective: PrintFunc<ast.PragmaDirective> = ({ node }) => {
@@ -67,8 +67,9 @@ export class PrinterMeta
       contents.push(nodePath.call(print));
       contents.push(this.builders.hardline);
       if (
-        nodePath.node?.type !== nodePath.next?.type ||
-        nodePath.next?.type === 'ContractDefinition'
+        !!nodePath.next &&
+        (nodePath.node?.type !== nodePath.next?.type ||
+          nodePath.next?.type === 'ContractDefinition')
       ) {
         contents.push(this.builders.hardline);
       }

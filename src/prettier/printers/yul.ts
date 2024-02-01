@@ -16,10 +16,9 @@ export class PrinterYul
   };
   printYulBlock: PrintFunc<ast.YulBlock> = ({ node, path, print }) => {
     const statements = path.map((p) => [print(p), this.pangu(p)], 'statements');
-    return this.block(
-      this.builders.join(this.builders.line, statements),
-      !node.statements.length,
-    );
+    return this.block(this.builders.join(this.builders.line, statements), {
+      empty: !node.statements.length,
+    });
   };
   printYulBoolean: PrintFunc<ast.YulBoolean> = ({ node }) => node.name;
   printYulForStatement: PrintFunc<ast.YulForStatement> = ({ path, print }) => {
@@ -68,8 +67,7 @@ export class PrinterYul
     } else if (node.expression !== null) {
       parts.push(path.call(print as any, 'expression'));
     }
-    if (parts.length) parts.push(this.builders.breakParent);
-    return this.builders.group(parts);
+    return this.builders.group(parts, { shouldBreak: !!parts.length });
   };
   printYulSwitchCase: PrintFunc<ast.YulSwitchCase> = ({ path, print }) => {
     return ['case', this.space, path.call(print, 'case'), this.space, path.call(print, 'body')];

@@ -24,11 +24,16 @@ export class PrinterExpression
     node.value === true ? 'true' : 'false';
   printCallArgumentList: PrintFunc<ast.CallArgumentList> = ({ path, print, node }) => {
     if (node.namedArguments.length) {
-      return this.block(this.paramater(path.map(print, 'namedArguments')));
+      return this.tuple(
+        this.block(this.paramater(path.map(print, 'namedArguments')), {
+          empty: !node.namedArguments.length,
+        }),
+        { unGroup: true },
+      );
     } else if (node.expressions.length) {
-      return this.paramater(path.map(print, 'expressions'));
+      return this.tuple(this.paramater(path.map(print, 'expressions')));
     }
-    return '';
+    return this.tuple('');
   };
   printConditional: PrintFunc<ast.Conditional> = ({ path, print }) => {
     const groupId = Symbol('conditional');
@@ -51,11 +56,11 @@ export class PrinterExpression
   printFunctionCallOptions: PrintFunc<ast.FunctionCallOptions> = ({ path, print }) => {
     return [
       path.call(print, 'expression'),
-      this.block(this.paramater(path.map(print, 'arguments'))),
+      this.block(this.paramater(path.map(print, 'namedArguments'))),
     ];
   };
   printFunctionCall: PrintFunc<ast.FunctionCall> = ({ path, print }) => {
-    return [path.call(print, 'expression'), this.tuple(path.call(print, 'arguments'))];
+    return [path.call(print, 'expression'), path.call(print, 'arguments')];
   };
   printHexStringLiteral: PrintFunc<ast.HexStringLiteral> = ({ node }) => [
     'hex',
@@ -90,11 +95,11 @@ export class PrinterExpression
   printNumberLiteral: PrintFunc<ast.NumberLiteral> = ({ node }) => {
     if (node.hexValue !== null) return node.hexValue;
     const parts = [node.value!];
-    if (node.subDenomination !== null) parts.push(node.subDenomination);
+    if (node.subDenomination !== null) parts.push(this.space, node.subDenomination);
     return parts;
   };
   printPayableConversion: PrintFunc<ast.PayableConversion> = ({ path, print }) => {
-    return ['payable', this.tuple(path.call(print, 'arguments'))];
+    return ['payable', path.call(print, 'arguments')];
   };
   printStringLiteral: PrintFunc<ast.StringLiteral> = ({ node }) => this.literal(node.value);
   printTupleExpression: PrintFunc<ast.TupleExpression> = ({ path, print }) => {

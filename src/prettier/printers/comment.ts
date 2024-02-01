@@ -12,6 +12,7 @@ export const canAttachComment: Printer<CommentToken>['canAttachComment'] = (node
 // TODO: needs a comment parser
 export const printComment: Printer<CommentToken>['printComment'] = (path, _options) => {
   const comment = path.node;
+  console.log(JSON.stringify(comment));
   if (!comment.text) return '';
 
   if (comment.text.startsWith('///')) {
@@ -60,7 +61,6 @@ export const printComment: Printer<CommentToken>['printComment'] = (path, _optio
       .split('\n')
       .map((line) => line.trim())
       .filter(Boolean);
-
     return ['/*', multiline, doc.builders.join(multiline, lines), multiline, '*/'];
   }
 
@@ -68,12 +68,11 @@ export const printComment: Printer<CommentToken>['printComment'] = (path, _optio
 };
 
 // Prettier offers a clean way to define ignored properties.
-const ignoredProperties = new Set(['location', 'range', 'comments']);
 export const massageAstNode: Printer<CommentToken>['massageAstNode'] = () => {};
-(<any>massageAstNode).ignoredProperties = ignoredProperties;
+(<any>massageAstNode).ignoredProperties = new Set(['location', 'range', 'comments']);
 
 export const handleComments: Printer<CommentToken>['handleComments'] = {
-  // ownLine: (commentNode, text, options, ast, isLastComment) => false,
-  // endOfLine: (commentNode, text, options, ast, isLastComment) => false,
-  // remaining: (commentNode, text, options, ast, isLastComment) => false,
+  ownLine: (commentNode, text, options, ast, isLastComment) => false,
+  endOfLine: (commentNode, text, options, ast, isLastComment) => false,
+  remaining: (commentNode, text, options, ast, isLastComment) => false,
 };
