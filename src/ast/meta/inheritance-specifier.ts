@@ -1,12 +1,12 @@
 import { BaseNode } from '../base';
 import { InheritanceSpecifierContext, SolidityParserVisitor } from '../../antlr4';
 import { IdentifierPath } from './identifier-path';
-import { Expression } from '../expression';
+import { CallArgumentList } from '../expression';
 
 export class InheritanceSpecifier extends BaseNode {
   type = 'InheritanceSpecifier' as const;
   baseName: IdentifierPath;
-  arguments: Expression[] | null = null;
+  arguments: CallArgumentList | null = null;
   constructor(ctx: InheritanceSpecifierContext, visitor: SolidityParserVisitor<any>) {
     super(ctx, visitor);
     this.baseName = ctx.identifierPath().accept(visitor);

@@ -18,7 +18,7 @@ test('ifStatement', () => {
 test('revertStatement', () => {
   expect(createParse((p) => p.revertStatement())(`revert Foo(name);`)).toMatchObject({
     expression: 'Foo',
-    arguments: ['name'],
+    arguments: { expressions: ['name'] },
   });
 });
 
@@ -31,7 +31,7 @@ test('returnStatement', () => {
 test('emitStatement', () => {
   expect(createParse((p) => p.emitStatement())(`emit Transfer(name);`)).toMatchObject({
     expression: 'Transfer',
-    arguments: ['name'],
+    arguments: { expressions: ['name'] },
   });
 });
 
@@ -50,7 +50,7 @@ test('tryStatement', () => {
       `try new Foo(owner) returns (Foo foo) {} catch Error(string memory reason) {} catch (bytes memory reason) {}`,
     ),
   ).toMatchObject({
-    expression: { expression: { typeName: 'Foo' }, arguments: ['owner'] },
+    expression: { expression: { typeName: 'Foo' }, arguments: { expressions: ['owner'] } },
     returnParameters: [{ name: 'foo', typeName: 'Foo' }],
     body: {},
     catchClauses: [

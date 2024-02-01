@@ -4,24 +4,26 @@ import { test, expect } from 'vitest';
 test('named-argument', () => {
   expect(
     createParse((p) => p.callArgumentList())(`({value: msg.value, bar: hex"aabb"})`),
-  ).toMatchObject([
-    {
-      type: 'NamedArgument',
-      name: 'value',
-      expression: {
-        type: 'MemberAccess',
-        expression: 'msg',
-        memberName: 'value',
+  ).toMatchObject({
+    namedArguments: [
+      {
+        type: 'NamedArgument',
+        name: 'value',
+        expression: {
+          type: 'MemberAccess',
+          expression: 'msg',
+          memberName: 'value',
+        },
       },
-    },
-    {
-      type: 'NamedArgument',
-      name: 'bar',
-      expression: {
-        value: 'aabb',
+      {
+        type: 'NamedArgument',
+        name: 'bar',
+        expression: {
+          value: 'aabb',
+        },
       },
-    },
-  ]);
+    ],
+  });
 });
 
 test('literal', () => {
@@ -111,6 +113,11 @@ test('memberAccess', () => {
 });
 
 test('expression', () => {
+  console.log(
+    createParse((p) => p.tupleExpression())(
+      `(call{foo: bar}, obj({foo: bar}), payable({foo: bar}), type(address), new Foo)`,
+    ),
+  );
   expect(
     createParse((p) => p.tupleExpression())(
       `(call{foo: bar}, obj({foo: bar}), payable({foo: bar}), type(address), new Foo)`,
@@ -128,20 +135,24 @@ test('expression', () => {
       },
       {
         expression: 'obj',
-        arguments: [
-          {
-            name: 'foo',
-            expression: 'bar',
-          },
-        ],
+        arguments: {
+          namedArguments: [
+            {
+              name: 'foo',
+              expression: 'bar',
+            },
+          ],
+        },
       },
       {
-        arguments: [
-          {
-            name: 'foo',
-            expression: 'bar',
-          },
-        ],
+        arguments: {
+          namedArguments: [
+            {
+              name: 'foo',
+              expression: 'bar',
+            },
+          ],
+        },
       },
       {
         typeName: 'address',

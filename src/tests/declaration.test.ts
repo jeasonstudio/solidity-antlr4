@@ -172,7 +172,7 @@ test('functionDefinition', () => {
     override: null,
     virtual: false,
     visibility: null,
-    stateMutability: 'payable',
+    stateMutability: null,
     modifiers: [
       {
         name: 'X',

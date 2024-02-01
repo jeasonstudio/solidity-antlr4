@@ -1,14 +1,15 @@
-import { BaseNodeList } from '../base';
+import { BaseNode } from '../base';
 import { CallArgumentListContext, SolidityParserVisitor } from '../../antlr4';
 import { Expression } from './expression';
 import { NamedArgument } from './named-argument';
 
-export type CallArgumentList = (Expression | NamedArgument)[];
-
-export const CallArgumentList = class extends BaseNodeList<Expression | NamedArgument> {
+export class CallArgumentList extends BaseNode {
   type = 'CallArgumentList' as const;
+  namedArguments: NamedArgument[] = [];
+  expressions: Expression[] = [];
   constructor(ctx: CallArgumentListContext, visitor: SolidityParserVisitor<any>) {
-    const args = ctx.namedArgument().length ? ctx.namedArgument() : ctx.expression();
-    super(args, visitor);
+    super(ctx, visitor);
+    this.namedArguments = ctx.namedArgument().map((namedArgument) => namedArgument.accept(visitor));
+    this.expressions = ctx.expression().map((expression) => expression.accept(visitor));
   }
-};
+}

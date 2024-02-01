@@ -45,15 +45,14 @@ export class PrinterMeta
   printInheritanceSpecifier: PrintFunc<ast.InheritanceSpecifier> = ({ node, path, print }) => {
     const parts: Doc[] = [path.call(print, 'baseName')];
     if (node.arguments !== null) {
-      const paramater = this.paramater(path.map(print, 'arguments'));
-      parts.push(this.tuple(paramater));
+      parts.push(this.tuple(path.call(print, 'arguments')));
     }
     return parts;
   };
   printModifierInvocation: PrintFunc<ast.ModifierInvocation> = ({ node, path, print }) => {
     const name = path.call(print, 'name');
     if (node.arguments === null) return name;
-    return this.builders.group([name, this.tuple(this.paramater(path.map(print, 'arguments')))]);
+    return this.builders.group([name, this.tuple(path.call(print, 'arguments'))]);
   };
   printPath: PrintFunc<ast.Path> = ({ node }) => this.literal(node.name);
   printPragmaDirective: PrintFunc<ast.PragmaDirective> = ({ node }) => {

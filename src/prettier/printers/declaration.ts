@@ -36,9 +36,15 @@ export class PrinterDeclaration
       ),
     ];
   };
-  printEnumDefinition: PrintFunc<ast.EnumDefinition> = ({ print, path }) => {
-    const enumMember = [this.builders.breakParent, this.paramater(path.map(print, 'members'))];
-    return ['enum', this.space, path.call(print, 'name'), this.space, this.block(enumMember)];
+  printEnumDefinition: PrintFunc<ast.EnumDefinition> = ({ print, path, node }) => {
+    const enumMember = this.paramater(path.map(print, 'members'));
+    return [
+      'enum',
+      this.space,
+      path.call(print, 'name'),
+      this.space,
+      this.block([enumMember, this.builders.breakParent], !node.members.length),
+    ];
   };
   printErrorDefinition: PrintFunc<ast.ErrorDefinition> = ({ path, print }) => {
     return [
@@ -123,12 +129,12 @@ export class PrinterDeclaration
     }
     return parts;
   };
-  printModifierDefinition: PrintFunc<ast.ModifierDefinition> = ({ path, print }) => {
+  printModifierDefinition: PrintFunc<ast.ModifierDefinition> = ({ path, print, node }) => {
     return [
       'modifier',
       this.space,
       path.call(print, 'name'),
-      this.tuple(this.paramater(path.map(print, 'parameters'))),
+      this.tuple(node.parameters !== null ? this.paramater(path.map(print, 'parameters')) : ''),
       this.space,
       path.call(print, 'body'),
     ];

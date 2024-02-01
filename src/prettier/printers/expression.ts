@@ -22,6 +22,14 @@ export class PrinterExpression
   };
   printBooleanLiteral: PrintFunc<ast.BooleanLiteral> = ({ node }) =>
     node.value === true ? 'true' : 'false';
+  printCallArgumentList: PrintFunc<ast.CallArgumentList> = ({ path, print, node }) => {
+    if (node.namedArguments.length) {
+      return this.block(this.paramater(path.map(print, 'namedArguments')));
+    } else if (node.expressions.length) {
+      return this.paramater(path.map(print, 'expressions'));
+    }
+    return '';
+  };
   printConditional: PrintFunc<ast.Conditional> = ({ path, print }) => {
     const groupId = Symbol('conditional');
     const breakLine = this.builders.indentIfBreak(this.builders.line, { groupId });
@@ -47,10 +55,7 @@ export class PrinterExpression
     ];
   };
   printFunctionCall: PrintFunc<ast.FunctionCall> = ({ path, print }) => {
-    return [
-      path.call(print, 'expression'),
-      this.tuple(this.paramater(path.map(print, 'arguments'))),
-    ];
+    return [path.call(print, 'expression'), this.tuple(path.call(print, 'arguments'))];
   };
   printHexStringLiteral: PrintFunc<ast.HexStringLiteral> = ({ node }) => [
     'hex',
@@ -89,7 +94,7 @@ export class PrinterExpression
     return parts;
   };
   printPayableConversion: PrintFunc<ast.PayableConversion> = ({ path, print }) => {
-    return ['payable', this.tuple(this.paramater(path.map(print, 'arguments')))];
+    return ['payable', this.tuple(path.call(print, 'arguments'))];
   };
   printStringLiteral: PrintFunc<ast.StringLiteral> = ({ node }) => this.literal(node.value);
   printTupleExpression: PrintFunc<ast.TupleExpression> = ({ path, print }) => {

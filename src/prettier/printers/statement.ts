@@ -55,7 +55,7 @@ export class PrinterStatement
       'emit',
       this.space,
       path.call(print, 'expression'),
-      this.tuple(this.paramater(path.map(print, 'arguments'))),
+      this.tuple(path.call(print, 'arguments')),
       this.semi,
     ]);
   };
@@ -102,7 +102,7 @@ export class PrinterStatement
       'revert',
       this.space,
       path.call(print, 'expression'),
-      this.tuple(this.paramater(path.map(print, 'arguments'))),
+      this.tuple(path.call(print, 'arguments')),
       this.semi,
     ]);
   };

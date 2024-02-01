@@ -2,6 +2,7 @@ import { AssignOp } from './assign-op';
 import { Assignment } from './assignment';
 import { BinaryOperation } from './binary-operation';
 import { BooleanLiteral } from './boolean-literal';
+import { CallArgumentList } from './call-argument-list';
 import { Conditional } from './conditional';
 import { FunctionCallOptions } from './function-call-options';
 import { FunctionCall } from './function-call';
@@ -27,6 +28,7 @@ export {
   Assignment,
   BinaryOperation,
   BooleanLiteral,
+  CallArgumentList,
   Conditional,
   FunctionCallOptions,
   FunctionCall,

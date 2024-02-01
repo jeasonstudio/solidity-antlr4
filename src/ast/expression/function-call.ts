@@ -3,8 +3,7 @@ import { Expression } from './expression';
 import { CallArgumentList } from './call-argument-list';
 import { BaseNode } from '../base';
 
-export class FunctionCall extends BaseNode {
-  type = 'FunctionCall' as const;
+export abstract class AbstractFunctionCall extends BaseNode {
   expression: Expression;
   arguments: CallArgumentList | null = null;
   constructor(ctx: FunctionCallContext, visitor: SolidityParserVisitor<any>) {
@@ -12,4 +11,8 @@ export class FunctionCall extends BaseNode {
     this.expression = ctx.expression().accept(visitor);
     this.arguments = ctx.callArgumentList().accept(visitor);
   }
+}
+
+export class FunctionCall extends AbstractFunctionCall {
+  type = 'FunctionCall' as const;
 }

@@ -49,3 +49,11 @@ contract KumquatTree is Tree, Plant /*test*/{
         return 3;
     }
 }
+
+contract A is B /*comment for B*/,C/*comment for C*/{}
+
+contract Comment {
+  function test() pure {
+revert InsufficientBalance({balance: bal, withdrawAmount: _withdrawAmount});
+  }
+}
