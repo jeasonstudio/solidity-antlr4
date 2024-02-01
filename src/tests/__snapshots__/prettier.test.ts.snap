@@ -192,11 +192,7 @@ interface IERC721 is IERC165 {
 
   function ownerOf(uint tokenId) external view returns (address owner);
 
-  function safeTransferFrom(
-    address from,
-    address to,
-    uint tokenId
-  ) external;
+  function safeTransferFrom(address from, address to, uint tokenId) external;
 
   function safeTransferFrom(
     address from,
@@ -205,63 +201,60 @@ interface IERC721 is IERC165 {
     bytes calldata data
   ) external;
 
-  function transferFrom(
-    address from,
-    address to,
-    uint tokenId
-  ) external;
+  function transferFrom(address from, address to, uint tokenId) external;
 
-  function approve(
-    address to,
-    uint tokenId
-  ) external;
+  function approve(address to, uint tokenId) external;
 
   function getApproved(uint tokenId) external view returns (address operator);
 
-  function setApprovalForAll(
-    address operator,
-    bool _approved
-  ) external;
+  function setApprovalForAll(address operator, bool _approved) external;
 
-  function isApprovedForAll(
-    address owner,
-    address operator
-  ) external view returns (bool);
+  function isApprovedForAll(address owner, address operator)
+    external
+    view
+    returns (bool);
 }
 
 contract AbiEncode {
-  function test(
-    address _contract,
-    bytes calldata data
-  ) external override(C, B) {
+  function test(address _contract, bytes calldata data)
+    external
+    override(C, B)
+  {
     (bool ok, , string msg, ) = _contract.call(data);
     require(ok, "call failed");
   }
-  function encodeWithSignature(
-    address to,
-    uint amount
-  ) external pure override(C, B) returns (bytes memory) {
+  function encodeWithSignature(address to, uint amount)
+    external
+    pure
+    override(C, B)
+    returns (bytes memory)
+  {
     return abi.encodeWithSignature("transfer(address,uint256)", to, amount);
   }
 
-  function encodeWithSelector(
-    address to,
-    uint amount
-  ) external pure returns (bytes memory) {
+  function encodeWithSelector(address to, uint amount)
+    external
+    pure
+    returns (bytes memory)
+  {
     return abi.encodeWithSelector(IERC20.transfer.selector, to, amount);
   }
 
-  function encodeCall(
-    address to,
-    uint amount
-  ) external pure override(C, B) returns (bytes memory, string) {
+  function encodeCall(address to, uint amount)
+    external
+    pure
+    override(C, B)
+    returns (bytes memory, string)
+  {
     return abi.encodeCall(IERC20.transfer, (to, amount));
   }
 
-  function isApprovedForAll(
-    address owner,
-    address operator
-  ) external view override(C, B) returns (bool) {}
+  function isApprovedForAll(address owner, address operator)
+    external
+    view
+    override(C, B)
+    returns (bool)
+  {}
 
   modifier checkBalances(uint[2] memory _balances) {
     require(
@@ -294,10 +287,10 @@ contract AbiEncode {
   mapping(address => bool[]) public isUser;
   mapping(address => uint) public balances;
 
-  function test(
-    address _contract,
-    bytes calldata data
-  ) external override(C, B) {
+  function test(address _contract, bytes calldata data)
+    external
+    override(C, B)
+  {
     (bool ok, , string msg, ) = _contract.call(data);
     require(ok, "call failed");
 

@@ -54,12 +54,56 @@ contract A is B /*comment for B*/,C/*comment for C*/{}
 
 contract Comment {
   function test() pure {
-revert Transaction({
-                    to: _to,
-                    value: _value,
-                    data: _data,
-                    executed: false,
-                    numConfirmations: 0
-                });
+    revert Transaction({
+        to: _to,
+        value: _value,
+        data: _data,
+        executed: false,
+        numConfirmations: 0
+    });
   }
+
+  function aloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongName(
+    string n1,
+    string n2,
+    string n3,
+    string n4,
+    string n5,
+    string n6
+  )
+    public
+    pure
+    modifier1() modifier22222222222222("asdfasfdasdfasdfasdf")
+    virtual
+    override(Foo, Bar, MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM)
+    returns (string, string, string, string, string, string, string, string, string, string, string)
+  {
+    emit Test();
+  }
+
+  function encode(
+        uint x,
+        address addr,
+        uint[] calldata arr,
+        MyStruct calldata myStruct
+    ) external pure returns (bytes memory) {
+        return abi.encode(x, addr, arr, myStruct);
+    }
+
+  function deploy(address _owner, uint _foo, bytes32 _salt)
+        public
+        payable
+        returns (address)
+    {
+        // This syntax is a newer way to invoke create2 without assembly, you just need to pass salt
+        // https://docs.soliditylang.org/en/latest/control-structures.html#salted-contract-creations-create2
+        return address(new TestContract{ salt: _salt }(_owner, _foo));
+    }
 }
+
+
+
+
+//////
+
+

@@ -65,76 +65,74 @@ export class PrinterDeclaration
     ];
   };
   printFunctionDefinition: PrintFunc<ast.FunctionDefinition> = ({ node, path, print }) => {
-    const groupId = Symbol(node.type);
-
-    const functionMeta: Doc[] = [];
+    const identifiers: Doc[] = [];
+    const describes: Doc[] = [];
+    const groupId = Symbol('functionDefinition');
+    const describeId = Symbol('functionDescribe');
     switch (node.functionKind) {
       case 'constructor':
       case 'fallback':
       case 'receive':
-        functionMeta.push(node.functionKind);
+        identifiers.push(node.functionKind);
         break;
       case 'function':
       default:
-        functionMeta.push('function', this.space, path.call(print, 'name'));
+        identifiers.push('function', this.space, path.call(print, 'name'));
         break;
     }
-    const parameters = node.parameters?.length ? path.map(print, 'parameters') : [];
-    const parameterSeparator = this.builders.ifBreak(
-      [this.comma, this.builders.hardline],
-      [this.comma, this.builders.line],
-      { groupId },
+    const line = this.builders.line;
+    identifiers.push(
+      this.tuple(this.paramater(node.parameters !== null ? path.map(print, 'parameters') : []), {
+        groupId, // TODO@jeason: Want to break parameters first, but this line not work
+      }),
     );
-    functionMeta.push(this.tuple(this.paramater(parameters, parameterSeparator), { groupId }));
-
-    const functionInfo: Doc[] = [];
-    if (node.visibility !== null) functionInfo.push(node.visibility);
-    if (node.stateMutability !== null) functionInfo.push(node.stateMutability);
-    if (node.modifiers !== null && node.modifiers.length) {
-      path.map((modifierPath) => functionInfo.push(print(modifierPath)), 'modifiers');
+    if (node.visibility !== null) describes.push(line, node.visibility);
+    if (node.stateMutability !== null) describes.push(line, node.stateMutability);
+    if (node.modifiers?.length) {
+      path.map((modifierPath) => describes.push(line, print(modifierPath)), 'modifiers');
     }
-    if (node.virtual === true) functionInfo.push('virtual');
+    if (node.virtual === true) describes.push(line, 'virtual');
     if (node.override !== null) {
-      functionInfo.push(
+      describes.push(
+        line,
         node.override.length
-          ? ['override', this.tuple(this.paramater(path.map(print, 'override')))]
+          ? this.builders.group([
+              'override',
+              this.tuple(this.paramater(path.map(print, 'override'))),
+            ])
           : 'override',
       );
     }
     if (node.returnParameters !== null) {
-      functionInfo.push(
-        this.builders.group(
-          ['returns', this.space, this.tuple(this.paramater(path.map(print, 'returnParameters')))],
-          { shouldBreak: false },
-        ),
+      describes.push(
+        line,
+        'returns',
+        this.space,
+        this.tuple(this.paramater(path.map(print, 'returnParameters'))),
       );
     }
-    const line = this.builders.indentIfBreak(this.builders.line, { groupId });
-    const functionInfoGroup = this.builders.group(this.builders.join(line, functionInfo), {
-      id: groupId,
-    });
-
-    const parts: Doc[] = [
+    return [
       this.builders.group(
-        functionInfo.length ? [functionMeta, this.space, functionInfoGroup] : [functionMeta],
-        {
-          id: groupId,
-        },
+        [
+          this.builders.group(identifiers),
+          this.builders.indent(this.builders.group(describes, { id: describeId })),
+        ],
+        { id: groupId },
       ),
+      node.body !== null
+        ? [
+            this.builders.ifBreak(this.builders.line, this.space, { groupId: describeId }),
+            path.call(print, 'body'),
+          ]
+        : this.semi,
     ];
-    if (node.body !== null) {
-      parts.push(this.space, path.call(print, 'body'));
-    } else {
-      parts.push(this.semi);
-    }
-    return parts;
   };
-  printModifierDefinition: PrintFunc<ast.ModifierDefinition> = ({ path, print }) => {
+  printModifierDefinition: PrintFunc<ast.ModifierDefinition> = ({ path, print, node }) => {
     return [
       'modifier',
       this.space,
       path.call(print, 'name'),
-      this.tuple(this.paramater(path.map(print, 'parameters'))),
+      this.tuple(this.paramater(node.parameters !== null ? path.map(print, 'parameters') : [])),
       this.space,
       path.call(print, 'body'),
     ];
