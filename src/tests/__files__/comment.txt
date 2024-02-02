@@ -101,9 +101,12 @@ contract Comment {
     }
 }
 
+function test() pure {
+    // hhh11
+  }
 
+abstract contract aloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongName is Foo("aloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongName", "aloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongName"), aloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongName2 {}
 
-
-//////
-
-
+contract Foo {
+  // hhh
+}

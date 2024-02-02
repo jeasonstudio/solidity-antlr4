@@ -1,11 +1,13 @@
-import { Parser, ParserOptions } from 'prettier';
+import type { Parser, ParserOptions } from 'prettier';
 import { SyntaxNode } from '../ast';
 import { PrettierPrinter } from './printer';
 import { SyntaxToken, parse, tokenizer } from '../parser';
 import { WithComments, comments } from './printers/base';
 
 export const getCommentTokens = (tokens: SyntaxToken[]) => {
-  return tokens.filter((token) => comments.includes(token.type));
+  return tokens
+    .filter((token) => comments.includes(token.type))
+    .map((c) => ({ ...c, value: c.text }));
 };
 
 export class PrettierParser implements Parser<SyntaxNode> {
@@ -16,7 +18,7 @@ export class PrettierParser implements Parser<SyntaxNode> {
   public parse = (text: string, _options: ParserOptions<SyntaxNode>) => {
     const ast = parse(text, { tolerant: true }) as WithComments<SyntaxNode>;
     const tokens = tokenizer(text, { tolerant: true });
-    if (ast) (<any>ast).comments = getCommentTokens(tokens).map((c) => ({ ...c, value: c.text }));
+    if (ast) (<any>ast).comments = getCommentTokens(tokens);
     return ast;
   };
 }

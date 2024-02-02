@@ -1,5 +1,5 @@
 import * as ast from '../ast';
-import { AstPath, Doc, ParserOptions, Printer } from 'prettier';
+import type { AstPath, Doc, ParserOptions, Printer } from 'prettier';
 import {
   printComment,
   isBlockComment,

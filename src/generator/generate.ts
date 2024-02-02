@@ -26,6 +26,6 @@ export const generate = async (ast: SyntaxNode, options: GenerateOptions = {}): 
   return prettier.format(JSON.stringify(ast), {
     ...options,
     parser: PrettierGenerator.name,
-    plugins: [generatorPlugin],
+    plugins: [...(options.plugins ?? []), generatorPlugin],
   });
 };

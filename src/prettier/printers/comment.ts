@@ -1,4 +1,4 @@
-import { doc } from 'prettier';
+import * as doc from 'prettier/doc';
 import type { Printer } from 'prettier';
 import { blockComments, comments, CommentToken } from './base';
 

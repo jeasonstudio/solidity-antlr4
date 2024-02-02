@@ -1,5 +1,7 @@
 import * as ast from '../../ast';
-import { type AstPath, type Doc, type ParserOptions, doc, util } from 'prettier';
+import type { AstPath, Doc, ParserOptions } from 'prettier';
+import * as doc from 'prettier/doc';
+import * as prettier from 'prettier/standalone';
 import { SyntaxTokenType, SyntaxToken } from '../../parser';
 import { printComment } from './comment';
 
@@ -55,7 +57,10 @@ export class BasePrinter {
 
   // The pangu space
   pangu = (path: AstPath<any>) => {
-    return util.isNextLineEmpty(this.options.originalText, this.options.locEnd(path.node))
+    return (prettier as any).util.isNextLineEmpty(
+      this.options.originalText,
+      this.options.locEnd(path.node),
+    )
       ? this.builders.hardline
       : '';
   };

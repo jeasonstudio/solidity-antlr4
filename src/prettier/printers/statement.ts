@@ -27,9 +27,13 @@ export class PrinterStatement
     return this.builders.group(parts);
   };
   printBlock: PrintFunc<ast.Block> = ({ node, path, print }) => {
-    const statements = path.map((p) => [print(p), this.pangu(p)], 'statements');
+    const statements: Doc[] = [];
+    path.map((p) => statements.push([print(p), this.pangu(p)]), 'statements');
+    if (node.comments?.length) {
+      statements.push(...this.comments(path));
+    }
     const parts = this.block(this.builders.join(this.builders.line, statements), {
-      empty: !node.statements.length,
+      empty: !statements.length,
       shouldBreak: true,
     });
     if (node.unchecked) {
